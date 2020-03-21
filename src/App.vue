@@ -1,20 +1,14 @@
 <template>
-  <div id="app">
-    <HeaderComponent/>
-    <router-view/>
-  </div>
+  <router-view></router-view>
 </template>
 
 <script>
-import HeaderComponent from './components/HeaderComponent';
-
 export default {
-  name: 'App',
-  components: {
-    HeaderComponent,
-  },
-
+  name: 'App'
 }
 </script>
 
-
+<style lang="scss">
+  // Import Main styles for this application
+  @import 'assets/scss/style';
+</style>
