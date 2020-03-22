@@ -1,1 +1,7 @@
 // Here you can add other styles
+
+a .card-body{
+  transition: 0.3s;
+}
+
+a .card-body:hover {background-color: #ced2d8;}

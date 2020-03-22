@@ -1,5 +1,5 @@
 <template>
-  <router-view></router-view>
+  <router-view><h1>koko</h1></router-view>
 </template>
 
 <script>

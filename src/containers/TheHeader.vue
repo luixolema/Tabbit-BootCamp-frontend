@@ -15,19 +15,9 @@
     </CHeaderBrand>
     <CHeaderNav class="d-md-down-none mr-auto">
       <CHeaderNavItem class="px-3">
-        <CHeaderNavLink to="/dashboard">
-          Dashboard
-        </CHeaderNavLink>
-      </CHeaderNavItem>
-      <CHeaderNavItem class="px-3">
-        <CHeaderNavLink to="/users" exact>
-          Users
-        </CHeaderNavLink>
-      </CHeaderNavItem>
-      <CHeaderNavItem class="px-3">
-        <CHeaderNavLink>
-          Settings
-        </CHeaderNavLink>
+        <h3>
+          <small class="text-muted"  v-text="timestamp"></small>
+        </h3>
       </CHeaderNavItem>
     </CHeaderNav>
     <CHeaderNav class="mr-4">
@@ -59,8 +49,26 @@ import TheHeaderDropdownAccnt from './TheHeaderDropdownAccnt'
 
 export default {
   name: 'TheHeader',
+  data: function () {
+    return {
+      timestamp: ""
+    }
+  },
   components: {
     TheHeaderDropdownAccnt
+  },
+  created() {
+      this.getNow();
+      setInterval(this.getNow, 1000);
+  },
+  methods: {
+      getNow: function() {
+          const today = new Date();
+
+          const options = { weekday: 'long', year: 'numeric', month: 'numeric', day: 'numeric' };
+
+          this.timestamp = today.toLocaleDateString('de-DE',options) + ", "+today.toLocaleTimeString();
+      }
   }
 }
 </script>
