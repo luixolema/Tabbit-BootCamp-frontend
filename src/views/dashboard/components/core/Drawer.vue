@@ -24,14 +24,14 @@
       dense
       nav
     >
-      <v-list-item>
+      <v-list-item class="logo">
         <v-list-item-avatar
           class="align-self-center"
           color="white"
           contain
         >
           <v-img
-            src="https://demos.creative-tim.com/vuetify-material-dashboard/favicon.ico"
+            src="/favicon.jpg"
             max-height="30"
           />
         </v-list-item-avatar>
@@ -39,8 +39,14 @@
         <v-list-item-content>
           <v-list-item-title
             class="display-1"
-            v-text="profile.title"
-          />
+          >
+            <div class="logo-title">
+              {{ profile.title }}
+            </div>
+            <div class="logo-subtitle">
+              {{ profile.subtitle }}
+            </div>
+          </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
     </v-list>
@@ -75,15 +81,18 @@
       <!-- https://github.com/vuetifyjs/vuetify/pull/8574 -->
       <div />
     </v-list>
-
     <template v-slot:append>
-      <base-item
-        :item="{
-          title: $t('upgrade'),
-          icon: 'mdi-package-up',
-          to: '/upgrade',
-        }"
-      />
+      <v-list-item class="logo">
+        <v-list-item-content>
+          <v-list-item-title
+            class="display-1"
+          >
+            <div class="time">
+              {{ timestamp }}
+            </div>
+          </v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
     </template>
   </v-navigation-drawer>
 </template>
@@ -105,6 +114,7 @@
     },
 
     data: () => ({
+      timestamp: '55:55:55',
       items: [
         {
           icon: 'mdi-view-dashboard',
@@ -112,34 +122,9 @@
           to: '/',
         },
         {
-          icon: 'mdi-account',
-          title: 'user',
-          to: '/pages/user',
-        },
-        {
-          title: 'rtables',
-          icon: 'mdi-clipboard-outline',
-          to: '/tables/regular-tables',
-        },
-        {
-          title: 'typography',
-          icon: 'mdi-format-font',
-          to: '/components/typography',
-        },
-        {
-          title: 'icons',
-          icon: 'mdi-chart-bubble',
-          to: '/components/icons',
-        },
-        {
-          title: 'google',
-          icon: 'mdi-map-marker',
-          to: '/maps/google-maps',
-        },
-        {
-          title: 'notifications',
-          icon: 'mdi-bell',
-          to: '/components/notifications',
+          icon: 'mdi-account-multiple',
+          title: 'guests',
+          to: '/pages/guests',
         },
       ],
     }),
@@ -160,11 +145,15 @@
       profile () {
         return {
           avatar: true,
-          title: this.$t('avatar'),
+          title: this.$t('title'),
+          subtitle: this.$t('subtitle'),
         }
       },
     },
-
+    created () {
+      this.getNow()
+      setInterval(this.getNow, 1000)
+    },
     methods: {
       mapItem (item) {
         return {
@@ -172,6 +161,13 @@
           children: item.children ? item.children.map(this.mapItem) : undefined,
           title: this.$t(item.title),
         }
+      },
+      getNow () {
+        const today = new Date()
+
+        const options = { weekday: 'long', year: 'numeric', month: 'numeric', day: 'numeric' }
+
+        this.timestamp = today.toLocaleDateString('de-DE', options) + ', ' + today.toLocaleTimeString()
       },
     },
   }

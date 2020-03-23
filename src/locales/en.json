@@ -1,5 +1,7 @@
 {
-  "avatar": "Vuetify MD",
+  "org": "Makadi Bay Extra Divers",
+  "title": "Makadi Bay",
+  "subtitle": "Extra Divers",
   "buttons": "Buttons",
   "calendar": "Calendar",
   "charts": "Charts",
@@ -39,6 +41,7 @@
   "typography": "Typography",
   "upgrade": "Upgrade To PRO",
   "user": "User Profile",
+  "guests": "Guests",
   "vforms": "Validation Forms",
   "widgets": "Widgets",
   "wizard": "Wizard"
