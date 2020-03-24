@@ -28,7 +28,7 @@
   import GuestOverviewComponent from './GuestOverviewComponent'
 
   export default {
-    name: 'Guests',
+    name: 'GuestsOverviewPage',
     components: {
       GuestOverviewComponent,
     },

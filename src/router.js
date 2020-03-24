@@ -21,7 +21,7 @@ export default new Router({
         {
           name: 'Guests',
           path: 'pages/guests',
-          component: () => import('@/views/guests/Guests'),
+          component: () => import('@/views/guests/GuestsOverviewPage'),
         },
       ],
     },

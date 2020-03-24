@@ -77,9 +77,10 @@
         GuestService.findAll()
           .then(response => {
             this.guests = response.data
-          })
-          .catch(error => {
+          }).catch(error => {
             NotificationService.error(null, error)
+          }).finally(() => {
+            this.selected = []
           })
       },
       filterByCheckin () {
@@ -90,9 +91,10 @@
           GuestService.findByCheckin(!!checkedIn)
             .then(response => {
               this.guests = response.data
-            })
-            .catch(error => {
+            }).catch(error => {
               NotificationService.error(null, error)
+            }).finally(() => {
+              this.selected = []
             })
         }
       },
@@ -106,9 +108,10 @@
           .then(() => {
             this.selected = []
             NotificationService.sucess('The guest has been chekin correctly')
-          })
-          .catch(error => {
+          }).catch(error => {
             NotificationService.error(null, error)
+          }).finally(() => {
+            this.selected = []
           })
       },
     },
