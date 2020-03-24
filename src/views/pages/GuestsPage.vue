@@ -3,7 +3,7 @@
     <v-row>
       <!-- Guest Overview -->
       <v-col
-        cols="3"
+        cols="4"
         class="flex-grow-1"
       >
         <guest-overview-component />
@@ -17,7 +17,7 @@
       </v-col>
 
       <!-- Left Area -->
-      <v-col cols="3">
+      <v-col cols="2">
         <v-card>
           <h1>Left area (not implemented yet)</h1>
           <v-card />

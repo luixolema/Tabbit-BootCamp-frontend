@@ -10,7 +10,7 @@
       <v-card-text>
         <v-row>
           <v-col
-            cols="12"
+            cols="6"
             class="py-0"
           >
             <v-radio-group
@@ -33,7 +33,7 @@
             </v-radio-group>
           </v-col>
           <v-col
-            cols="12"
+            cols="6"
             class="py-0"
           >
             <v-btn
@@ -50,7 +50,7 @@
             <v-btn
               :disabled="!onlyNotCheckedInSelectedGuests"
               small
-              @click="checkedInSelectedGuests"
+              @click="checkInSelectedGuests"
             >
               Check In
               <v-icon
@@ -66,12 +66,24 @@
       <!-- Guest Table -->
       <v-data-table
         v-model="selected"
+        dense
         :headers="headers"
         :items="guests"
         hide-default-footer
         item-key="id"
         show-select
-      />
+      >
+      <template
+        v-slot:item.checkedIn="{ item }"
+        >
+        <div v-if="item.checkedIn">
+          <v-icon>mdi-check-bold</v-icon>
+        </div>
+        <div v-else>
+          <v-icon>mdi-close-thick </v-icon>
+        </div>
+      </template>
+      </v-data-table>
     </base-material-card>
   </v-container>
 </template>
@@ -110,7 +122,6 @@
     },
     mounted () {
       this.loadAllGuests()
-      console.log(process.env)
     },
     methods: {
       loadAllGuests () {
@@ -138,7 +149,7 @@
             })
         }
       },
-      checkedInSelectedGuests () {
+      checkInSelectedGuests () {
         if (!this.onlyNotCheckedInSelectedGuests) {
           NotificationService.info('You should and only select NOT checked in guests')
           return
