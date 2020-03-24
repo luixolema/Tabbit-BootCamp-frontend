@@ -48,6 +48,7 @@
               </v-icon>
             </v-btn>
             <v-btn
+              :disabled="!isThereACheckedInSelectedGuests"
               small
               @click="checkedInSelectedGuests"
             >
@@ -80,8 +81,11 @@
   import NotificationService from '@/services/NotificationService'
 
   const headers = [
+    { text: 'Id', value: 'id' },
     { text: 'Name', value: 'name' },
     { text: 'Last Name', value: 'lastName' },
+    { text: 'Box', value: 'box' },
+    { text: 'Checked-in', value: 'checkedIn' },
   ]
 
   export default {
@@ -93,6 +97,15 @@
         filterBYCheckedIn: 'all',
         selected: [],
       }
+    },
+    computed: {
+      isThereACheckedInSelectedGuests: function () {
+        let checkedInGuest
+        if (this.selected.length) {
+          checkedInGuest = this.selected.find(guest => guest.checkedIn === true)
+        }
+        return checkedInGuest === undefined
+      },
     },
     mounted () {
       this.loadAllGuests()
@@ -125,8 +138,8 @@
         }
       },
       checkedInSelectedGuests () {
-        if (!this.selected.length) {
-          NotificationService.info('You must select at least one guest')
+        if (this.isThereACheckedInSelectedGuests) {
+          NotificationService.info('You should and only select NOT checked in guests')
           return
         }
         const ids = this.selected.map(object => object.id)

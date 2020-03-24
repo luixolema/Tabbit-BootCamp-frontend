@@ -2,7 +2,10 @@
   <v-container fluid>
     <v-row>
       <!-- Guest Overview -->
-      <v-col cols="3">
+      <v-col
+        cols="3"
+        class="flex-grow-1"
+      >
         <guest-overview-component />
       </v-col>
 

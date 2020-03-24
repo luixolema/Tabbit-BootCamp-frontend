@@ -114,7 +114,7 @@
     },
 
     data: () => ({
-      timestamp: '55:55:55',
+      timestamp: '',
       items: [
         {
           icon: 'mdi-view-dashboard',
