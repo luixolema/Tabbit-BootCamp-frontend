@@ -3,6 +3,10 @@ module.exports = {
     disableHostCheck: true,
   },
 
+  configureWebpack: {
+    devtool: 'source-map',
+  },
+
   transpileDependencies: ['vuetify'],
 
   pluginOptions: {
@@ -12,9 +16,5 @@ module.exports = {
       localeDir: 'locales',
       enableInSFC: false,
     },
-  },
-  
-  configureWebpack: {
-    devtool: 'source-map'
   }
 }

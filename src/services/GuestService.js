@@ -7,7 +7,9 @@ export default {
       return axios.get(apirUrl)
   },
   findByCheckin (checkin) {
-    const url = new URL(apirUrl).searchParams.append('checkin', checkin)
+    const url = new URL(apirUrl)
+    url.searchParams.append('checkin', checkin)
+    console.log(url)
     return axios.get(url.href)
   },
   checkInGuests (guestsIds) {

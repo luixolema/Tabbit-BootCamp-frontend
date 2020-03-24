@@ -25,10 +25,10 @@
 </template>
 
 <script>
-  import GuestOverviewComponent from '../components/guests/GuestOverviewComponent.vue'
+  import GuestOverviewComponent from '@/views/components/guests/GuestOverviewComponent'
 
   export default {
-    name: 'Guests',
+    name: 'GuestsPage',
     components: {
       GuestOverviewComponent,
     },
