@@ -1,41 +1,67 @@
 <template>
-  <v-card>
-    <v-card-title>
-      <h2>Guest Overview</h2>
-    </v-card-title>
+  <v-container>
+    <base-material-card color="green">
+      <template v-slot:heading>
+        <div class="display-2 font-weight-thin">
+          Guests Overview
+        </div>
+      </template>
 
-    <v-card-text>
-      <!-- Radio Buttons and buttons -->
-
-      <v-row>
-        <v-col cols="6">
-          <v-radio-group
-            v-model="filterBYCheckedIn"
-            class="mt-0"
-            @change="filterByCheckin"
+      <v-card-text>
+        <v-row>
+          <v-col
+            cols="12"
+            class="py-0"
           >
-            <v-radio
-              label="All"
-              value="all"
-            />
-            <v-radio
-              label="Checked in"
-              value="checkedIn"
-            />
-            <v-radio
-              label="Checked out"
-              value="checkedOut"
-            />
-          </v-radio-group>
-        </v-col>
-        <v-col cols="6">
-          <v-btn>Add</v-btn>
-          <v-btn @click="checkedInSelectedGuests">
-            Check In
-          </v-btn>
-        </v-col>
-      </v-row>
-
+            <v-radio-group
+              v-model="filterBYCheckedIn"
+              class="mt-0"
+              @change="filterByCheckin"
+            >
+              <v-radio
+                label="All"
+                value="all"
+              />
+              <v-radio
+                label="Checked in"
+                value="checkedIn"
+              />
+              <v-radio
+                label="Checked out"
+                value="checkedOut"
+              />
+            </v-radio-group>
+          </v-col>
+          <v-col
+            cols="12"
+            class="py-0"
+          >
+            <v-btn
+              small
+            >
+              Add
+              <v-icon
+                right
+                dark
+              >
+                mdi-account-plus
+              </v-icon>
+            </v-btn>
+            <v-btn
+              small
+              @click="checkedInSelectedGuests"
+            >
+              Check In
+              <v-icon
+                right
+                dark
+              >
+                mdi-account-check
+              </v-icon>
+            </v-btn>
+          </v-col>
+        </v-row>
+      </v-card-text>
       <!-- Guest Table -->
       <v-data-table
         v-model="selected"
@@ -45,13 +71,13 @@
         item-key="id"
         show-select
       />
-    </v-card-text>
-  </v-card>
+    </base-material-card>
+  </v-container>
 </template>
 
 <script>
-  import GuestService from '../../services/GuestService'
-  import NotificationService from '../../services/NotificationService'
+  import GuestService from '@/services/GuestService'
+  import NotificationService from '@/services/NotificationService'
 
   const headers = [
     { text: 'Name', value: 'name' },
