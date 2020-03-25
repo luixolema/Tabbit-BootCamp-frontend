@@ -48,7 +48,7 @@
               </v-icon>
             </v-btn>
             <v-btn
-              :disabled="!isThereACheckedInSelectedGuest"
+              :disabled="!onlyNotCheckedInSelectedGuests"
               small
               @click="checkInSelectedGuests"
             >
@@ -112,12 +112,13 @@
       }
     },
     computed: {
-      isThereACheckedInSelectedGuest: function () {
-        let checkedInGuest
+      onlyNotCheckedInSelectedGuests: function () {
         if (this.selected.length) {
-          checkedInGuest = this.selected.find(guest => guest.checkedIn === true)
+          const selectedCheckIn = this.selected.find(guest => guest.checkedIn === true)
+          return selectedCheckIn === undefined
         }
-        return checkedInGuest === undefined
+
+        return false
       },
     },
     mounted () {
@@ -150,7 +151,7 @@
         }
       },
       checkInSelectedGuests () {
-        if (this.isThereACheckedInSelectedGuest) {
+        if (!this.onlyNotCheckedInSelectedGuests) {
           NotificationService.info('You should and only select NOT checked in guests')
           return
         }
@@ -159,10 +160,9 @@
           .then(() => {
             this.selected = []
             NotificationService.sucess('The guest has been chekin correctly')
+            this.selected = []
           }).catch(error => {
             NotificationService.error(null, error)
-          }).finally(() => {
-            this.selected = []
           })
       },
     },
