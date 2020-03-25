@@ -77,7 +77,7 @@
       <template
         v-slot:item.checkedIn="{ item }"
         >
-        <div v-if="item.checkedIn">
+        <div v-if="item.checkin">
           <v-icon>mdi-check-bold</v-icon>
         </div>
         <div v-else>
@@ -114,7 +114,7 @@
     computed: {
       onlyNotCheckedInSelectedGuests: function () {
         if (this.selected.length) {
-          const selectedCheckIn = this.selected.find(guest => guest.checkedIn === true)
+          const selectedCheckIn = this.selected.find(guest => guest.checkin === 1)
           return selectedCheckIn === undefined
         }
 
@@ -139,8 +139,8 @@
         if (this.filterBYCheckedIn === 'all') {
           this.loadAllGuests()
         } else {
-          const checkedIn = this.filterBYCheckedIn === 'checkedIn'
-          GuestService.findByCheckin(!!checkedIn)
+          const checkedIn = this.filterBYCheckedIn === 'checkedIn' ? 1 : 0
+          GuestService.findByCheckin(checkedIn)
             .then(response => {
               this.guests = response.data
             }).catch(error => {
