@@ -74,16 +74,16 @@
         item-key="id"
         show-select
       >
-      <template
-        v-slot:item.checkedIn="{ item }"
+        <template
+          v-slot:item.checkedIn="{ item }"
         >
-        <div v-if="item.checkin">
-          <v-icon>mdi-check-bold</v-icon>
-        </div>
-        <div v-else>
-          <v-icon>mdi-close-thick </v-icon>
-        </div>
-      </template>
+          <div v-if="item.checkin">
+            <v-icon>mdi-check-bold</v-icon>
+          </div>
+          <div v-else>
+            <v-icon>mdi-close-thick </v-icon>
+          </div>
+        </template>
       </v-data-table>
     </base-material-card>
   </v-container>
