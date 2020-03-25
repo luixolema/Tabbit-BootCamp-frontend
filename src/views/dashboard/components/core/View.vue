@@ -1,12 +1,14 @@
 <template>
-  <div>
+  <v-content>
     <router-view />
-    <notifications />
-  </div>
+  </v-content>
 </template>
 
 <script>
   export default {
-    name: 'App',
+    name: 'DashboardCoreView',
+
+    components: {
+    },
   }
 </script>

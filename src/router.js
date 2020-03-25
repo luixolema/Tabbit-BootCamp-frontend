@@ -1,18 +1,29 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HomePageComponent from './components/HomePageComponent';
-import GuestOverviewComponent from './components/GuestOverviewComponent';
 
+Vue.use(Router)
 
-Vue.use(Router);
-
-const routes = [
-    { path: '/', component: HomePageComponent },
-    { path: '/home', component: HomePageComponent },
-    { path: '/guest-overview', component: GuestOverviewComponent },
-]
-
-// Create the router instance and pass the `routes` option
 export default new Router({
-    routes // short for `routes: routes`
+  mode: 'hash',
+  base: process.env.BASE_URL,
+  routes: [
+    {
+      path: '/',
+      component: () => import('@/views/dashboard/Index'),
+      children: [
+        // Dashboard
+        {
+          name: 'Dashboard',
+          path: '',
+          component: () => import('@/views/dashboard/Dashboard'),
+        },
+        // Pages
+        {
+          name: 'Guests',
+          path: 'pages/guests',
+          component: () => import('@/views/pages/GuestsPage'),
+        },
+      ],
+    },
+  ],
 })
