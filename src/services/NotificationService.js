@@ -8,7 +8,6 @@ export default {
       text: msg,
       type: 'error',
     })
-    console.error(error)
   },
   sucess (msg) {
     Vue.notify({
