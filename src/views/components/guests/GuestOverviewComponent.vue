@@ -114,7 +114,7 @@
     computed: {
       onlyNotCheckedInSelectedGuests: function () {
         if (this.selected.length) {
-          const selectedCheckIn = this.selected.find(guest => guest.checkin === 1)
+          const selectedCheckIn = this.selected.find(guest => guest.checkedin === true)
           return selectedCheckIn === undefined
         }
 

@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const apiUrl = 'http://localhost:8081/api/guests'
+const apiUrl = 'http://localhost:8080/api/guests'
 
 export default {
   findAll () {
