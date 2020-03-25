@@ -17,9 +17,6 @@
             color="info"
             icon="mdi-account-multiple"
             title="Guests"
-            value="25"
-            sub-icon="mdi-clock"
-            sub-text="Just Updated"
           />
         </router-link>
       </v-col>
