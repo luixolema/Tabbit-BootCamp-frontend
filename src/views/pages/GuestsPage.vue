@@ -3,21 +3,31 @@
     <v-row>
       <!-- Guest Overview -->
       <v-col
-        cols="4"
+        cols="12"
+        sm="12"
+        md="4"
         class="flex-grow-1"
       >
         <guest-overview-component />
       </v-col>
 
       <!-- Central Area -->
-      <v-col cols="6">
+      <v-col
+        cols="12"
+        sm="12"
+        md="6"
+      >
         <v-card>
           <h1>Central area (not implemented yet)</h1>
         </v-card>
       </v-col>
 
       <!-- Left Area -->
-      <v-col cols="2">
+      <v-col
+        cols="12"
+        sm="12"
+        md="2"
+      >
         <v-card>
           <h1>Left area (not implemented yet)</h1>
           <v-card />
