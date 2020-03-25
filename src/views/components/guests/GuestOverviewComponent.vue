@@ -69,6 +69,7 @@
         dense
         :headers="headers"
         :items="guests"
+        :single-select="true"
         hide-default-footer
         item-key="id"
         show-select
