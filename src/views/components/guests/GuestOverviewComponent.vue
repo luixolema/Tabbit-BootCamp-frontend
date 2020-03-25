@@ -74,16 +74,16 @@
         item-key="id"
         show-select
       >
-        <template
-          v-slot:item.checkedIn="{ item }"
+      <template
+        v-slot:item.checkedin="{ item }"
         >
-          <div v-if="item.checkin">
-            <v-icon>mdi-check-bold</v-icon>
-          </div>
-          <div v-else>
-            <v-icon>mdi-close-thick </v-icon>
-          </div>
-        </template>
+        <div v-if="item.checkedin">
+          <v-icon>mdi-check-bold</v-icon>
+        </div>
+        <div v-else>
+          <v-icon>mdi-close-thick </v-icon>
+        </div>
+      </template>
       </v-data-table>
     </base-material-card>
   </v-container>
@@ -95,10 +95,10 @@
 
   const headers = [
     { text: 'Id', value: 'id' },
-    { text: 'Name', value: 'name' },
+    { text: 'Name', value: 'firstName' },
     { text: 'Last Name', value: 'lastName' },
-    { text: 'Box', value: 'box' },
-    { text: 'Checked-in', value: 'checkedIn' },
+    { text: 'Box', value: 'boxId' },
+    { text: 'Checked-in', value: 'checkedin' },
   ]
 
   export default {
@@ -114,7 +114,7 @@
     computed: {
       onlyNotCheckedInSelectedGuests: function () {
         if (this.selected.length) {
-          const selectedCheckIn = this.selected.find(guest => guest.checkin === 1)
+          const selectedCheckIn = this.selected.find(guest => guest.checkedin === true)
           return selectedCheckIn === undefined
         }
 
@@ -128,7 +128,7 @@
       loadAllGuests () {
         GuestService.findAll()
           .then(response => {
-            this.guests = response.data
+            this.guests = response.data.guests
           }).catch(error => {
             NotificationService.error(null, error)
           }).finally(() => {
@@ -142,7 +142,7 @@
           const checkedIn = this.filterBYCheckedIn === 'checkedIn' ? 1 : 0
           GuestService.findByCheckin(checkedIn)
             .then(response => {
-              this.guests = response.data
+              this.guests = response.data.guests
             }).catch(error => {
               NotificationService.error(null, error)
             }).finally(() => {
@@ -159,7 +159,7 @@
         GuestService.checkInGuests(ids)
           .then(() => {
             this.selected = []
-            NotificationService.sucess('The guest has been chekin correctly')
+            NotificationService.sucess('The guest has been cheked-in correctly')
             this.selected = []
           }).catch(error => {
             NotificationService.error(null, error)
