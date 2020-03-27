@@ -24,11 +24,11 @@
               />
               <v-radio
                 label="Checked in"
-                value="checkedIn"
+                value="true"
               />
               <v-radio
-                label="Checked out"
-                value="checkedOut"
+                label="Not Checked in"
+                value="flase"
               />
             </v-radio-group>
           </v-col>
@@ -48,9 +48,9 @@
               </v-icon>
             </v-btn>
             <v-btn
-              :disabled="!onlyNotCheckedInSelectedGuests"
+              :disabled="!noCheckedinGuestIsSelected"
               small
-              @click="checkInSelectedGuests"
+              @click="checkInSelectedGuest"
             >
               Check In
               <v-icon
@@ -65,25 +65,42 @@
       </v-card-text>
       <!-- Guest Table -->
       <v-data-table
-        v-model="selected"
         dense
         :headers="headers"
         :items="guests"
-        :single-select="true"
         hide-default-footer
         item-key="id"
-        show-select
       >
-      <template
-        v-slot:item.checkedin="{ item }"
-        >
-        <div v-if="item.checkedin">
-          <v-icon>mdi-check-bold</v-icon>
-        </div>
-        <div v-else>
-          <v-icon>mdi-close-thick </v-icon>
-        </div>
-      </template>
+        <template v-slot:item="{ item }">
+          <tr
+            class="cursor-pointer"
+            :class="{active: selectedGuest && selectedGuest.id === item.id}"
+            @click="selectGuest(item)"
+          >
+            <td>
+              {{ item.id }}
+            </td>
+            <td>
+              {{ item.firstName }}
+            </td>
+            <td>
+              {{ item.lastName }}
+            </td>
+            <td>
+              {{ item.boxId }}
+            </td>
+            <td
+              class="text-center"
+            >
+              <div v-if="item.checkedin">
+                <v-icon>mdi-check-bold</v-icon>
+              </div>
+              <div v-else>
+                <v-icon>mdi-close-thick </v-icon>
+              </div>
+            </td>
+          </tr>
+        </template>
       </v-data-table>
     </base-material-card>
   </v-container>
@@ -98,7 +115,7 @@
     { text: 'Name', value: 'firstName' },
     { text: 'Last Name', value: 'lastName' },
     { text: 'Box', value: 'boxId' },
-    { text: 'Checked-in', value: 'checkedin' },
+    { text: 'Checked-in', value: 'checkedin', align: 'center' },
   ]
 
   export default {
@@ -108,14 +125,13 @@
         guests: [],
         headers,
         filterBYCheckedIn: 'all',
-        selected: [],
+        selectedGuest: undefined,
       }
     },
     computed: {
-      onlyNotCheckedInSelectedGuests: function () {
-        if (this.selected.length) {
-          const selectedCheckIn = this.selected.find(guest => guest.checkedin === true)
-          return selectedCheckIn === undefined
+      noCheckedinGuestIsSelected: function () {
+        if (this.selectedGuest !== undefined) {
+          return this.selectedGuest.checkedin === false
         }
 
         return false
@@ -129,41 +145,42 @@
         GuestService.findAll()
           .then(response => {
             this.guests = response.data.guests
+            this.selectedGuest = undefined
           }).catch(error => {
             NotificationService.error(null, error)
-          }).finally(() => {
-            this.selected = []
           })
       },
       filterByCheckin () {
         if (this.filterBYCheckedIn === 'all') {
           this.loadAllGuests()
         } else {
-          const checkedIn = this.filterBYCheckedIn === 'checkedIn' ? 1 : 0
+          const checkedIn = this.filterBYCheckedIn === 'true' ? 1 : 0
           GuestService.findByCheckin(checkedIn)
             .then(response => {
               this.guests = response.data.guests
+              this.selectedGuest = undefined
             }).catch(error => {
               NotificationService.error(null, error)
-            }).finally(() => {
-              this.selected = []
             })
         }
       },
-      checkInSelectedGuests () {
-        if (!this.onlyNotCheckedInSelectedGuests) {
-          NotificationService.info('You should and only select NOT checked in guests')
-          return
-        }
-        const ids = this.selected.map(object => object.id)
-        GuestService.checkInGuests(ids)
-          .then(() => {
-            this.selected = []
-            NotificationService.sucess('The guest has been cheked-in correctly')
-            this.selected = []
-          }).catch(error => {
-            NotificationService.error(null, error)
-          })
+      checkInSelectedGuest () {
+        // if (!this.noCheckedinGuestIsSelected) {
+        //   NotificationService.info('You should and only select NOT checked in guests')
+        //   return
+        // }
+
+        // GuestService.checkInGuests(this.selectedGuest.id)
+        //   .then(() => {
+        //     NotificationService.sucess('The guest has been cheked-in correctly')
+        //     this.selectedGuest.checkedin = true
+        //     // we need to verify if the checkedin user its correctly shown in the table
+        //   }).catch(error => {
+        //     NotificationService.error(null, error)
+        //   })
+      },
+      selectGuest (guest) {
+        this.selectedGuest = guest
       },
     },
   }

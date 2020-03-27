@@ -3,12 +3,12 @@
 </template>
 
 <script>
-export default {
-  name: 'GuestOverviewComponent',
-  components: {
-    
+  export default {
+    name: 'GuestOverviewComponent',
+    components: {
+
+    },
   }
-}
 </script>
 
 <style>

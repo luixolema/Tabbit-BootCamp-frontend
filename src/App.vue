@@ -10,3 +10,9 @@
     name: 'App',
   }
 </script>
+
+<style>
+  .cursor-pointer{
+    cursor: pointer
+  }
+</style>
