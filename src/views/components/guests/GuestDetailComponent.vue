@@ -1,43 +1,45 @@
 <template>
-  <v-card class="pa-3">
-    <v-row>
-      <!-- Stay selection -->
-      <v-combobox
-        v-model="selectedStay"
-        class="pl-4 pr-4"
-        :items="stays"
-        item-text="description"
-        item-value="id"
-        @change="selectStay"
-      />
-      <v-btn
-        small
-      >
-        Bill
-        <v-icon
-          right
-          dark
+  <v-card>
+    <v-card-text>
+      <v-row>
+        <!-- Stay selection -->
+        <v-combobox
+          v-model="selectedStay"
+          class="pl-4 pr-4"
+          :items="stays"
+          item-text="description"
+          item-value="id"
+          @change="selectStay"
+        />
+        <v-btn
+          small
         >
-          mdi-account-plus
-        </v-icon>
-      </v-btn>
+          Bill
+          <v-icon
+            right
+            dark
+          >
+            mdi-currency-eur
+          </v-icon>
+        </v-btn>
 
-      <v-btn
-        small
-      >
-        Checkout
-        <v-icon
-          right
-          dark
-          :disabled="enableCheckout"
+        <v-btn
+          small
         >
-          mdi-account-plus
-        </v-icon>
-      </v-btn>
-    </v-row>
-    <v-row>
+          Checkout
+          <v-icon
+            right
+            dark
+            :disabled="enableCheckout"
+          >
+            mdi-text-box-check-outline
+          </v-icon>
+        </v-btn>
+      </v-row>
+      <v-row>
       <!-- GeneralAreaComponent -->
-    </v-row>
+      </v-row>
+    </v-card-text>
   </v-card>
 </template>
 
