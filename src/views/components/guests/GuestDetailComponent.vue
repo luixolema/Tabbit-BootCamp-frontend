@@ -44,7 +44,7 @@
 </template>
 
 <script>
-  export default {
+  const GuestDetailComponent = {
     data: () => {
       return {
         enableCheckout: false,
@@ -63,6 +63,8 @@
       },
     },
   }
+
+  export default GuestDetailComponent
 </script>
 
 <style>

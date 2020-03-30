@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-export default {
+const NotificationService = {
   error (msg, error) {
     msg = msg || 'Unknown error'
     Vue.notify({
@@ -29,3 +29,5 @@ export default {
     })
   },
 }
+
+export default NotificationService

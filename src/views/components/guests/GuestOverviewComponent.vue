@@ -19,14 +19,17 @@
               @change="filterByCheckin"
             >
               <v-radio
+                id="allFilter"
                 label="All"
                 value="all"
               />
               <v-radio
+                id="checkedInFilter"
                 label="Checked in"
                 value="true"
               />
               <v-radio
+                id="noCheckedInFilter"
                 label="Not Checked in"
                 value="flase"
               />
@@ -118,7 +121,7 @@
     { text: 'Checked-in', value: 'checkedin', align: 'center' },
   ]
 
-  export default {
+  const GuestOverviewComponent = {
     name: 'GuestOverviewComponent',
     data: () => {
       return {
@@ -180,11 +183,13 @@
         //   })
       },
       selectGuest (guest) {
-        this.$store.state.commit('guestModule/setSelectedGuest', guest)
+        this.$store.commit('guestModule/setSelectedGuest', guest)
         this.selectedGuest = guest
       },
     },
   }
+
+  export default GuestOverviewComponent
 </script>
 
 <style>
