@@ -3,7 +3,7 @@
     <base-material-card color="green">
       <template v-slot:heading>
         <div class="display-2 font-weight-thin">
-          {{profile.title}}
+          {{ profile.title }}
         </div>
       </template>
 

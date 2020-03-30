@@ -1,52 +1,62 @@
 <template>
-  <v-card>
-    <v-card-text>
-      <v-row>
-        <!-- Stay selection -->
-        <v-combobox
-          v-model="selectedStay"
-          class="pl-4 pr-4"
-          :items="guestInfo.stays"
-          item-text="description"
-          item-value="id"
-          @change="selectStay"
-        />
-        <v-btn small>
-          Bill
-          <v-icon
-            right
-            dark
-          >
-            mdi-currency-eur
-          </v-icon>
-        </v-btn>
+  <v-container>
+    <base-material-card color="green">
+      <template v-slot:heading>
+        <div class="display-2 font-weight-thin">
+          {{ profile.title }}
+        </div>
+      </template>
+      <v-card-text>
+        <v-row>
+          <!-- Stay selection -->
+          <v-combobox
+            v-model="selectedStay"
+            class="pl-4 pr-4"
+            :items="guestInfo.stays"
+            item-text="description"
+            item-value="id"
+            @change="selectStay"
+          />
+          <v-btn small>
+            Bill
+            <v-icon
+              right
+              dark
+            >
+              mdi-currency-eur
+            </v-icon>
+          </v-btn>
 
-        <v-btn small>
-          Checkout
-          <v-icon
-            right
-            dark
-            :disabled="enableCheckout"
-          >
-            mdi-text-box-check-outline
-          </v-icon>
-        </v-btn>
-      </v-row>
-      <v-row v-if="guest">
-        <!-- GeneralAreaComponent -->
-      </v-row>
-      <!-- Example to pass info to another component -->
-      <!-- <activities-ifo :guest="selectedStay.activities"> -->
-    </v-card-text>
-  </v-card>
+          <v-btn small>
+            Checkout
+            <v-icon
+              right
+              dark
+              :disabled="enableCheckout"
+            >
+              mdi-text-box-check-outline
+            </v-icon>
+          </v-btn>
+        </v-row>
+        <general-area-component />
+        <!-- Example to pass info to another component -->
+        <!-- <activities-ifo :guest="selectedStay.activities"> -->
+      </v-card-text>
+    </base-material-card>
+  </v-container>
 </template>
 
 <script>
+
+  import GeneralAreaComponent from '@/views/components/guests/details/GeneralAreaComponent'
   import GuestService from '@/services/GuestService'
   import NotificationService from '@/services/NotificationService'
   import StayService from '@/services/StayService'
 
   export default {
+    components: {
+      GeneralAreaComponent,
+    },
     data: () => {
       return {
         enableCheckout: false,
@@ -58,6 +68,11 @@
       guest () {
         const selectedGuest = this.$store.state.guestModule.selectedGuest
         return selectedGuest
+      },
+      profile () {
+        return {
+          title: this.$t('guestDetail'),
+        }
       },
     },
     watch: {

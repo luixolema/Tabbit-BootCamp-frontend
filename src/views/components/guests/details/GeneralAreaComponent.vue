@@ -1,0 +1,64 @@
+<template>
+  <div>
+    <v-row>
+      <v-col
+        cols="12"
+        md="6"
+        lg="6"
+      >
+        <v-row>
+          <v-col cols="12">
+            guestPersonalDetailsComponent
+          </v-col>
+          <v-col cols="12">
+            stayDetailsComponent
+          </v-col>
+        </v-row>
+      </v-col>
+      <v-col
+        cols="12"
+        md="6"
+        lg="6"
+      >
+        <v-row>
+          <v-col cols="12">
+            equipmentComponent
+          </v-col>
+        </v-row>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col cols="12">
+        activitiesComponent
+      </v-col>
+    </v-row>
+  </div>
+</template>
+
+<script>
+
+  export default {
+    name: 'GeneralAreaComponent',
+    data: () => {
+      return {
+      }
+    },
+    computed: {
+      profile () {
+        return {
+          title: this.$t('guestOverview'),
+        }
+      },
+    },
+    mounted () {
+      this.test()
+    },
+    methods: {
+      test () {
+      },
+    },
+  }
+</script>
+
+<style>
+</style>
