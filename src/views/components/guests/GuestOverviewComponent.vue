@@ -3,7 +3,7 @@
     <base-material-card color="green">
       <template v-slot:heading>
         <div class="display-2 font-weight-thin">
-          Guests Overview
+          {{profile.title}}
         </div>
       </template>
 
@@ -23,12 +23,12 @@
                 value="all"
               />
               <v-radio
-                label="Checked in"
-                value="true"
+                label="Checked In"
+                value="checkedIn"
               />
               <v-radio
-                label="Not Checked in"
-                value="flase"
+                label="Not Checked In"
+                value="notCheckedIn"
               />
             </v-radio-group>
           </v-col>
@@ -115,7 +115,7 @@
     { text: 'Name', value: 'firstName' },
     { text: 'Last Name', value: 'lastName' },
     { text: 'Box', value: 'boxId' },
-    { text: 'Checked-in', value: 'checkedin', align: 'center' },
+    { text: 'Checked In', value: 'checkedin', align: 'center' },
   ]
 
   export default {
@@ -136,6 +136,11 @@
 
         return false
       },
+      profile () {
+        return {
+          title: this.$t('guestOverview'),
+        }
+      },
     },
     mounted () {
       this.loadAllGuests()
@@ -154,7 +159,7 @@
         if (this.filterBYCheckedIn === 'all') {
           this.loadAllGuests()
         } else {
-          const checkedIn = this.filterBYCheckedIn === 'true' ? 1 : 0
+          const checkedIn = this.filterBYCheckedIn === 'checkedIn' ? 1 : 0
           GuestService.findByCheckin(checkedIn)
             .then(response => {
               this.guests = response.data.guests

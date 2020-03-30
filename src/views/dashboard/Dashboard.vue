@@ -16,7 +16,7 @@
           <base-material-stats-card
             color="info"
             icon="mdi-account-multiple"
-            title="Guests"
+            :title="profile.title"
           />
         </router-link>
       </v-col>
@@ -27,7 +27,13 @@
 <script>
   export default {
     name: 'DashboardDashboard',
-
+    computed: {
+      profile () {
+        return {
+          title: this.$t('guests'),
+        }
+      },
+    },
     methods: {
       complete (index) {
         this.list[index] = !this.list[index]
