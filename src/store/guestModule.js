@@ -1,13 +1,10 @@
-export default {
+const guestModule = {
  namespaced: true,
  state: {
      selectedGuest: undefined,
  },
  /* Guettes are for retuning modified state (like computed properties) */
  getters: {
-    selectedGuest: state => {
-        return state.selectedGuest
-    },
  },
  mutations: {
     setSelectedGuest (state, payload) {
@@ -16,3 +13,5 @@ export default {
  },
  actions: {},
 }
+
+export default guestModule
