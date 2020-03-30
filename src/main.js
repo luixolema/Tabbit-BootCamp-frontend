@@ -26,8 +26,8 @@ Vue.config.productionTip = false
 Vue.use(Notifications)
 
 new Vue({
-  router,
   store,
+  router,
   vuetify,
   i18n,
   render: h => h(App),

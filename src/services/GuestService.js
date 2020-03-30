@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const apiUrl = 'http://localhost:8080/api/guests'
 
-export default {
+const GuestService = {
   findAll () {
       return axios.get(apiUrl)
   },
@@ -14,4 +14,24 @@ export default {
   checkInGuests (guestsIds) {
     return axios.put(apiUrl + '/checkIn', guestsIds)
   },
+  getGestInfo (guestId) {
+    /** Mock data to test TODO: remove it after finish the api */
+    // return Promise.resolve({
+    //   data: {
+    //     stays: [
+    //       null,
+    //       {
+    //         id: 1,
+    //         checkInDate: '12.02.2020',
+    //         checkOutDate: '12.02.2020',
+    //       },
+    //     ],
+    //     guest: null,
+    //   },
+    // })
+
+    return axios.get(apiUrl + '/' + guestId)
+  },
 }
+
+export default GuestService

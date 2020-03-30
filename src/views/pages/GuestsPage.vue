@@ -17,9 +17,7 @@
         sm="12"
         md="6"
       >
-        <v-card>
-          <h1>Central area (not implemented yet)</h1>
-        </v-card>
+        <guest-detail-component />
       </v-col>
 
       <!-- Left Area -->
@@ -39,11 +37,13 @@
 
 <script>
   import GuestOverviewComponent from '@/views/components/guests/GuestOverviewComponent'
+  import GuestDetailComponent from '@/views/components/guests/GuestDetailComponent'
 
   export default {
     name: 'GuestsPage',
     components: {
       GuestOverviewComponent,
+      GuestDetailComponent,
     },
   }
 </script>

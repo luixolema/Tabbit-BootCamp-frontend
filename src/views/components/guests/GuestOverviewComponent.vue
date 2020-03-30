@@ -185,6 +185,7 @@
         //   })
       },
       selectGuest (guest) {
+        this.$store.commit('guestModule/setSelectedGuest', guest)
         this.selectedGuest = guest
       },
     },
