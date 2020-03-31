@@ -21,7 +21,7 @@
             class="py-0"
             cols="12"
           >
-            <stay-details-component stay-details="{}" />
+            <stay-details-component />
           </v-col>
         </v-row>
       </v-col>
@@ -29,12 +29,9 @@
         cols="12"
         md="6"
         lg="6"
+        class="py-0"
       >
-        <v-row>
-          <v-col cols="12">
-            equipmentComponent
-          </v-col>
-        </v-row>
+        <equipment-component />
       </v-col>
     </v-row>
     <v-row>
@@ -49,12 +46,14 @@
 
   import GuestPersonalDetailsComponent from '@/views/components/guests/details/personal/GuestPersonalDetailsComponent'
   import StayDetailsComponent from '@/views/components/guests/details/StayDetailsComponent'
+  import EquipmentComponent from '@/views/components/guests/details/EquipmentComponent'
 
   export default {
     name: 'GeneralAreaComponent',
     components: {
       GuestPersonalDetailsComponent,
       StayDetailsComponent,
+      EquipmentComponent,
     },
     data: () => {
       return {
