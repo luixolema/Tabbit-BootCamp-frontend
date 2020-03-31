@@ -1,11 +1,6 @@
 <template>
   <v-container>
-    <base-material-card color="green">
-      <template v-slot:heading>
-        <div class="display-2 font-weight-thin">
-          {{ profile.title }}
-        </div>
-      </template>
+    <v-card>
       <v-card-text>
         <v-row>
           <!-- Stay selection -->
@@ -42,7 +37,7 @@
         <!-- Example to pass info to another component -->
         <!-- <activities-ifo :guest="selectedStay.activities"> -->
       </v-card-text>
-    </base-material-card>
+    </v-card>
   </v-container>
 </template>
 
