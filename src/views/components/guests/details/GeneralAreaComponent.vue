@@ -39,7 +39,7 @@
     </v-row>
     <v-row>
       <v-col cols="12">
-        activitiesComponent
+        <activities-component />
       </v-col>
     </v-row>
   </div>
@@ -49,12 +49,14 @@
 
   import GuestPersonalDetailsComponent from '@/views/components/guests/details/personal/GuestPersonalDetailsComponent'
   import StayDetailsComponent from '@/views/components/guests/details/StayDetailsComponent'
+  import ActivitiesComponent from '@/views/components/guests/details/ActivitiesComponent'
 
   export default {
     name: 'GeneralAreaComponent',
     components: {
       GuestPersonalDetailsComponent,
       StayDetailsComponent,
+      ActivitiesComponent,
     },
     data: () => {
       return {
