@@ -21,7 +21,7 @@
             class="py-0"
             cols="12"
           >
-            stayDetailsComponent
+            <stay-details-component stay-details="{}" />
           </v-col>
         </v-row>
       </v-col>
@@ -48,11 +48,13 @@
 <script>
 
   import GuestPersonalDetailsComponent from '@/views/components/guests/details/personal/GuestPersonalDetailsComponent'
+  import StayDetailsComponent from '@/views/components/guests/details/StayDetailsComponent'
 
   export default {
     name: 'GeneralAreaComponent',
     components: {
       GuestPersonalDetailsComponent,
+      StayDetailsComponent,
     },
     data: () => {
       return {
