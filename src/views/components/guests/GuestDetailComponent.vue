@@ -74,7 +74,7 @@
       guest () {
         const selectedGuest = this.$store.state.guestModule.selectedGuest
         if (selectedGuest) {
-          GuestService.getGestInfo(selectedGuest.id)
+          GuestService.getGuestInfo(selectedGuest.id)
             .then((response) => {
               this.guestInfo = response.data
               this.buildStaysOptions()

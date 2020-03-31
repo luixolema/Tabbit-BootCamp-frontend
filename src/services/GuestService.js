@@ -14,7 +14,7 @@ const GuestService = {
   checkInGuests (guestsIds) {
     return axios.put(apiUrl + '/checkIn', guestsIds)
   },
-  getGestInfo (guestId) {
+  getGuestInfo (guestId) {
     /** Mock data to test TODO: remove it after finish the api */
     // return Promise.resolve({
     //   data: {
