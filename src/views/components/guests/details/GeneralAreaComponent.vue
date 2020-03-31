@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="my-4">
     <v-row>
       <v-col
         class="py-0"
