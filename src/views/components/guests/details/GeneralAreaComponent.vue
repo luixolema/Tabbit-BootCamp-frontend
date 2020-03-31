@@ -2,15 +2,25 @@
   <div>
     <v-row>
       <v-col
+        class="py-0"
         cols="12"
         md="6"
         lg="6"
       >
         <v-row>
-          <v-col cols="12">
-            guestPersonalDetailsComponent
+          <v-col
+            class="py-0"
+            cols="12"
+          >
+            <guest-personal-details-component
+              :headers="headers"
+              :guest-personal-details-data="guestPersonalDetailsData"
+            />
           </v-col>
-          <v-col cols="12">
+          <v-col
+            class="py-0"
+            cols="12"
+          >
             stayDetailsComponent
           </v-col>
         </v-row>
@@ -37,10 +47,23 @@
 
 <script>
 
+  import GuestPersonalDetailsComponent from '@/views/components/guests/details/personal/GuestPersonalDetailsComponent'
+
   export default {
     name: 'GeneralAreaComponent',
+    components: {
+      GuestPersonalDetailsComponent,
+    },
     data: () => {
       return {
+        headers: [
+          { text: 'Key', value: 'key' },
+          { text: 'Value', value: 'value' },
+        ],
+        guestPersonalDetailsData: [
+          { key: 'First name', value: 'Andrey' }, // mocked data
+          { key: 'Last name', value: 'Sapozhkov' },
+        ],
       }
     },
     computed: {
