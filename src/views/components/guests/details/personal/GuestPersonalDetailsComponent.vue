@@ -4,7 +4,7 @@
       <v-col
         cols="8"
       >
-        <h5 class="headline">
+        <h5 class="display1">
           Details
         </h5>
       </v-col>
@@ -12,7 +12,7 @@
         cols="4"
       >
         <v-btn
-          class="my-1"
+          class="my-0"
           x-small
         >
           Delete
@@ -30,6 +30,7 @@
         <v-data-table
           :headers="headers"
           :items="guestPersonalDetailsData"
+          :disable-pagination="true"
           hide-default-footer
         />
       </v-col>
@@ -41,7 +42,20 @@
 
   export default {
     name: 'GuestPersonalDetailsComponent',
-    props: ['headers', 'guestPersonalDetailsData'],
+    props: {
+      headers: {
+        type: Array,
+        default: function () {
+          return []
+        },
+      },
+      guestPersonalDetailsData: {
+        type: Array,
+        default: function () {
+          return []
+        },
+      },
+    },
     data: () => {
       return {
       }

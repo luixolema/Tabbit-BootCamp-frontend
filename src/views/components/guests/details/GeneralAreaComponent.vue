@@ -14,7 +14,6 @@
           >
             <guest-personal-details-component
               :headers="headers"
-              ,
               :guest-personal-details-data="guestPersonalDetailsData"
             />
           </v-col>
@@ -62,7 +61,7 @@
           { text: 'Value', value: 'value' },
         ],
         guestPersonalDetailsData: [
-          { key: 'First name', value: 'Andrey' },
+          { key: 'First name', value: 'Andrey' }, // mocked data
           { key: 'Last name', value: 'Sapozhkov' },
         ],
       }
