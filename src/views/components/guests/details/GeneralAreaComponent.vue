@@ -12,7 +12,11 @@
             class="py-0"
             cols="12"
           >
-            <guest-personal-details-component v-bind:headers="headers" />
+            <guest-personal-details-component
+              :headers="headers"
+              ,
+              :guest-personal-details-data="guestPersonalDetailsData"
+            />
           </v-col>
           <v-col
             class="py-0"
@@ -56,6 +60,10 @@
         headers: [
           { text: 'Key', value: 'key' },
           { text: 'Value', value: 'value' },
+        ],
+        guestPersonalDetailsData: [
+          { key: 'First name', value: 'Andrey' },
+          { key: 'Last name', value: 'Sapozhkov' },
         ],
       }
     },

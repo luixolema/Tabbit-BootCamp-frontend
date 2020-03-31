@@ -29,6 +29,8 @@
       <v-col cols="12">
         <v-data-table
           :headers="headers"
+          :items="guestPersonalDetailsData"
+          hide-default-footer
         />
       </v-col>
     </v-row>
@@ -39,7 +41,7 @@
 
   export default {
     name: 'GuestPersonalDetailsComponent',
-    props: ['headers'],
+    props: ['headers', 'guestPersonalDetailsData'],
     data: () => {
       return {
       }
