@@ -2,6 +2,7 @@
   <div>
     <v-row>
       <v-col
+        class="py-0"
         cols="8"
       >
         <h5 class="display1">
@@ -9,6 +10,7 @@
         </h5>
       </v-col>
       <v-col
+        class="py-0"
         cols="4"
       >
         <v-btn
@@ -26,7 +28,10 @@
         </v-btn>
       </v-col>
 
-      <v-col cols="12">
+      <v-col
+        class="py-0"
+        cols="12"
+      >
         <v-data-table
           :headers="headers"
           :items="guestPersonalDetailsData"
