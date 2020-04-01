@@ -14,14 +14,14 @@
           >
             <guest-personal-details-component
               :headers="headers"
-              :guest-personal-details-data="guestPersonalDetailsData"
+              :guest-personal-details="guestPersonalDetails"
             />
           </v-col>
           <v-col
             class="py-0"
             cols="12"
           >
-            <stay-details-component />
+            <stay-details-component :stay-details="stayDetails" />
           </v-col>
         </v-row>
       </v-col>
@@ -57,15 +57,21 @@
       EquipmentComponent,
       ActivitiesComponent,
     },
+    props: {
+      guestPersonalDetails: {
+        type: Object,
+        default: () => ({}),
+      },
+      stayDetails: {
+        type: Object,
+        default: () => ({}),
+      },
+    },
     data: () => {
       return {
         headers: [
           { text: 'Key', value: 'key' },
           { text: 'Value', value: 'value' },
-        ],
-        guestPersonalDetailsData: [
-          { key: 'First name', value: 'Andrey' }, // mocked data
-          { key: 'Last name', value: 'Sapozhkov' },
         ],
       }
     },

@@ -12,7 +12,10 @@
             item-value="id"
             @change="selectStay"
           />
-          <v-btn small>
+          <v-btn
+            small
+            :disabled="disableBill"
+          >
             Bill
             <v-icon
               right
@@ -22,20 +25,22 @@
             </v-icon>
           </v-btn>
 
-          <v-btn small>
+          <v-btn
+            small
+            :disabled="disableCheckOut"
+          >
             Checkout
             <v-icon
               right
               dark
-              :disabled="enableCheckout"
             >
               mdi-text-box-check-outline
             </v-icon>
           </v-btn>
         </v-row>
         <general-area-component
-          guest-personal-details="guestPersonalDetails"
-          stay-details="stayDetails"
+          :guest-personal-details="guestPersonalDetails"
+          :stay-details="stayDetails"
         />
         <!-- Example to pass info to another component -->
         <!-- <activities-ifo :guest="selectedStay.activities"> -->
@@ -57,7 +62,6 @@
     },
     data: () => {
       return {
-        enableCheckout: false,
         selectedStay: null,
         guestInfo: { stays: [] },
         staysOptions: [],
@@ -75,6 +79,15 @@
           title: this.$t('guestDetail'),
         }
       },
+      disableBill () {
+        if (this.guest) {
+          return false
+        }
+        return true
+      },
+      disableCheckOut () {
+        return true
+      },
     },
     watch: {
       guest () {
@@ -84,7 +97,7 @@
             .then((response) => {
               this.guestInfo = response.data
               this.guestPersonalDetails = this.guestInfo.stayDto.guestPersonalDetails
-              this.stayDetails = this.guestInfo.stayDto.stayDetails
+              this.stayDetails = this.guestInfo.stayDto.stayDetails || {}
               this.buildStaysOptions()
             })
             .catch((error) => {

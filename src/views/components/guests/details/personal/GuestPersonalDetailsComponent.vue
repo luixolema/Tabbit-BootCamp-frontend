@@ -32,12 +32,72 @@
         class="py-0"
         cols="12"
       >
-        <v-data-table
-          :headers="headers"
-          :items="guestPersonalDetailsData"
-          :disable-pagination="true"
-          hide-default-footer
-        />
+        <v-card>
+          <!-- Table -->
+          <v-simple-table
+            :height="height"
+            :fixed-header="true"
+          >
+            <template v-slot:default>
+              <thead>
+                <tr>
+                  <th class="text-left">
+                    Key
+                  </th>
+                  <th class="text-left">
+                    Value
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>First Name</td>
+                  <td>{{ guestPersonalDetails.firstName }}</td>
+                </tr>
+                <tr>
+                  <td>Last Name</td>
+                  <td>{{ guestPersonalDetails.lastName }}</td>
+                </tr>
+                <tr>
+                  <td>Birth Date</td>
+                  <td>{{ guestPersonalDetails.birthDate }}</td>
+                </tr>
+                <tr>
+                  <td>Nationality</td>
+                  <td>{{ guestPersonalDetails.nationality }}</td>
+                </tr>
+                <tr>
+                  <td>Country</td>
+                  <td>{{ guestPersonalDetails.country }}</td>
+                </tr>
+                <tr>
+                  <td>City</td>
+                  <td>{{ guestPersonalDetails.city }}tel</td>
+                </tr>
+                <tr>
+                  <td>Postcode</td>
+                  <td>{{ guestPersonalDetails.postcode }}</td>
+                </tr>
+                <tr>
+                  <td>Street</td>
+                  <td>{{ guestPersonalDetails.street }}</td>
+                </tr>
+                <tr>
+                  <td>Email</td>
+                  <td>{{ guestPersonalDetails.email }}</td>
+                </tr>
+                <tr>
+                  <td>Phone</td>
+                  <td>{{ guestPersonalDetails.phone }}</td>
+                </tr>
+                <tr>
+                  <td>Passport ID</td>
+                  <td>{{ guestPersonalDetails.passportId }}</td>
+                </tr>
+              </tbody>
+            </template>
+          </v-simple-table>
+        </v-card>
       </v-col>
     </v-row>
   </div>
@@ -48,35 +108,27 @@
   export default {
     name: 'GuestPersonalDetailsComponent',
     props: {
-      headers: {
-        type: Array,
-        default: function () {
-          return []
-        },
-      },
-      guestPersonalDetailsData: {
-        type: Array,
-        default: function () {
-          return []
-        },
+      guestPersonalDetails: {
+        type: Object,
+        default: () => ({}),
       },
     },
-    data: () => {
-      return {
-      }
-    },
+    data: () => ({
+      height: '200px',
+    }),
     computed: {
-      profile () {
-        return {
-          title: this.$t('guestOverview'),
-        }
-      },
-    },
-    mounted () {
-      this.test()
-    },
-    methods: {
-      test () {
+      StayDatailsFormated () {
+        const result = []
+        const stayDetailsCopy = [...this.stayDetails]
+
+        Object.keys(stayDetailsCopy).forEach(key => {
+          const name = key
+          const value = stayDetailsCopy[key]
+
+          result.push({ name, value })
+        })
+
+        return result
       },
     },
   }

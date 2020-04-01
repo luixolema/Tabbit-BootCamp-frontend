@@ -20,45 +20,24 @@
     </div>
     <v-card>
       <!-- Table -->
-      <v-simple-table
-        :height="height"
-        :fixed-header="true"
-      >
-        <template v-slot:default>
-          <thead>
-            <tr>
-              <th class="text-left">
-                Date
-              </th>
-              <th class="text-left">
-                Activitiy Id
-              </th>
-              <th class="text-left">
-                Type
-              </th>
-              <th class="text-left">
-                Title
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr
-              v-for="activity in dummyData"
-              :key="activity.id"
-            >
-              <td>{{ activity.date }}</td>
-              <td>{{ activity.id }}</td>
-              <td>{{ activity.type }}</td>
-              <td>{{ activity.title }}</td>
-            </tr>
-          </tbody>
-        </template>
-      </v-simple-table>
+      <v-data-table
+        dense
+        :headers="headers"
+        :items="dummyData"
+        hide-default-footer
+        item-key="id"
+      />
     </v-card>
   </div>
 </template>
 
 <script>
+  const headers = [
+    { text: 'Date', value: 'date' },
+    { text: 'Activitiy Id', value: 'id' },
+    { text: 'Type', value: 'type' },
+    { text: 'Title', value: 'title' },
+  ]
   const dummyData = [
     { id: 1, date: '20.02.2020', type: 'Test type', title: 'Test title' },
     { id: 2, date: '20.01.2020', type: 'Test type2', title: 'Test title2' },
@@ -69,6 +48,7 @@
   const StayDetailsComponent = {
     data: function () {
       return {
+        headers,
         height: '200px',
         dummyData,
       }
