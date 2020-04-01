@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <div>
     <v-card>
       <v-card-text>
         <v-row>
@@ -46,7 +46,7 @@
         <!-- <activities-ifo :guest="selectedStay.activities"> -->
       </v-card-text>
     </v-card>
-  </v-container>
+  </div>
 </template>
 
 <script>

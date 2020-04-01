@@ -1,5 +1,5 @@
 <template>
-  <div class="my-4">
+  <div class="mt-4">
     <v-row>
       <v-col
         class="py-0"
@@ -35,7 +35,10 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="12">
+      <v-col
+        cols="12"
+        class="py-0"
+      >
         <activities-component />
       </v-col>
     </v-row>
@@ -45,9 +48,9 @@
 <script>
 
   import GuestPersonalDetailsComponent from '@/views/components/guests/details/personal/GuestPersonalDetailsComponent'
-  import StayDetailsComponent from '@/views/components/guests/details/StayDetailsComponent'
-  import EquipmentComponent from '@/views/components/guests/details/EquipmentComponent'
-  import ActivitiesComponent from '@/views/components/guests/details/ActivitiesComponent'
+  import StayDetailsComponent from '@/views/components/guests/details/stay/StayDetailsComponent'
+  import EquipmentComponent from '@/views/components/guests/details/equipment/EquipmentComponent'
+  import ActivitiesComponent from '@/views/components/guests/details/activity/ActivitiesComponent'
 
   export default {
     name: 'GeneralAreaComponent',

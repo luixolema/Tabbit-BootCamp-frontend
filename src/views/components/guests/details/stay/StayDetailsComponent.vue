@@ -2,7 +2,7 @@
   <v-card>
     <!-- Table -->
     <v-simple-table
-      :height="height"
+      height="20vh"
       :fixed-header="true"
     >
       <template v-slot:default>
@@ -90,7 +90,6 @@
   const StayDetailsComponent = {
     data: function () {
       return {
-        height: '200px',
       }
     },
     props: {

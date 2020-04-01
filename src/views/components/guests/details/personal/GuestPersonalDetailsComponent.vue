@@ -5,7 +5,7 @@
         class="py-0"
         cols="8"
       >
-        <h5 class="display1">
+        <h5 class="display-2 pt-1">
           Details
         </h5>
       </v-col>
@@ -14,8 +14,9 @@
         cols="4"
       >
         <v-btn
-          class="my-0"
+          class="my-2"
           x-small
+          block
         >
           Delete
           <v-icon
@@ -35,7 +36,7 @@
         <v-card>
           <!-- Table -->
           <v-simple-table
-            :height="height"
+            height="20vh"
             :fixed-header="true"
           >
             <template v-slot:default>
@@ -113,9 +114,7 @@
         default: () => ({}),
       },
     },
-    data: () => ({
-      height: '200px',
-    }),
+    data: () => ({}),
     computed: {
       StayDatailsFormated () {
         const result = []
