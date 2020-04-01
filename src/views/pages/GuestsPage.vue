@@ -1,12 +1,15 @@
 <template>
-  <v-container fluid>
+  <v-container
+    class="py-0"
+    fluid
+  >
     <v-row>
       <!-- Guest Overview -->
       <v-col
         cols="12"
         sm="12"
         md="4"
-        class="flex-grow-1"
+        class="flex-grow-1 py-0 px-2"
       >
         <guest-overview-component />
       </v-col>
@@ -16,6 +19,7 @@
         cols="12"
         sm="12"
         md="6"
+        class="py-0 px-2"
       >
         <guest-detail-component />
       </v-col>
@@ -25,6 +29,7 @@
         cols="12"
         sm="12"
         md="2"
+        class="px-0"
       >
         <v-card>
           <h1>Left area (not implemented yet)</h1>

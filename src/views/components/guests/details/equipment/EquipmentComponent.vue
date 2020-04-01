@@ -5,7 +5,7 @@
         class="py-0"
         cols="8"
       >
-        <h5 class="display1">
+        <h5 class="display-2 pt-1">
           Equipment
         </h5>
       </v-col>
@@ -14,8 +14,9 @@
         cols="4"
       >
         <v-btn
-          class="my-0"
+          class="my-2"
           x-small
+          block
         >
           Add
           <v-icon
@@ -29,10 +30,10 @@
       </v-col>
     </v-row>
 
-    <v-card>
+    <v-card class="my-0">
       <!-- Table -->
       <v-simple-table
-        :height="height"
+        height="44vh"
         :fixed-header="true"
       >
         <template v-slot:default>
