@@ -66,7 +66,7 @@
         ],
         headers: [
           { text: 'Date', value: 'date' },
-          { text: 'Activity Id', value: 'activity_id' },
+          { text: 'ActivityId', value: 'activity_id' },
           { text: 'Type', value: 'type' },
           { text: 'Title', value: 'title' },
         ],

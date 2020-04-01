@@ -10,6 +10,9 @@ const guestModule = {
     setSelectedGuest (state, payload) {
         state.selectedGuest = payload
     },
+    removeSelectedGuest (state) {
+        state.selectedGuest = undefined
+    },
  },
  actions: {},
 }
