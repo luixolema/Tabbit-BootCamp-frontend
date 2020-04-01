@@ -64,7 +64,7 @@
                   <td>{{ guestPersonalDetails.lastName }}</td>
                 </tr>
                 <tr>
-                  <td>Birth Date</td>
+                  <td>Birthdate</td>
                   <td>{{ guestPersonalDetails.birthDate }}</td>
                 </tr>
                 <tr>
@@ -96,7 +96,7 @@
                   <td>{{ guestPersonalDetails.phone }}</td>
                 </tr>
                 <tr>
-                  <td>Passport ID</td>
+                  <td>PassportId</td>
                   <td>{{ guestPersonalDetails.passportId }}</td>
                 </tr>
               </tbody>

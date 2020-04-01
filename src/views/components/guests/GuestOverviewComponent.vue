@@ -157,6 +157,9 @@
     mounted () {
       this.loadAllGuests()
     },
+    beforeDestroy () {
+      this.$store.commit('guestModule/removeSelectedGuest')
+    },
     methods: {
       loadAllGuests () {
         GuestService.findAll()

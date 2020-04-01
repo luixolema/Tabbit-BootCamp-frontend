@@ -130,7 +130,7 @@
         })
 
         if (!this.guest.checkedin) {
-          this.staysOptions.unshift({ id: null, description: 'None' })
+          this.staysOptions.unshift({ id: null, description: '' })
         }
 
         this.selectedStay = this.staysOptions[0]

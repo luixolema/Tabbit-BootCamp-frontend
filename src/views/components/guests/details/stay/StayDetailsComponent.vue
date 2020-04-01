@@ -18,7 +18,7 @@
         </thead>
         <tbody>
           <tr>
-            <td>Box Number</td>
+            <td>Box</td>
             <td>{{ stayDetails.boxNumber }}</td>
           </tr>
           <tr>
