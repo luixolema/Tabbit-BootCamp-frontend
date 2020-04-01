@@ -17,6 +17,7 @@
           class="my-2"
           x-small
           block
+          :disabled="disableDelete"
         >
           Delete
           <v-icon
@@ -131,6 +132,10 @@
         })
 
         return result
+      },
+      disableDelete () {
+        const selectedGuest = this.$store.state.guestModule.selectedGuest
+        return selectedGuest === undefined
       },
     },
   }

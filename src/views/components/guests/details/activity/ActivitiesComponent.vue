@@ -17,6 +17,7 @@
           class="my-2"
           x-small
           block
+          :disabled="disableAdd"
         >
           Add
           <v-icon
@@ -50,7 +51,10 @@
   export default {
     name: 'StayDetailsComponent',
     props: {
-      activities: Array,
+      activities: {
+        type: Array,
+        default: () => ([]),
+      },
     },
     data: function () {
       return {
@@ -67,6 +71,12 @@
           { text: 'Title', value: 'title' },
         ],
       }
+    },
+    computed: {
+      disableAdd () {
+        const selectedGuest = this.$store.state.guestModule.selectedGuest
+        return selectedGuest === undefined
+      },
     },
   }
 

@@ -17,6 +17,7 @@
           class="my-2"
           x-small
           block
+          :disabled="disableAdd"
         >
           Add
           <v-icon
@@ -64,6 +65,12 @@
     },
     props: {
       equipments: Array,
+    },
+    computed: {
+      disableAdd () {
+        const selectedGuest = this.$store.state.guestModule.selectedGuest
+        return selectedGuest === undefined
+      },
     },
   }
 
