@@ -99,7 +99,7 @@
               {{ item.lastName }}
             </td>
             <td>
-              {{ item.boxId }}
+              {{ item.boxNumber }}
             </td>
             <td
               class="text-center"
@@ -126,7 +126,7 @@
     { text: 'Id', value: 'id' },
     { text: 'Name', value: 'firstName' },
     { text: 'Last Name', value: 'lastName' },
-    { text: 'Box', value: 'boxId' },
+    { text: 'Box', value: 'boxNumber' },
     { text: 'Checked In', value: 'checkedin', align: 'center' },
   ]
 

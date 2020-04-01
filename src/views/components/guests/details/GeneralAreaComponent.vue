@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-4">
+  <div class="my-0">
     <v-row>
       <v-col
         class="py-0"
@@ -17,6 +17,7 @@
               :guest-personal-details="guestPersonalDetails"
             />
           </v-col>
+          <div style="margin:1vh"></div>
           <v-col
             class="py-0"
             cols="12"
@@ -37,7 +38,7 @@
     <v-row>
       <v-col
         cols="12"
-        class="py-0"
+        class="mt-1 mb-0 pb-0"
       >
         <activities-component />
       </v-col>
