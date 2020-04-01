@@ -1,8 +1,8 @@
 <template>
-  <v-card>
+  <v-card class="my-0">
     <!-- Table -->
     <v-simple-table
-      height="20vh"
+      height="24vh"
       :fixed-header="true"
     >
       <template v-slot:default>

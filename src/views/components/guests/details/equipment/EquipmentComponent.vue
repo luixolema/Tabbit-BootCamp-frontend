@@ -34,7 +34,7 @@
       <!-- Table -->
       <v-data-table
         dense
-        height="44vh"
+        height="50vh"
         :headers="headers"
         :items="dummyData"
         hide-default-footer

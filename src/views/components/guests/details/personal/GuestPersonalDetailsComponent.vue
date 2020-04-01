@@ -33,10 +33,13 @@
         class="py-0"
         cols="12"
       >
-        <v-card>
+        <v-card
+          class="my-0 "
+          style="margin-top:1vh"
+        >
           <!-- Table -->
           <v-simple-table
-            height="20vh"
+            height="24vh"
             :fixed-header="true"
           >
             <template v-slot:default>
@@ -73,7 +76,7 @@
                 </tr>
                 <tr>
                   <td>City</td>
-                  <td>{{ guestPersonalDetails.city }}tel</td>
+                  <td>{{ guestPersonalDetails.city }}</td>
                 </tr>
                 <tr>
                   <td>Postcode</td>

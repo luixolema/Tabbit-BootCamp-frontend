@@ -30,14 +30,16 @@
       </v-col>
       <v-col cols="12 py-0">
         <!-- Table -->
-        <v-data-table
-          height="22vh"
-          :fixed-header="true"
-          :headers="headers"
-          :items="dummyData"
-          hide-default-footer="true"
-          disable-pagination="true"
-        />
+        <v-card class="my-0">
+          <v-data-table
+            height="22vh"
+            :fixed-header="true"
+            :headers="headers"
+            :items="dummyData"
+            hide-default-footer="true"
+            disable-pagination="true"
+          />
+        </v-card>
       </v-col>
     </v-row>
   </div>
