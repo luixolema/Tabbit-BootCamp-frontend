@@ -16,6 +16,7 @@
         <v-btn
           class="my-2"
           x-small
+          block
         >
           Add
           <v-icon
@@ -32,7 +33,7 @@
     <v-card class="my-0">
       <!-- Table -->
       <v-simple-table
-        :height="height"
+        height="44vh"
         :fixed-header="true"
       >
         <template v-slot:default>

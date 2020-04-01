@@ -79,7 +79,7 @@
         :items="guests"
         hide-default-footer
         disable-pagination="true"
-        height="60vh"
+        height="70vh"
         item-key="id"
         :fixed-header="true"
       >

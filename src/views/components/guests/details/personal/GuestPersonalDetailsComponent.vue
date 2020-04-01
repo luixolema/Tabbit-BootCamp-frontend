@@ -16,6 +16,7 @@
         <v-btn
           class="my-2"
           x-small
+          block
         >
           Delete
           <v-icon
@@ -34,6 +35,7 @@
       >
         <v-data-table
           :headers="headers"
+          height="20vh"
           :items="guestPersonalDetailsData"
           :disable-pagination="true"
           hide-default-footer
