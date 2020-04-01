@@ -63,3 +63,20 @@ a{
     padding: 15px 28px !important;
 }
 
+.v-data-table table thead tr th {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.v-data-table td {
+    font-size: 12px;
+    padding: 5px 5px;
+    height: unset;
+}
+
+thead th {
+    background: #c6c6c6 !important;
+    padding: 5px 5px !important; 
+    height: unset !important;
+    white-space: nowrap;
+}

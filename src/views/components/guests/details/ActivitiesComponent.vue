@@ -1,11 +1,11 @@
 <template>
   <div>
     <div class="d-flex flex-row justify-space-between">
-      <h5>
+      <h5 class="display-2 pt-1">
         Activities
       </h5>
       <v-btn
-        class="my-0 align-self-end"
+        class="my-2 align-self-end"
         x-small
       >
         Add

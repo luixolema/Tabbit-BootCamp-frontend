@@ -5,7 +5,7 @@
         class="py-0"
         cols="8"
       >
-        <h5 class="display1">
+        <h5 class="display-2 pt-1">
           Equipment
         </h5>
       </v-col>
@@ -14,7 +14,7 @@
         cols="4"
       >
         <v-btn
-          class="my-0"
+          class="my-2"
           x-small
         >
           Add
@@ -29,7 +29,7 @@
       </v-col>
     </v-row>
 
-    <v-card>
+    <v-card class="my-0">
       <!-- Table -->
       <v-simple-table
         :height="height"

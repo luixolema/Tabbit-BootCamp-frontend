@@ -15,7 +15,7 @@
     />
 
     <div
-      class="display-2 font-weight-light mb-2"
+      class="display-2 pt-1 font-weight-light mb-2"
       v-text="author"
     />
 

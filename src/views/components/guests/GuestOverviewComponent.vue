@@ -1,16 +1,18 @@
 <template>
-  <v-container>
+  <div>
     <base-material-card color="green">
       <template v-slot:heading>
-        <div class="display-2 font-weight-thin">
+        <div class="display-2 pt-1 font-weight-thin">
           {{ profile.title }}
         </div>
       </template>
 
-      <v-card-text>
+      <v-card-text class="pb-0">
         <v-row>
           <v-col
-            cols="6"
+            cols="8"
+            sm="10"
+            md="8"
             class="py-0"
           >
             <v-radio-group
@@ -19,24 +21,30 @@
               @change="filterByCheckin"
             >
               <v-radio
+                class="my-0"
                 label="All"
                 value="all"
               />
               <v-radio
+                class="my-0"
                 label="Checked In"
                 value="checkedIn"
               />
               <v-radio
+                class="my-0"
                 label="Not Checked In"
                 value="notCheckedIn"
               />
             </v-radio-group>
           </v-col>
           <v-col
-            cols="6"
+            cols="4"
+            sm="2"
+            md="4"
             class="py-0"
           >
             <v-btn
+              block
               small
             >
               Add
@@ -48,8 +56,9 @@
               </v-icon>
             </v-btn>
             <v-btn
-              :disabled="!noCheckedinGuestIsSelected"
+              block
               small
+              :disabled="!noCheckedinGuestIsSelected"
               @click="checkInSelectedGuest"
             >
               Check In
@@ -69,7 +78,10 @@
         :headers="headers"
         :items="guests"
         hide-default-footer
+        disable-pagination="true"
+        height="60vh"
         item-key="id"
+        :fixed-header="true"
       >
         <template v-slot:item="{ item }">
           <tr
@@ -103,7 +115,7 @@
         </template>
       </v-data-table>
     </base-material-card>
-  </v-container>
+  </div>
 </template>
 
 <script>
