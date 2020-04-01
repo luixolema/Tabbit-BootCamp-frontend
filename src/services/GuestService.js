@@ -8,11 +8,11 @@ const GuestService = {
   },
   findByCheckin (checkin) {
     const url = new URL(apiUrl)
-    url.searchParams.append('checkIn', checkin)
+    url.searchParams.append('checkedIn', checkin)
     return axios.get(url.href)
   },
-  checkInGuests (guestsIds) {
-    return axios.put(apiUrl + '/checkIn', guestsIds)
+  checkInGuests (guestId) {
+    return axios.put(apiUrl + '/checkIn', guestId)
   },
   getGuestInfo (guestId) {
     /** Mock data to test TODO: remove it after finish the api */

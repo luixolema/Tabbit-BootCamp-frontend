@@ -19,65 +19,65 @@
         <tbody>
           <tr>
             <td>Box Number</td>
-            <td>boxNumber</td>
+            <td>{{ stayDetails.boxNumber }}</td>
           </tr>
           <tr>
             <td>Check in</td>
-            <td>checkInDate</td>
+            <td>{{ stayDetails.checkInDate }}</td>
           </tr>
           <tr>
             <td>Check out</td>
-            <td>checkOutDate</td>
+            <td>{{ stayDetails.checkOutDate }}</td>
           </tr>
           <tr>
             <td>Arrive</td>
-            <td>arriveDate</td>
+            <td>{{ stayDetails.arriveDate }}</td>
           </tr>
           <tr>
             <td>Leave</td>
-            <td>leaveDate</td>
+            <td>{{ stayDetails.leaveDate }}</td>
           </tr>
           <tr>
             <td>Hotel</td>
-            <td>hotel</td>
+            <td>{{ stayDetails.hotel }}</td>
           </tr>
           <tr>
             <td>Room</td>
-            <td>room</td>
+            <td>{{ stayDetails.room }}</td>
           </tr>
           <tr>
             <td>Last dive</td>
-            <td>lastDiveDate</td>
+            <td>{{ stayDetails.lastDiveDate }}</td>
           </tr>
           <tr>
             <td>Brevet</td>
-            <td>brevet</td>
+            <td>{{ stayDetails.brevet }}</td>
           </tr>
           <tr>
             <!--Number of logged dives -->
             <td>Number of dives</td>
-            <td>divesAmount</td>
+            <td>{{ stayDetails.divesAmount }}</td>
           </tr>
           <tr>
             <td>Nitrox</td>
             <td>
-              <!-- <v-icon v-if="stayDetails.nitrox">
-                  mdi-check-bold
-                </v-icon>
-                <v-icon v-else>
-                  mdi-close-thick
-                </v-icon> -->
+              <v-icon v-if="stayDetails.nitrox == 1">
+                mdi-check-bold
+              </v-icon>
+              <v-icon v-else>
+                mdi-close-thick
+              </v-icon>
             </td>
           </tr>
           <tr>
             <td>Medical Statement</td>
             <td>
-              <!-- <v-icon v-if="stayDetails.medicalStatement">
-                  mdi-check-bold
-                </v-icon>
-                <v-icon v-else>
-                  mdi-close-thick
-                </v-icon> -->
+              <v-icon v-if="stayDetails.medicalStatement == 1">
+                mdi-check-bold
+              </v-icon>
+              <v-icon v-else>
+                mdi-close-thick
+              </v-icon>
             </td>
           </tr>
         </tbody>
@@ -93,7 +93,10 @@
       }
     },
     props: {
-      stayDetails: Object,
+      stayDetails: {
+        type: Object,
+        default: () => ({}),
+      },
     },
     computed: {
       StayDatailsFormated () {
