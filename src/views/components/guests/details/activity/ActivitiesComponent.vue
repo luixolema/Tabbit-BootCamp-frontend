@@ -34,11 +34,11 @@
         <v-card class="my-0">
           <v-data-table
             height="22vh"
-            :fixed-header="true"
+            fixed-header
             :headers="headers"
             :items="dummyData"
-            hide-default-footer="true"
-            disable-pagination="true"
+            hide-default-footer
+            disable-pagination
           />
         </v-card>
       </v-col>

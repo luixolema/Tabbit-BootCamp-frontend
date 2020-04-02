@@ -17,7 +17,7 @@
               :guest-personal-details="guestPersonalDetails"
             />
           </v-col>
-          <div style="margin:1vh"></div>
+          <div style="margin:1vh" />
           <v-col
             class="py-0"
             cols="12"

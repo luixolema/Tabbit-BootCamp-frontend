@@ -63,7 +63,6 @@
     data: () => {
       return {
         selectedStay: null,
-        guestInfo: { stays: [] },
         staysOptions: [],
         guestPersonalDetails: {},
         stayDetails: {},
@@ -92,17 +91,24 @@
     watch: {
       guest () {
         const selectedGuest = this.$store.state.guestModule.selectedGuest
+        // a new guest has been selected
         if (selectedGuest) {
           GuestService.getGuestInfo(selectedGuest.id)
             .then((response) => {
-              this.guestInfo = response.data
-              this.guestPersonalDetails = this.guestInfo.stayDto.guestPersonalDetails
-              this.stayDetails = this.guestInfo.stayDto.stayDetails || {}
-              this.buildStaysOptions()
+              const guestInfo = response.data
+              this.guestPersonalDetails = guestInfo.stayDto.guestPersonalDetails
+              this.stayDetails = guestInfo.stayDto.stayDetails || {}
+              this.buildStaysOptions(guestInfo.staySummaries)
             })
             .catch((error) => {
               NotificationService.error(error.message)
             })
+        } else {
+          // no selected gest right now
+          this.selectedStay = {}
+          this.selectedStay = null
+          this.guestPersonalDetails = {}
+          this.stayDetails = {}
         }
       },
     },
@@ -121,8 +127,8 @@
           this.stayDetails = {}
         }
       },
-      buildStaysOptions () {
-        this.staysOptions = this.guestInfo.staySummaries.map((stay) => {
+      buildStaysOptions (staySummaries) {
+        this.staysOptions = staySummaries.map((stay) => {
           return {
             id: stay.id,
             description: stay.description || (stay.checkInDate + ' - ' + stay.checkOutDate),
