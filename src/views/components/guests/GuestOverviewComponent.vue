@@ -78,10 +78,10 @@
         :headers="headers"
         :items="guests"
         hide-default-footer
-        disable-pagination="true"
+        disable-pagination
         height="70vh"
         item-key="id"
-        :fixed-header="true"
+        fixed-header
       >
         <template v-slot:item="{ item }">
           <tr
@@ -137,7 +137,6 @@
         guests: [],
         headers,
         filterBYCheckedIn: 'all',
-        selectedGuest: undefined,
       }
     },
     computed: {
@@ -147,6 +146,9 @@
         }
 
         return false
+      },
+      selectedGuest () {
+        return this.$store.state.guestModule.selectedGuest
       },
       profile () {
         return {
@@ -165,7 +167,7 @@
         GuestService.findAll()
           .then(response => {
             this.guests = response.data.guests
-            this.selectedGuest = undefined
+            this.$store.commit('guestModule/removeSelectedGuest')
           }).catch(error => {
             NotificationService.error(null, error)
           })
@@ -178,7 +180,7 @@
           GuestService.findByCheckin(checkedIn)
             .then(response => {
               this.guests = response.data.guests
-              this.selectedGuest = undefined
+              this.$store.commit('guestModule/removeSelectedGuest')
             }).catch(error => {
               NotificationService.error(null, error)
             })
@@ -201,7 +203,6 @@
       },
       selectGuest (guest) {
         this.$store.commit('guestModule/setSelectedGuest', guest)
-        this.selectedGuest = guest
       },
     },
   }
