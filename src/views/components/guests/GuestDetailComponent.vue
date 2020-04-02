@@ -91,7 +91,6 @@
     watch: {
       guest () {
         const selectedGuest = this.$store.state.guestModule.selectedGuest
-        // a new guest has been selected
         if (selectedGuest) {
           GuestService.getGuestInfo(selectedGuest.id)
             .then((response) => {
@@ -104,9 +103,8 @@
               NotificationService.error(error.message)
             })
         } else {
-          // no selected gest right now
-          this.selectedStay = {}
           this.selectedStay = null
+          this.staysOptions = []
           this.guestPersonalDetails = {}
           this.stayDetails = {}
         }
