@@ -80,6 +80,10 @@
               </v-icon>
             </td>
           </tr>
+          <tr>
+            <td>Pre-Boocking</td>
+            <td>{{ stayDetails.preBoocking }}</td>
+          </tr>
         </tbody>
       </template>
     </v-simple-table>

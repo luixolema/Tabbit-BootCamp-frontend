@@ -56,6 +56,10 @@
               </thead>
               <tbody>
                 <tr>
+                  <td>Id</td>
+                  <td>{{ guestPersonalDetails.id }}</td>
+                </tr>
+                <tr>
                   <td>First Name</td>
                   <td>{{ guestPersonalDetails.firstName }}</td>
                 </tr>
