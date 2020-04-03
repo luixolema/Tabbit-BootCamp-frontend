@@ -133,7 +133,7 @@
         this.staysOptions = staySummaries.map((stay) => {
           return {
             id: stay.id,
-            description: stay.description || (stay.checkInDate + ' - ' + stay.checkOutDate),
+            description: stay.description || (stay.arriveDate + ' - ' + stay.leaveDate),
           }
         })
 
