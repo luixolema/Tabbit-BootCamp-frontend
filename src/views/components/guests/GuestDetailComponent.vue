@@ -13,6 +13,7 @@
             @change="selectStay"
           />
           <v-btn
+            color="success"
             small
             :disabled="disableBill"
           >
@@ -26,6 +27,7 @@
           </v-btn>
 
           <v-btn
+            color="success"
             small
             :disabled="disableCheckOut"
           >

@@ -5,7 +5,7 @@
         class="py-0"
         cols="8"
       >
-        <h5 class="display-2 pt-1">
+        <h5 class="display-2  font-weight-bold pt-1">
           Equipment
         </h5>
       </v-col>
@@ -14,6 +14,7 @@
         cols="4"
       >
         <v-btn
+          color="success"
           class="my-2"
           x-small
           block

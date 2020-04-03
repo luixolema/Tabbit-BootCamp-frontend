@@ -33,6 +33,7 @@
     <div class="mx-3" />
 
     <v-btn
+      color="success"
       class="ml-2"
       min-width="0"
       text
@@ -64,6 +65,7 @@
     </v-menu>
 
     <v-btn
+      color="success"
       class="ml-2"
       min-width="0"
       text

@@ -2,7 +2,7 @@
   <div>
     <base-material-card color="green">
       <template v-slot:heading>
-        <div class="display-2 pt-1 font-weight-thin">
+        <div class="display-2  pt-1 font-weight-thin">
           {{ profile.title }}
         </div>
       </template>
@@ -46,6 +46,7 @@
             <v-btn
               block
               small
+              color="success"
             >
               Add
               <v-icon
@@ -58,6 +59,7 @@
             <v-btn
               block
               small
+              color="success"
               :disabled="!noCheckedinGuestIsSelected"
               @click="checkInSelectedGuest"
             >
@@ -79,7 +81,7 @@
         :items="guests"
         hide-default-footer
         disable-pagination
-        height="70vh"
+        height="73vh"
         item-key="id"
         fixed-header
       >
