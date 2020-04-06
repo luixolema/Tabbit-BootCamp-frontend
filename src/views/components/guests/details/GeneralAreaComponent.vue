@@ -74,8 +74,8 @@
     data: () => {
       return {
         headers: [
-          { text: 'Key', value: 'key' },
-          { text: 'Value', value: 'value' },
+          { text: 'Key', value: 'key', sortable: false },
+          { text: 'Value', value: 'value', sortable: false },
         ],
       }
     },
