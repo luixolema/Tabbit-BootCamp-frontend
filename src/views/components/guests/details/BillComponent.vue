@@ -6,7 +6,7 @@
     <template v-slot:activator="{ }">
       <v-btn
         small
-        :disabled="disableBill"
+        :disabled="!enableBill"
         @click="openDialog"
       >
         Bill
@@ -71,7 +71,9 @@
         />
 
         <div class="flex-row">
-          <label>Total: {{ totalPrice }} </label>
+          <h5 class="text-right">
+            Total: € {{ totalPrice }}
+          </h5>
         </div>
       </v-card-text>
 
@@ -163,7 +165,11 @@
       },
     },
     computed: {
-      disableBill () {
+      enableBill () {
+        if (this.selectedStay != null && this.selectedStay.id) {
+          return true
+        }
+
         return false
       },
       currentStayIndex () {
@@ -174,7 +180,7 @@
         if (!this.possibleStays.length) {
           return null
         }
-        // the next id in the possibleStays (null if thre is not next)
+
         const nextIndex = this.currentStayIndex + 1
 
         if (nextIndex < this.possibleStays.length) {
@@ -188,10 +194,9 @@
           return null
         }
 
-        // the previous id in the possibleStays (null if thre is not previous)
         const previousIndex = this.currentStayIndex - 1
 
-        if (previousIndex > 0) {
+        if (previousIndex >= 0) {
           return this.possibleStays[previousIndex].id
         }
 
@@ -207,7 +212,7 @@
           total += activity.price
         })
 
-        return total
+        return total.toFixed(2)
       },
     },
   }
