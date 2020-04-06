@@ -12,18 +12,24 @@
         </span>
       </template>
 
-      <v-card class="my-0 pt-2">
+      <v-card
+        class="my-0 pt-2"
+        @keyup="keyPressed($event)"
+      >
         <v-text-field
-          v-if="editMode"
-          v-model="editorValue"
+          v-model="inputValue"
           class="px-3"
           dense
+          autofocus
+          :rules="[validateDate]"
+          @input="updateDatepicker"
         />
         <v-date-picker
           v-model="editorValue"
           class="my-0"
           no-title
           scrollable
+          @change="updateInput"
         >
           <v-spacer />
           <v-btn
@@ -47,6 +53,9 @@
 </template>
 
 <script>
+
+  import moment from 'moment'
+
   const DateInlineEditComponet = {
     props: {
       value: {
@@ -73,22 +82,52 @@
     data: () => ({
       editMode: false,
       editorValue: undefined,
+      inputValue: undefined,
       menu: false,
     }),
+    computed: {
+      formattedDate () {
+        return this.editorValue ? moment(this.editorValue).format('DD.MM.YYYY') : ''
+      },
+    },
     methods: {
+      updateDatepicker () {
+        const date = moment(this.inputValue, 'DD.MM.YYYY')
+        if (date.isValid()) {
+          const inputStringIsoDate = date.format().substr(0, 10)
+          this.editorValue = inputStringIsoDate
+        }
+      },
+      updateInput () {
+        this.inputValue = this.formattedDate
+      },
       toggleEditMode () {
         this.editorValue = new Date(Date.parse(this.value, 'dd.mm.yyyy')).toISOString().substr(0, 10)
+        this.inputValue = this.value
         this.editMode = !this.editMode
       },
       save () {
-        const valid = true // validate acording all the functions passed throgh rules
+        const valid = moment(this.inputValue, 'DD.MM.YYYY').isValid()
+        // validate acording all the functions passed throgh rules
 
         if (valid) {
-          this.onSave(this.editorValue, this.payload)
+          this.onSave(this.formattedDate, this.payload)
           this.toggleEditMode()
         } else {
-          this.onInvalid(this.editorValue, this.payload)
+          this.onInvalid(this.formattedDate, this.payload)
         }
+      },
+      keyPressed ($event) {
+        if ($event.key === 'Escape') {
+          this.toggleEditMode()
+        }
+
+        if ($event.key === 'Enter') {
+          this.save()
+        }
+      },
+      validateDate () {
+        return moment(this.inputValue, 'DD.MM.YYYY').isValid() ? true : 'Invalid date'
       },
     },
   }
