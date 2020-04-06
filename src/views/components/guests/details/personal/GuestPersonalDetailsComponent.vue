@@ -57,7 +57,14 @@
               <tbody>
                 <tr>
                   <td>First Name</td>
-                  <td>{{ guestPersonalDetails.firstName }}</td>
+                  <td>
+                    <text-inline-edit-componet
+                      :value="guestPersonalDetails.firstName"
+                      :on-save="saveProperty"
+                      payload="firstName"
+                      :validation-rules="myRules"
+                    />
+                  </td>
                 </tr>
                 <tr>
                   <td>Last Name</td>
@@ -65,7 +72,13 @@
                 </tr>
                 <tr>
                   <td>Birthdate</td>
-                  <td>{{ guestPersonalDetails.birthDate }}</td>
+                  <td>
+                    <date-inline-edit-componet
+                      :value="guestPersonalDetails.birthDate"
+                      :on-save="saveProperty"
+                      payload="birthDate"
+                    />
+                  </td>
                 </tr>
                 <tr>
                   <td>Nationality</td>
@@ -109,9 +122,16 @@
 </template>
 
 <script>
+  import TextInlineEditComponet from '@/components/formUtils/TextInlineEditComponet'
+  import DateInlineEditComponet from '@/components/formUtils/DateInlineEditComponet'
+  import validations from '@/components/formUtils/validations'
 
   export default {
     name: 'GuestPersonalDetailsComponent',
+    components: {
+      TextInlineEditComponet,
+      DateInlineEditComponet,
+    },
     props: {
       guestPersonalDetails: {
         type: Object,
@@ -136,6 +156,17 @@
       disableDelete () {
         const selectedGuest = this.$store.state.guestModule.selectedGuest
         return selectedGuest === undefined
+      },
+      myRules () {
+        return [
+          validations.maxLength(10),
+          validations.required(),
+        ]
+      },
+    },
+    methods: {
+      saveProperty (value, peyload) {
+        alert('Saved ' + peyload + ': ' + value)
       },
     },
   }
