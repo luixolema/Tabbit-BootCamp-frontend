@@ -6,7 +6,7 @@
     <template v-slot:activator="{ }">
       <v-btn
         small
-        :disabled="disableBill"
+        :disabled="!enableBill"
         @click="openDialog"
       >
         Bill
@@ -21,9 +21,17 @@
 
     <v-card>
       <v-card-title
-        primary-title
+        class="flex-row"
       >
-        Bill OverView
+        <span class="flex-column">
+          Bill OverView
+        </span>
+        <label
+          class="float-right cursor-pointer"
+          @click="closeDialog"
+        >
+          X
+        </label>
       </v-card-title>
       <v-card-text>
         <h5>Invoice, #342343_mock</h5>
@@ -71,7 +79,9 @@
         />
 
         <div class="flex-row">
-          <label>Total: {{ totalPrice }} </label>
+          <h5 class="text-right">
+            Total: € {{ totalPrice }}
+          </h5>
         </div>
       </v-card-text>
 
@@ -129,6 +139,10 @@
     }),
     methods: {
       openDialog () {
+        if (!this.selectedStay.id) {
+          NotificationService.error('You need to select a stay')
+          return
+        }
         this.dialog = true
         this.loading = true
 
@@ -161,9 +175,20 @@
             this.loading = false
           })
       },
+      closeDialog () {
+        this.dialog = false
+      },
     },
     computed: {
-      disableBill () {
+      enableBill () {
+        if (this.possibleStays.length) {
+          if (this.possibleStays.length === 1) {
+            return this.possibleStays[0].id != null
+          }
+
+          return true
+        }
+
         return false
       },
       currentStayIndex () {
@@ -174,7 +199,7 @@
         if (!this.possibleStays.length) {
           return null
         }
-        // the next id in the possibleStays (null if thre is not next)
+
         const nextIndex = this.currentStayIndex + 1
 
         if (nextIndex < this.possibleStays.length) {
@@ -188,10 +213,9 @@
           return null
         }
 
-        // the previous id in the possibleStays (null if thre is not previous)
         const previousIndex = this.currentStayIndex - 1
 
-        if (previousIndex > 0) {
+        if (previousIndex >= 0) {
           return this.possibleStays[previousIndex].id
         }
 
@@ -207,7 +231,7 @@
           total += activity.price
         })
 
-        return total
+        return total.toFixed(2)
       },
     },
   }
@@ -216,5 +240,8 @@
 </script>
 
 <style>
-
+  .float-right {
+    position: relative;
+    float: right;
+  }
 </style>
