@@ -59,7 +59,10 @@
               </tr>
               <tr>
                 <td>Check Out</td>
-                <td>{{ stayDetails.checkOutDate }}</td>
+                <td v-if="!selectedGuest.checkedin">
+                  {{ stayDetails.checkOutDate }}
+                </td>
+                <td v-else />
               </tr>
               <tr>
                 <td>Box</td>
@@ -190,6 +193,9 @@
         }
 
         return false
+      },
+      selectedGuest () {
+        return this.$store.state.guestModule.selectedGuest
       },
       currentStayIndex () {
         const currentStay = this.stayDetails
