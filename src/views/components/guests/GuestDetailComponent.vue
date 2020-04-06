@@ -12,18 +12,10 @@
             item-value="id"
             @change="selectStay"
           />
-          <v-btn
-            small
-            :disabled="disableBill"
-          >
-            Bill
-            <v-icon
-              right
-              dark
-            >
-              mdi-currency-eur
-            </v-icon>
-          </v-btn>
+          <bill-component
+            :selected-stay="selectedStay"
+            :possible-stays="staysOptions"
+          />
 
           <v-btn
             small
@@ -55,10 +47,12 @@
   import GuestService from '@/services/GuestService'
   import NotificationService from '@/services/NotificationService'
   import StayService from '@/services/StayService'
+  import BillComponent from '@/views/components/guests/details/BillComponent'
 
   export default {
     components: {
       GeneralAreaComponent,
+      BillComponent,
     },
     data: () => {
       return {
