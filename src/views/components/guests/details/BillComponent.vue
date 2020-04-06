@@ -140,7 +140,7 @@
     methods: {
       openDialog () {
         if (!this.selectedStay.id) {
-          NotificationService.error('You need to select a stay')
+          NotificationService.error('You need to select a stay!')
           return
         }
         this.dialog = true
