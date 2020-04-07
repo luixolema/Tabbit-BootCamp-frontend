@@ -46,7 +46,6 @@
             <v-btn
               block
               small
-              color="success"
             >
               Add
               <v-icon
@@ -59,7 +58,6 @@
             <v-btn
               block
               small
-              color="success"
               :disabled="!noCheckedinGuestIsSelected"
               @click="checkInSelectedGuest"
             >

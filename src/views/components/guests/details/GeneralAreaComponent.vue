@@ -22,7 +22,10 @@
             class="py-0"
             cols="12"
           >
-            <stay-details-component :stay-details="stayDetails" />
+            <stay-details-component
+              :headers="headers"
+              :stay-details="stayDetails"
+            />
           </v-col>
         </v-row>
       </v-col>
