@@ -126,8 +126,8 @@
 </template>
 
 <script>
-  import DateInlineEditComponent  from '@components/formUtils/DateInlineEditComponent'
-  import TextInlineEditComponent from '@components/formUtils/TextInlineEditComponent'
+  import DateInlineEditComponent from '@/components/formUtils/DateInlineEditComponent'
+  import TextInlineEditComponent from '@/components/formUtils/TextInlineEditComponent'
   import validations from '@/components/formUtils/validations'
 
   export default {
