@@ -69,7 +69,11 @@
     computed: {
       disableAdd () {
         const selectedGuest = this.$store.state.guestModule.selectedGuest
-        return selectedGuest === undefined
+        if (selectedGuest !== undefined) {
+          return selectedGuest.checkedin === false
+        } else {
+          return true
+        }
       },
     },
   }
