@@ -68,6 +68,10 @@ a{
     font-weight: bold;
 }
 
+tr {
+    white-space: nowrap;
+}
+
 .v-data-table td {
     font-size: 12px;
     padding: 5px 5px;
@@ -79,4 +83,20 @@ thead th {
     padding: 5px 5px !important; 
     height: unset !important;
     white-space: nowrap;
+}
+
+.v-picker thead th {
+    background: white !important;
+}
+
+.v-date-picker-table--date td {
+    height: 35px;
+}
+
+.v-small-dialog__activator {
+    cursor: text;
+}
+
+.v-picker.v-card.v-picker--date {
+    margin-top: unset;
 }

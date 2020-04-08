@@ -1,129 +1,106 @@
 <template>
   <v-card class="my-0">
-    <!-- Table -->
-    <v-simple-table
-      height="24vh"
-      :fixed-header="true"
-    >
-      <template v-slot:default>
-        <thead>
-          <tr>
-            <th class="text-left">
-              Key
-            </th>
-            <th class="text-left">
-              Value
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Box</td>
-            <td>{{ stayDetails.boxNumber }}</td>
-          </tr>
-          <tr>
-            <td>Check in</td>
-            <td>{{ stayDetails.checkInDate }}</td>
-          </tr>
-          <tr>
-            <td>Check out</td>
-            <td>{{ stayDetails.checkOutDate }}</td>
-          </tr>
-          <tr>
-            <td>Arrive</td>
-            <td>{{ stayDetails.arriveDate }}</td>
-          </tr>
-          <tr>
-            <td>Leave</td>
-            <td>{{ stayDetails.leaveDate }}</td>
-          </tr>
-          <tr>
-            <td>Hotel</td>
-            <td>{{ stayDetails.hotel }}</td>
-          </tr>
-          <tr>
-            <td>Room</td>
-            <td>{{ stayDetails.room }}</td>
-          </tr>
-          <tr>
-            <td>Last dive</td>
-            <td>{{ stayDetails.lastDiveDate }}</td>
-          </tr>
-          <tr>
-            <td>Brevet</td>
-            <td>{{ stayDetails.brevet }}</td>
-          </tr>
-          <tr>
-            <!--Number of logged dives -->
-            <td>Number of dives</td>
-            <td>{{ stayDetails.divesAmount }}</td>
-          </tr>
-          <tr>
-            <td>Nitrox</td>
-            <td>
-              <v-icon v-if="stayDetails.nitrox == 1">
-                mdi-check-bold
-              </v-icon>
-              <v-icon v-else>
-                mdi-close-thick
-              </v-icon>
-            </td>
-          </tr>
-          <tr>
-            <td>Medical Statement</td>
-            <td>
-              <v-icon v-if="stayDetails.medicalStatement == 1">
-                mdi-check-bold
-              </v-icon>
-              <v-icon v-else>
-                mdi-close-thick
-              </v-icon>
-            </td>
-          </tr>
-          <tr>
-            <td>Pre-Boocking</td>
-            <td>{{ stayDetails.preBoocking }}</td>
-          </tr>
-        </tbody>
-      </template>
-    </v-simple-table>
+    <base-editable-data-table
+      :headers="headers"
+      :table-items="stayDetailTableItems"
+      @item-updated="updateField"
+    />
   </v-card>
 </template>
 
 <script>
-  const StayDetailsComponent = {
-    data: function () {
-      return {
-      }
-    },
+  export default {
+    name: 'StayDetailsComponent',
     props: {
       stayDetails: {
         type: Object,
         default: () => ({}),
       },
+      headers: {
+        type: Array,
+        default: () => ([]),
+      },
+    },
+    data: function () {
+      return {
+        propertiesSpecification: {
+          boxNumber: { name: 'Box', type: 'text' },
+          checkInDate: { name: 'Check In', type: 'date' },
+          checkOutDate: { name: 'check Out', type: 'date' },
+          arriveDate: { name: 'Arrival', type: 'date' },
+          leaveDate: { name: 'Leave', type: 'date' },
+          hotel: { name: 'Hotel', type: 'text' },
+          room: { name: 'Room', type: 'text' },
+          lastDiveDate: { name: 'Last Dive', type: 'date' },
+          brevet: { name: 'Brevet', type: 'text' },
+          divesAmount: { name: 'Number of Dives', type: 'number' },
+          nitrox: {
+            name: 'Nitrox',
+            type: 'select',
+            options: [
+              {
+                value: 'true',
+                text: 'Yes',
+              },
+              {
+                value: 'false',
+                text: 'No',
+              },
+              {
+                value: 'null',
+                text: 'Maybe',
+              },
+            ],
+          },
+          medicalStatement: {
+            name: 'Medical Statement',
+            type: 'select',
+            options: [
+              {
+                value: 'true',
+                text: 'Yes',
+              },
+              {
+                value: 'false',
+                text: 'No',
+              },
+              {
+                value: 'null',
+                text: 'Maybe',
+              },
+            ],
+          },
+          preBoocking: { name: 'Pre Booking', type: 'fixed' },
+        },
+        date: '',
+      }
     },
     computed: {
-      StayDatailsFormated () {
-        const result = []
-        const stayDetailsCopy = [...this.stayDetails]
+      stayDetailTableItems () {
+        if (!this.stayDetails) { return }
 
-        Object.keys(stayDetailsCopy).forEach(key => {
-          const name = key
-          const value = stayDetailsCopy[key]
+        const items = []
 
-          result.push({ name, value })
+        Object.keys(this.propertiesSpecification).forEach(property => {
+          if (!Object.prototype.hasOwnProperty.call(this.stayDetails, property)) { return }
+
+          items.push({
+            property: property,
+            key: this.propertiesSpecification[property].name,
+            type: this.propertiesSpecification[property].type,
+            value: this.stayDetails[property] + '',
+            options: this.propertiesSpecification[property].options,
+          })
         })
 
-        return result
+        return items
+      },
+    },
+    methods: {
+      updateField (property, value) {
+        this.stayDetails[property] = value
+        console.log(this.stayDetails)
       },
     },
   }
-
-  export default StayDetailsComponent
 </script>
-
-<style>
-    .highlight {
-        background-color: #EEEEEE
-    }
-</style>

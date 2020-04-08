@@ -38,74 +38,11 @@
           class="my-0 "
           style="margin-top:1vh"
         >
-          <!-- Table -->
-          <v-simple-table
-            height="24vh"
-            :fixed-header="true"
-          >
-            <template v-slot:default>
-              <thead>
-                <tr>
-                  <th class="text-left">
-                    Key
-                  </th>
-                  <th class="text-left">
-                    Value
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Id</td>
-                  <td>{{ guestPersonalDetails.id }}</td>
-                </tr>
-                <tr>
-                  <td>First Name</td>
-                  <td>{{ guestPersonalDetails.firstName }}</td>
-                </tr>
-                <tr>
-                  <td>Last Name</td>
-                  <td>{{ guestPersonalDetails.lastName }}</td>
-                </tr>
-                <tr>
-                  <td>Birthdate</td>
-                  <td>{{ guestPersonalDetails.birthDate }}</td>
-                </tr>
-                <tr>
-                  <td>Nationality</td>
-                  <td>{{ guestPersonalDetails.nationality }}</td>
-                </tr>
-                <tr>
-                  <td>Country</td>
-                  <td>{{ guestPersonalDetails.country }}</td>
-                </tr>
-                <tr>
-                  <td>City</td>
-                  <td>{{ guestPersonalDetails.city }}</td>
-                </tr>
-                <tr>
-                  <td>Postcode</td>
-                  <td>{{ guestPersonalDetails.postcode }}</td>
-                </tr>
-                <tr>
-                  <td>Street</td>
-                  <td>{{ guestPersonalDetails.street }}</td>
-                </tr>
-                <tr>
-                  <td>Email</td>
-                  <td>{{ guestPersonalDetails.email }}</td>
-                </tr>
-                <tr>
-                  <td>Phone</td>
-                  <td>{{ guestPersonalDetails.phone }}</td>
-                </tr>
-                <tr>
-                  <td>PassportId</td>
-                  <td>{{ guestPersonalDetails.passportId }}</td>
-                </tr>
-              </tbody>
-            </template>
-          </v-simple-table>
+          <base-editable-data-table
+            :headers="headers"
+            :table-items="guestPersonalDetailTableItems"
+            @item-updated="updateField"
+          />
         </v-card>
       </v-col>
     </v-row>
@@ -113,7 +50,6 @@
 </template>
 
 <script>
-
   export default {
     name: 'GuestPersonalDetailsComponent',
     props: {
@@ -121,25 +57,56 @@
         type: Object,
         default: () => ({}),
       },
-    },
-    data: () => ({}),
-    computed: {
-      StayDatailsFormated () {
-        const result = []
-        const stayDetailsCopy = [...this.stayDetails]
-
-        Object.keys(stayDetailsCopy).forEach(key => {
-          const name = key
-          const value = stayDetailsCopy[key]
-
-          result.push({ name, value })
-        })
-
-        return result
+      headers: {
+        type: Array,
+        default: () => ([]),
       },
+    },
+    data: () => {
+      return {
+        propertiesSpecification: {
+          firstName: { name: 'First Name', type: 'text' },
+          lastName: { name: 'Last Name', type: 'text' },
+          birthDate: { name: 'Birthdate', type: 'date' },
+          nationality: { name: 'Nationality', type: 'text' },
+          country: { name: 'Country', type: 'text' },
+          city: { name: 'City', type: 'text' },
+          postcode: { name: 'Postcode', type: 'text' },
+          street: { name: 'Street', type: 'text' },
+          email: { name: 'Email', type: 'email' },
+          phone: { name: 'Phone', type: 'text' },
+          passportId: { name: 'PassportId', type: 'text' },
+        },
+      }
+    },
+    computed: {
       disableDelete () {
         const selectedGuest = this.$store.state.guestModule.selectedGuest
         return selectedGuest === undefined
+      },
+      guestPersonalDetailTableItems () {
+        if (this.guestPersonalDetails == null) { return }
+
+        const items = []
+
+        Object.keys(this.propertiesSpecification).forEach(property => {
+          if (!Object.prototype.hasOwnProperty.call(this.guestPersonalDetails, property)) { return }
+
+          items.push({
+            property: property,
+            key: this.propertiesSpecification[property].name,
+            type: this.propertiesSpecification[property].type,
+            value: this.guestPersonalDetails[property] + '',
+          })
+        })
+
+        return items
+      },
+    },
+    methods: {
+      updateField (property, value) {
+        this.guestPersonalDetails[property] = value
+        console.log(this.guestPersonalDetails)
       },
     },
   }

@@ -22,7 +22,10 @@
             class="py-0"
             cols="12"
           >
-            <stay-details-component :stay-details="stayDetails" />
+            <stay-details-component
+              :headers="headers"
+              :stay-details="stayDetails"
+            />
           </v-col>
         </v-row>
       </v-col>
@@ -74,8 +77,8 @@
     data: () => {
       return {
         headers: [
-          { text: 'Key', value: 'key' },
-          { text: 'Value', value: 'value' },
+          { text: 'Key', value: 'key', sortable: false },
+          { text: 'Value', value: 'value', sortable: false },
         ],
       }
     },
