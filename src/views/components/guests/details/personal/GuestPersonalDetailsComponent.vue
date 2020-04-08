@@ -40,7 +40,7 @@
         >
           <base-editable-data-table
             :headers="headers"
-            :disable-edit="disablePersonalDetails"
+            :disable-edit="disableEditingPersonalDetails"
             :table-items="guestPersonalDetailTableItems"
             @item-updated="updateField"
           />
@@ -90,7 +90,7 @@
         const selectedGuest = this.$store.state.guestModule.selectedGuest
         return selectedGuest === undefined
       },
-      disablePersonalDetails () {
+      disableEditingPersonalDetails () {
         const selectedGuest = this.$store.state.guestModule.selectedGuest
         if (selectedGuest === undefined) {
           return true
