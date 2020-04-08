@@ -77,21 +77,6 @@
           phone: { name: 'Phone', type: 'text' },
           passportId: { name: 'PassportId', type: 'text' },
         },
-        pressEnterDisabled: true,
-        validationMessage: '',
-        rules: {
-          required: value => !!value.trim() || 'Required.',
-          counter: value => value.length <= 20 || 'Max 20 characters',
-          nonNegative: value => value >= 0 || 'The number can not be negative',
-          validDate: value => {
-            const pattern = /^\d{4}-([0]\d|1[0-2])-([0-2]\d|3[01])$/
-            return pattern.test(value) || 'Invalid Date'
-          },
-          email: value => {
-            const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-            return pattern.test(value) || 'Invalid e-mail'
-          },
-        },
       }
     },
     computed: {
