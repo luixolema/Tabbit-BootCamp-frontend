@@ -16,7 +16,6 @@
               :headers="headers"
               :selected-stay="selectedStay"
               :guest-personal-details="guestPersonalDetails"
-              :disable-for-hystorical-data="disableForHystoricalData"
             />
           </v-col>
           <div style="margin:1vh" />

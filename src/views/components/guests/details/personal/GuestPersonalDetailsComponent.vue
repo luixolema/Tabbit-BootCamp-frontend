@@ -62,10 +62,6 @@
         type: Array,
         default: () => ([]),
       },
-      disableForHystoricalData: {
-        type: Boolean,
-        default: false,
-      },
       selectedStay: {
         type: Object,
         default: () => ({}),
