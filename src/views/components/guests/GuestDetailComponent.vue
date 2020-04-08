@@ -41,6 +41,8 @@
         <general-area-component
           :guest-personal-details="guestPersonalDetails"
           :stay-details="stayDetails"
+          :disable-for-hystorical-data="disableForHystoricalData"
+          :selected-stay="selectedStay"
         />
         <!-- Example to pass info to another component -->
         <!-- <activities-ifo :guest="selectedStay.activities"> -->
@@ -87,6 +89,15 @@
       disableCheckOut () {
         return true
       },
+      disableForHystoricalData () {
+        if (!this.guest) {
+          return true
+        }
+        if (this.selectedStay) {
+          return !this.selectedStay.active
+        }
+        return true
+      },
     },
     watch: {
       guest () {
@@ -129,12 +140,13 @@
         this.staysOptions = staySummaries.map((stay) => {
           return {
             id: stay.id,
+            active: stay.active,
             description: stay.description || (stay.arriveDate + ' - ' + stay.leaveDate),
           }
         })
 
         if (!this.guest.checkedin) {
-          this.staysOptions.unshift({ id: null, description: '' })
+          this.staysOptions.unshift({ id: null, active: null, description: '' })
         }
 
         this.selectedStay = this.staysOptions[0]

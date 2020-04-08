@@ -17,7 +17,7 @@
           class="my-2"
           x-small
           block
-          :disabled="disableAdd"
+          :disabled="disableForHystoricalData"
         >
           Add
           <v-icon
@@ -49,11 +49,15 @@
 <script>
 
   export default {
-    name: 'StayDetailsComponent',
+    name: 'ActivitiesComponent',
     props: {
       activities: {
         type: Array,
         default: () => ([]),
+      },
+      disableForHystoricalData: {
+        type: Boolean,
+        default: false,
       },
     },
     data: function () {
@@ -72,6 +76,7 @@
         ],
       }
     },
+<<<<<<< HEAD
     computed: {
       disableAdd () {
         const selectedGuest = this.$store.state.guestModule.selectedGuest
@@ -82,6 +87,8 @@
         }
       },
     },
+=======
+>>>>>>> #DCM2-14 #DCM2-81 Disable hystorical data editing
   }
 
 </script>

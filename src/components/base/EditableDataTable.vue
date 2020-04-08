@@ -9,6 +9,7 @@
   >
     <template v-slot:item.value="props">
       <base-edit-dialog
+        v-if="!disableEdit"
         :return-value.sync="props.item.value"
         @save="$emit('item-updated', props.item.property, props.item.value)"
       >
@@ -81,6 +82,7 @@
           />
         </template>
       </base-edit-dialog>
+      <span v-else>{{ props.item.value }}</span>
     </template>
   </v-data-table>
 </template>
@@ -96,6 +98,10 @@
       headers: {
         type: Array,
         default: () => ([]),
+      },
+      disableEdit: {
+        type: Boolean,
+        default: false,
       },
     },
     data: () => {
