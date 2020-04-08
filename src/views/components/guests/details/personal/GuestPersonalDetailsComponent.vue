@@ -96,7 +96,11 @@
           return true
         }
         if (this.selectedStay) {
-          return !this.selectedStay.active
+          if (this.selectedStay.active === null) {
+            return false
+          } else {
+            return !this.selectedStay.active
+          }
         }
         return false
       },
