@@ -5,12 +5,6 @@
   export default {
     name: 'EditDialog',
     extends: VEditDialog,
-    props: {
-      disableEnter: {
-        type: Boolean,
-        default: false,
-      },
-    },
     methods: {
       genContent () {
         var _this2 = this

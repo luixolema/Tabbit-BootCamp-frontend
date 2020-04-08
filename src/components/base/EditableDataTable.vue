@@ -10,7 +10,6 @@
     <template v-slot:item.value="props">
       <base-edit-dialog
         :return-value.sync="props.item.value"
-        :disable-enter="pressEnterDisabled"
         @save="$emit('item-updated', props.item.property, props.item.value)"
       >
         <!--if its option type, show the text of the option instead of the value-->
