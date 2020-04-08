@@ -76,19 +76,6 @@
         ],
       }
     },
-<<<<<<< HEAD
-    computed: {
-      disableAdd () {
-        const selectedGuest = this.$store.state.guestModule.selectedGuest
-        if (selectedGuest !== undefined) {
-          return selectedGuest.checkedin === false
-        } else {
-          return true
-        }
-      },
-    },
-=======
->>>>>>> #DCM2-14 #DCM2-81 Disable hystorical data editing
   }
 
 </script>
