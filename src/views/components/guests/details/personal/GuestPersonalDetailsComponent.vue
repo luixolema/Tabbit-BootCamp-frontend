@@ -40,6 +40,7 @@
         >
           <base-editable-data-table
             :headers="headers"
+            :disable-edit="disableEditingPersonalDetails"
             :table-items="guestPersonalDetailTableItems"
             @item-updated="updateField"
           />
@@ -61,10 +62,15 @@
         type: Array,
         default: () => ([]),
       },
+      selectedStay: {
+        type: Object,
+        default: () => ({}),
+      },
     },
     data: () => {
       return {
         propertiesSpecification: {
+          id: { name: 'Id', type: 'fixed' },
           firstName: { name: 'First Name', type: 'text' },
           lastName: { name: 'Last Name', type: 'text' },
           birthDate: { name: 'Birthdate', type: 'date' },
@@ -83,6 +89,20 @@
       disableDelete () {
         const selectedGuest = this.$store.state.guestModule.selectedGuest
         return selectedGuest === undefined
+      },
+      disableEditingPersonalDetails () {
+        const selectedGuest = this.$store.state.guestModule.selectedGuest
+        if (selectedGuest === undefined) {
+          return true
+        }
+        if (this.selectedStay) {
+          if (this.selectedStay.active === null) {
+            return false
+          } else {
+            return !this.selectedStay.active
+          }
+        }
+        return false
       },
       guestPersonalDetailTableItems () {
         if (this.guestPersonalDetails == null) { return }

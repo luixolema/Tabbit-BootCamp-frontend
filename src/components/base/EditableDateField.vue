@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-text-field
-      v-model="date"
+      v-model="inputDate"
       :label="label"
       class="mt-3"
       :rules="[rules.required,rules.validDate]"
@@ -14,6 +14,8 @@
 </template>
 
 <script>
+  const germanDatePattern = /^([0-2]\d|3[01])\.([0]\d|1[0-2])\.\d{4}$/
+
   export default {
     name: 'EditableDateField',
 
@@ -36,23 +38,29 @@
         rules: {
           required: value => !!value || 'Required.',
           validDate: value => {
-            const germanDatePattern = /^([0-2]\d|3[01])\.([0]\d|1[0-2])\.\d{4}$/
             return germanDatePattern.test(value) || 'Invalid Date'
           },
         },
+        inputDate: '',
       }
     },
     computed: {
       isoDate: {
         get: function () {
           this.signalDateUpdated()
-          return this.germanTimeStringtoIsoString(this.date)
+          if (germanDatePattern.test(this.inputDate)) {
+            return this.germanTimeStringtoIsoString(this.inputDate)
+          }
+          return new Date().toISOString().substr(0, 10)
         },
         set: function (newValue) {
-          this.date = this.IsoStringtoGermanTimeString(newValue)
+          this.inputDate = this.IsoStringtoGermanTimeString(newValue)
           this.signalDateUpdated()
         },
       },
+    },
+    mounted () {
+      this.inputDate = this.date
     },
     methods: {
       germanTimeStringtoIsoString (germanTimeString) {
@@ -64,7 +72,7 @@
         return parts[2] + '.' + parts[1] + '.' + parts[0]
       },
       signalDateUpdated () {
-        this.$emit('date-updated', this.property, this.date)
+        this.$emit('date-updated', this.property, this.inputDate)
       },
     },
   }
