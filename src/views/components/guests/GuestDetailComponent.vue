@@ -39,8 +39,6 @@
           </v-btn>
         </v-row>
         <general-area-component
-          :guest-personal-details="guestPersonalDetails"
-          :stay-details="stayDetails"
           :disable-for-hystorical-data="disableForHystoricalData"
           :selected-stay="selectedStay"
         />
@@ -66,8 +64,6 @@
       return {
         selectedStay: null,
         staysOptions: [],
-        guestPersonalDetails: {},
-        stayDetails: {},
       }
     },
     computed: {
@@ -106,8 +102,9 @@
           GuestService.getGuestInfo(selectedGuest.id)
             .then((response) => {
               const guestInfo = response.data
-              this.guestPersonalDetails = guestInfo.stayDto.guestPersonalDetails
-              this.stayDetails = guestInfo.stayDto.stayDetails || {}
+              const stayData = guestInfo.stayDto
+              stayData.stayDetails = guestInfo.stayDto.stayDetails || {}
+              this.$store.commit('stayModule/setStayData', stayData)
               this.buildStaysOptions(guestInfo.staySummaries)
             })
             .catch((error) => {
@@ -116,8 +113,10 @@
         } else {
           this.selectedStay = null
           this.staysOptions = []
-          this.guestPersonalDetails = {}
-          this.stayDetails = {}
+          const stayData = this.$store.state.stayModule.stayData
+          stayData.guestPersonalDetails = {}
+          stayData.stayDetails = {}
+          this.$store.commit('stayModule/setStayData', stayData)
         }
       },
     },
@@ -126,14 +125,15 @@
         if (selectedStay.id !== null) {
           StayService.findById(selectedStay.id)
             .then((response) => {
-              this.guestPersonalDetails = response.data.guestPersonalDetails
-              this.stayDetails = response.data.stayDetails
+              this.$store.commit('stayModule/setStayData', response.data)
             })
             .catch((error) => {
               NotificationService.error(error.message)
             })
         } else {
-          this.stayDetails = {}
+          const stayData = this.$store.state.stayModule.stayData
+          stayData.stayDetails = {}
+          this.$store.commit('stayModule/setStayData', stayData)
         }
       },
       buildStaysOptions (staySummaries) {
