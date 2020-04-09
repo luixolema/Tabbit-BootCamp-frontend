@@ -113,10 +113,7 @@
         } else {
           this.selectedStay = null
           this.staysOptions = []
-          const stayData = this.$store.state.stayModule.stayData
-          stayData.guestPersonalDetails = {}
-          stayData.stayDetails = {}
-          this.$store.commit('stayModule/setStayData', stayData)
+          this.$store.commit('stayModule/removeStayData')
         }
       },
     },
@@ -131,7 +128,7 @@
               NotificationService.error(error.message)
             })
         } else {
-          const stayData = this.$store.state.stayModule.stayData
+          const stayData = { ...this.$store.state.stayModule.stayData }
           stayData.stayDetails = {}
           this.$store.commit('stayModule/setStayData', stayData)
         }
