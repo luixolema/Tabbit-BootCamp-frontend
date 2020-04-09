@@ -14,6 +14,7 @@
           >
             <guest-personal-details-component
               :headers="headers"
+              :selected-stay="selectedStay"
               :guest-personal-details="guestPersonalDetails"
             />
           </v-col>
@@ -25,6 +26,7 @@
             <stay-details-component
               :headers="headers"
               :stay-details="stayDetails"
+              :disable-for-hystorical-data="disableForHystoricalData"
             />
           </v-col>
         </v-row>
@@ -35,7 +37,9 @@
         lg="6"
         class="py-0"
       >
-        <equipment-component />
+        <equipment-component
+          :disable-for-hystorical-data="disableForHystoricalData"
+        />
       </v-col>
     </v-row>
     <v-row>
@@ -43,7 +47,9 @@
         cols="12"
         class="mt-1 mb-0 pb-0"
       >
-        <activities-component />
+        <activities-component
+          :disable-for-hystorical-data="disableForHystoricalData"
+        />
       </v-col>
     </v-row>
   </div>
@@ -72,6 +78,14 @@
       stayDetails: {
         type: Object,
         default: () => ({}),
+      },
+      selectedStay: {
+        type: Object,
+        default: () => ({}),
+      },
+      disableForHystoricalData: {
+        type: Boolean,
+        default: false,
       },
     },
     data: () => {

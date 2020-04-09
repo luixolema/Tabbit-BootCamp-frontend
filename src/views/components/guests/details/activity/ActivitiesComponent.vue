@@ -17,7 +17,7 @@
           class="my-2"
           x-small
           block
-          :disabled="disableAdd"
+          :disabled="disableForHystoricalData"
         >
           Add
           <v-icon
@@ -49,11 +49,15 @@
 <script>
 
   export default {
-    name: 'StayDetailsComponent',
+    name: 'ActivitiesComponent',
     props: {
       activities: {
         type: Array,
         default: () => ([]),
+      },
+      disableForHystoricalData: {
+        type: Boolean,
+        default: false,
       },
     },
     data: function () {
@@ -71,16 +75,6 @@
           { text: 'Title', value: 'title' },
         ],
       }
-    },
-    computed: {
-      disableAdd () {
-        const selectedGuest = this.$store.state.guestModule.selectedGuest
-        if (selectedGuest !== undefined) {
-          return selectedGuest.checkedin === false
-        } else {
-          return true
-        }
-      },
     },
   }
 

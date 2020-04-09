@@ -3,6 +3,7 @@
     <base-editable-data-table
       :headers="headers"
       :table-items="stayDetailTableItems"
+      :disable-edit="disableForHystoricalData"
       @item-updated="updateField"
     />
   </v-card>
@@ -19,6 +20,10 @@
       headers: {
         type: Array,
         default: () => ([]),
+      },
+      disableForHystoricalData: {
+        type: Boolean,
+        default: false,
       },
     },
     data: function () {
@@ -46,10 +51,6 @@
                 value: 'false',
                 text: 'No',
               },
-              {
-                value: 'null',
-                text: 'Maybe',
-              },
             ],
           },
           medicalStatement: {
@@ -64,13 +65,9 @@
                 value: 'false',
                 text: 'No',
               },
-              {
-                value: 'null',
-                text: 'Maybe',
-              },
             ],
           },
-          preBoocking: { name: 'Pre Booking', type: 'fixed' },
+          preBoocking: { name: 'Pre Booking', type: 'text' },
         },
         date: '',
       }
