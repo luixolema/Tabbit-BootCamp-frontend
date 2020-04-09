@@ -9,6 +9,9 @@ const StayService = {
   findById (stayId) {
     return axios.get(apiUrl + '/' + stayId)
   },
+  updateStay (stayInfo) {
+    return axios.put(apiUrl, stayInfo)
+  },
 }
 
 export default StayService

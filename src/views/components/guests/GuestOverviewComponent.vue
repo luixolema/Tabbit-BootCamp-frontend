@@ -161,6 +161,7 @@
     },
     beforeDestroy () {
       this.$store.commit('guestModule/removeSelectedGuest')
+      this.$store.commit('stayModule/removeStayData')
     },
     methods: {
       loadAllGuests () {
