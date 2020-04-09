@@ -1,7 +1,14 @@
 image: node:10.15.0
 pipelines:
-  default:
-    - step:
-        script:
-          - npm install
-          - npm test
+  pull-requests:
+    '**':
+      - step:
+          script:
+            - npm install
+            - npm test
+  branches:
+    master:
+      - step:
+          script:
+            - npm install
+            - npm test
