@@ -148,6 +148,7 @@
               NotificationService.error(error.message)
             })
         }
+        this.$store.commit('guestModule/updateSelectedGuest', stayData)
       },
     },
   }
