@@ -15,7 +15,6 @@
             <guest-personal-details-component
               :headers="headers"
               :selected-stay="selectedStay"
-              :guest-personal-details="guestPersonalDetails"
             />
           </v-col>
           <div style="margin:1vh" />
@@ -25,7 +24,6 @@
           >
             <stay-details-component
               :headers="headers"
-              :stay-details="stayDetails"
               :disable-for-hystorical-data="disableForHystoricalData"
             />
           </v-col>
@@ -71,14 +69,6 @@
       ActivitiesComponent,
     },
     props: {
-      guestPersonalDetails: {
-        type: Object,
-        default: () => ({}),
-      },
-      stayDetails: {
-        type: Object,
-        default: () => ({}),
-      },
       selectedStay: {
         type: Object,
         default: () => ({}),

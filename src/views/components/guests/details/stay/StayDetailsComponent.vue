@@ -10,13 +10,12 @@
 </template>
 
 <script>
+  import NotificationService from '@/services/NotificationService'
+  import StayService from '@/services/StayService'
+
   export default {
     name: 'StayDetailsComponent',
     props: {
-      stayDetails: {
-        type: Object,
-        default: () => ({}),
-      },
       headers: {
         type: Array,
         default: () => ([]),
@@ -74,18 +73,22 @@
     },
     computed: {
       stayDetailTableItems () {
-        if (!this.stayDetails) { return }
+        var stayDetails
+        if (this.$store.state.stayModule.stayData) {
+          stayDetails = this.$store.state.stayModule.stayData.stayDetails
+        }
+        if (!stayDetails) { return }
 
         const items = []
 
         Object.keys(this.propertiesSpecification).forEach(property => {
-          if (!Object.prototype.hasOwnProperty.call(this.stayDetails, property)) { return }
+          if (!Object.prototype.hasOwnProperty.call(stayDetails, property)) { return }
 
           items.push({
             property: property,
             key: this.propertiesSpecification[property].name,
             type: this.propertiesSpecification[property].type,
-            value: this.stayDetails[property] + '',
+            value: stayDetails[property] + '',
             options: this.propertiesSpecification[property].options,
           })
         })
@@ -95,8 +98,15 @@
     },
     methods: {
       updateField (property, value) {
-        this.stayDetails[property] = value
-        console.log(this.stayDetails)
+        const stayData = { ...this.$store.state.stayModule.stayData }
+        stayData.stayDetails[property] = value
+        StayService.updateStay(this.$store.state.stayModule.stayData).then((response) => {
+          this.$store.commit('stayModule/setStayData', stayData)
+        })
+          .catch((error) => {
+            NotificationService.error(error.message)
+          })
+        this.$store.commit('guestModule/updateSelectedGuest', stayData)
       },
     },
   }

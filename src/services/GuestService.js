@@ -15,22 +15,10 @@ const GuestService = {
     return axios.put(apiUrl + '/checkIn', guestId)
   },
   getGuestInfo (guestId) {
-    /** Mock data to test TODO: remove it after finish the api */
-    // return Promise.resolve({
-    //   data: {
-    //     stays: [
-    //       null,
-    //       {
-    //         id: 1,
-    //         checkInDate: '12.02.2020',
-    //         checkOutDate: '12.02.2020',
-    //       },
-    //     ],
-    //     guest: null,
-    //   },
-    // })
-
     return axios.get(apiUrl + '/' + guestId)
+  },
+  updateGuest (guestInfo) {
+    return axios.put(apiUrl, guestInfo)
   },
 }
 

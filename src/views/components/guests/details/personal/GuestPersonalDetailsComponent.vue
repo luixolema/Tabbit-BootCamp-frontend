@@ -51,13 +51,14 @@
 </template>
 
 <script>
+
+  import GuestService from '@/services/GuestService'
+  import NotificationService from '@/services/NotificationService'
+  import StayService from '@/services/StayService'
+
   export default {
     name: 'GuestPersonalDetailsComponent',
     props: {
-      guestPersonalDetails: {
-        type: Object,
-        default: () => ({}),
-      },
       headers: {
         type: Array,
         default: () => ([]),
@@ -105,18 +106,22 @@
         return false
       },
       guestPersonalDetailTableItems () {
-        if (this.guestPersonalDetails == null) { return }
+        var guestPersonalDetails
+        if (this.$store.state.stayModule.stayData) {
+          guestPersonalDetails = this.$store.state.stayModule.stayData.guestPersonalDetails
+        }
+        if (guestPersonalDetails == null) { return }
 
         const items = []
 
         Object.keys(this.propertiesSpecification).forEach(property => {
-          if (!Object.prototype.hasOwnProperty.call(this.guestPersonalDetails, property)) { return }
+          if (!Object.prototype.hasOwnProperty.call(guestPersonalDetails, property)) { return }
 
           items.push({
             property: property,
             key: this.propertiesSpecification[property].name,
             type: this.propertiesSpecification[property].type,
-            value: this.guestPersonalDetails[property] + '',
+            value: guestPersonalDetails[property] + '',
           })
         })
 
@@ -125,8 +130,25 @@
     },
     methods: {
       updateField (property, value) {
-        this.guestPersonalDetails[property] = value
-        console.log(this.guestPersonalDetails)
+        const stayData = { ...this.$store.state.stayModule.stayData }
+        stayData.guestPersonalDetails[property] = value
+        const guest = this.$store.state.guestModule.selectedGuest
+        if (guest.checkedin) {
+          StayService.updateStay(this.$store.state.stayModule.stayData).then((response) => {
+            this.$store.commit('stayModule/setStayData', stayData)
+          })
+            .catch((error) => {
+              NotificationService.error(error.message)
+            })
+        } else {
+          GuestService.updateGuest(this.$store.state.stayModule.stayData.guestPersonalDetails).then((response) => {
+            this.$store.commit('stayModule/setStayData', stayData)
+          })
+            .catch((error) => {
+              NotificationService.error(error.message)
+            })
+        }
+        this.$store.commit('guestModule/updateSelectedGuest', stayData)
       },
     },
   }

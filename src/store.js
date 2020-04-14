@@ -1,12 +1,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import guestModule from './store/guestModule'
+import stayModule from './store/stayModule'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
     guestModule,
+    stayModule,
   },
   state: {
     barColor: 'rgba(0, 0, 0, .8), rgba(0, 0, 0, .8)',
