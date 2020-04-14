@@ -59,7 +59,7 @@
               block
               small
               :disabled="!noCheckedinGuestIsSelected"
-              @click="toggleOpenCheckinDialog"
+              @click="openCheckinDialog"
             >
               Check In
               <v-icon
@@ -70,9 +70,9 @@
               </v-icon>
             </v-btn>
             <checkin-dialog-component
-              :open="openCheckinDialog"
+              :isCheckInDialogOpen="isOpenCheckinDialog"
               @onSave="checkInSelectedGuest"
-              @onCancel="toggleOpenCheckinDialog"
+              @onCancel="closeCheckinDialog"
             />
           </v-col>
         </v-row>
@@ -126,7 +126,7 @@
 <script>
   import GuestService from '@/services/GuestService'
   import NotificationService from '@/services/NotificationService'
-  import CheckinDialogComponent from '@/views/components/guests/CheckinDialogComponent'
+  import CheckinDialogComponent from '@/views/components/guests/overview/CheckinDialogComponent'
 
   const headers = [
     { text: 'Id', value: 'id' },
@@ -146,7 +146,7 @@
         guests: [],
         headers,
         filterBYCheckedIn: 'all',
-        openCheckinDialog: false,
+        isOpenCheckinDialog: false,
       }
     },
     computed: {
@@ -197,12 +197,15 @@
             })
         }
       },
-      toggleOpenCheckinDialog () {
-        this.openCheckinDialog = !this.openCheckinDialog
+      openCheckinDialog () {
+        this.isOpenCheckinDialog = true
+      },
+      closeCheckinDialog () {
+        this.isOpenCheckinDialog = false
       },
       checkInSelectedGuest (stayDto) {
         console.log('data to save: ', stayDto)
-        this.toggleOpenCheckinDialog()
+        this.closeCheckinDialog()
         alert('Saved!!')
       },
       selectGuest (guest) {
