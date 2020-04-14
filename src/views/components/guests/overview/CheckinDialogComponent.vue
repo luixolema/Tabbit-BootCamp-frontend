@@ -1,19 +1,34 @@
 <template>
   <v-dialog
-    v-model="open"
+    v-model="isCheckInDialogOpen"
     persistent
-    width="900"
+    width="700"
   >
     <v-card>
-      <v-card-title class="d-flex flex-row justify-space-between">
-        <span class="headline">
-          Check in guest
-        </span>
-        <span
-          class="cursor-pointer"
-          @click="cancel"
-        >X</span>
-      </v-card-title>
+      <v-toolbar
+        flat
+        dark
+        color="primary"
+      >
+        <v-toolbar-title>Check in Guest</v-toolbar-title>
+        <v-spacer />
+        <v-menu
+          bottom
+          right
+          offset-y
+        >
+          <template v-slot:activator="{ on }">
+            <v-btn
+              dark
+              icon
+              v-on="on"
+              @click="cancel"
+            >
+              <v-icon>mdi-close</v-icon>
+            </v-btn>
+          </template>
+        </v-menu>
+      </v-toolbar>
       <v-card-text>
         <v-stepper
           v-model="step"
@@ -24,7 +39,7 @@
               editable
               step="1"
             >
-              Name of step 1
+              Personal Data
             </v-stepper-step>
 
             <v-divider />
@@ -33,7 +48,7 @@
               editable
               step="2"
             >
-              Name of step 2
+              Stay Related Data
             </v-stepper-step>
 
             <v-divider />
@@ -42,7 +57,7 @@
               editable
               step="3"
             >
-              Name of step 3
+              Dive Data
             </v-stepper-step>
           </v-stepper-header>
 
@@ -89,7 +104,7 @@
 <script>
   const CheckinDialogComponent = {
     props: {
-      open: {
+      isCheckInDialogOpen: {
         type: Boolean,
         required: true,
       },
@@ -110,8 +125,18 @@
         this.$emit('onCancel')
       },
       save () {
+        this.step = 1
         this.$emit('onSave', this.stayDto)
       },
+    },
+    mounted () {
+      var self = this
+      window.addEventListener('keyup', function (event) {
+        // If  ESC key was pressed...
+        if (event.keyCode === 27) {
+          self.cancel()
+        }
+      })
     },
   }
   export default CheckinDialogComponent
