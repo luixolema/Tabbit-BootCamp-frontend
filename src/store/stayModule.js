@@ -11,8 +11,10 @@ const stayModule = {
         state.stayData = payload
     },
     removeStayData (state) {
+        if (state.stayData) {
         state.stayData.guestPersonalDetails = {}
         state.stayData.stayDetails = {}
+        }
     },
  },
  actions: {},
