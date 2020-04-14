@@ -59,7 +59,7 @@
               block
               small
               :disabled="!noCheckedinGuestIsSelected"
-              @click="checkInSelectedGuest"
+              @click="toggleOpenCheckinDialog"
             >
               Check In
               <v-icon
@@ -69,6 +69,11 @@
                 mdi-account-check
               </v-icon>
             </v-btn>
+            <checkin-dialog-component
+              :open="openCheckinDialog"
+              @onSave="checkInSelectedGuest"
+              @onCancel="toggleOpenCheckinDialog"
+            />
           </v-col>
         </v-row>
       </v-card-text>
@@ -121,6 +126,7 @@
 <script>
   import GuestService from '@/services/GuestService'
   import NotificationService from '@/services/NotificationService'
+  import CheckinDialogComponent from '@/views/components/guests/CheckinDialogComponent'
 
   const headers = [
     { text: 'Id', value: 'id' },
@@ -132,11 +138,15 @@
 
   export default {
     name: 'GuestOverviewComponent',
+    components: {
+      CheckinDialogComponent,
+    },
     data: () => {
       return {
         guests: [],
         headers,
         filterBYCheckedIn: 'all',
+        openCheckinDialog: false,
       }
     },
     computed: {
@@ -187,20 +197,13 @@
             })
         }
       },
-      checkInSelectedGuest () {
-        // if (!this.noCheckedinGuestIsSelected) {
-        //   NotificationService.info('You should and only select NOT checked in guests')
-        //   return
-        // }
-
-        // GuestService.checkInGuests(this.selectedGuest.id)
-        //   .then(() => {
-        //     NotificationService.sucess('The guest has been cheked-in correctly')
-        //     this.selectedGuest.checkedin = true
-        //     // we need to verify if the checkedin user its correctly shown in the table
-        //   }).catch(error => {
-        //     NotificationService.error(null, error)
-        //   })
+      toggleOpenCheckinDialog () {
+        this.openCheckinDialog = !this.openCheckinDialog
+      },
+      checkInSelectedGuest (stayDto) {
+        console.log('data to save: ', stayDto)
+        this.toggleOpenCheckinDialog()
+        alert('Saved!!')
       },
       selectGuest (guest) {
         this.$store.commit('guestModule/setSelectedGuest', guest)
