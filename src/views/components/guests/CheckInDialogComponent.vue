@@ -1,11 +1,12 @@
 <template>
   <v-dialog
     v-model="open"
+    persistent
     width="900"
   >
     <v-card>
       <v-card-title class="d-flex flex-row justify-space-between">
-        <span>
+        <span class="headline">
           Check in guest
         </span>
         <span
@@ -20,6 +21,7 @@
         >
           <v-stepper-header>
             <v-stepper-step
+              editable
               step="1"
             >
               Name of step 1
@@ -28,6 +30,7 @@
             <v-divider />
 
             <v-stepper-step
+              editable
               step="2"
             >
               Name of step 2
@@ -35,7 +38,10 @@
 
             <v-divider />
 
-            <v-stepper-step step="3">
+            <v-stepper-step
+              editable
+              step="3"
+            >
               Name of step 3
             </v-stepper-step>
           </v-stepper-header>
@@ -132,6 +138,7 @@
     }),
     methods: {
       cancel () {
+        this.step = 1
         this.$emit('onCancel')
       },
       save () {
