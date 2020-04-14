@@ -78,7 +78,6 @@
             item-value="value"
             :items="props.item.options"
             :label="props.item.key"
-            @mousedown="console.log(props.item.value)"
           />
         </template>
       </base-edit-dialog>
