@@ -63,72 +63,40 @@
 
           <v-stepper-items>
             <v-stepper-content step="1">
-              <div class="mb-3">
-                // content 1
-              </div>
-
-              <v-divider />
-              <div class="d-flex flex-row justify-space-between">
-                <v-btn
-                  text
-                  :disabled="true"
-                >
-                  Back
-                </v-btn>
-
-                <v-btn
-                  @click="step = 2"
-                >
-                  Next
-                </v-btn>
-              </div>
+              // content 1
             </v-stepper-content>
 
             <v-stepper-content step="2">
-              <div class="mb-3">
-                // content 2
-              </div>
-
-              <v-divider />
-              <div class="d-flex flex-row justify-space-between">
-                <v-btn
-                  @click="step = 1"
-                >
-                  Back
-                </v-btn>
-
-                <v-btn
-                  @click="step = 3"
-                >
-                  Next
-                </v-btn>
-              </div>
+              // content 2
             </v-stepper-content>
 
             <v-stepper-content step="3">
-              <div class="mb-3">
-                // content 3
-              </div>
-
-              <v-divider />
-              <div class="d-flex flex-row justify-space-between">
-                <v-btn
-                  @click="step = 2"
-                >
-                  Back
-                </v-btn>
-
-                <v-btn
-                  color="primary"
-                  @click="save"
-                >
-                  Check in!
-                </v-btn>
-              </div>
+              // content 3
             </v-stepper-content>
           </v-stepper-items>
         </v-stepper>
       </v-card-text>
+      <v-card-actions class="d-flex flex-row justify-space-between">
+        <v-btn
+          :disabled="step==1"
+          @click="step -= 1"
+        >
+          Back
+        </v-btn>
+
+        <v-btn
+          v-if="step < 3"
+          @click="step += 1"
+        >
+          Next
+        </v-btn>
+        <v-btn
+          v-else
+          @click="save"
+        >
+          CHECK IN
+        </v-btn>
+      </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
