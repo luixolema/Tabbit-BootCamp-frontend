@@ -70,7 +70,7 @@
               </v-icon>
             </v-btn>
             <checkin-dialog-component
-              :isCheckInDialogOpen="isOpenCheckinDialog"
+              :is-check-in-dialog-open="isOpenCheckinDialog"
               @onSave="checkInSelectedGuest"
               @onCancel="closeCheckinDialog"
             />
