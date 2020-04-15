@@ -15,6 +15,11 @@ const StayService = {
   createStay (StayDto) {
     return axios.post(apiUrl, StayDto)
   },
+  isBoxEmpty (boxNumber) {
+    return axios.post(apiUrl + '/boxState', boxNumber, {
+      headers: { 'Content-Type': 'application/json' },
+    })
+  },
 }
 
 export default StayService

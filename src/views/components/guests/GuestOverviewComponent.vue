@@ -203,8 +203,8 @@
         this.$refs.checkinDialog.cancel()
       },
       checkInSelectedGuest (stayDto) {
-        console.log('data to save: ', stayDto)
         this.closeCheckinDialog()
+        console.log('data to save: ', stayDto)
         alert('Saved!!')
       },
       selectGuest (guest) {

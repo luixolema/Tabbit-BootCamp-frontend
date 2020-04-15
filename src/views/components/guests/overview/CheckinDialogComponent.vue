@@ -4,7 +4,6 @@
     width="700"
     scrollable
     persistent
-    @keydown="keydown"
   >
     <v-card>
       <v-toolbar
@@ -92,6 +91,7 @@
                     v-model="stayDto.guestPersonalDetails.nationality"
                     :items="nationalities"
                     label="Nationality"
+                    :rules="[rules.required]"
                   />
                   <v-text-field
                     v-model="stayDto.guestPersonalDetails.passportId"
@@ -118,6 +118,7 @@
                     v-model="stayDto.guestPersonalDetails.country"
                     :items="countries"
                     label="Country"
+                    :rules="[rules.required]"
                   />
                   <v-divider />
                   <v-text-field
@@ -138,6 +139,7 @@
                   <v-text-field
                     v-model="stayDto.stayDetails.boxNumber"
                     label="Box Number"
+                    :error-messages="boxErrorMessages"
                     :rules="[rules.required]"
                   />
                   <base-datepicker
@@ -188,7 +190,7 @@
                     v-model="stayDto.stayDetails.divesAmount"
                     label="Number of Dives"
                     type="number"
-                    :rules="[validations.required('The number of... is required')]"
+                    :rules="[rules.required, rules.nonNegative]"
                   />
                   <v-text-field
                     v-model="stayDto.stayDetails.brevet"
@@ -283,7 +285,7 @@
       step: 1,
       validations,
       rules: {
-        required: validations.required(),
+        required: value => (!!value && value.match(/^ *$/) === null) || 'Required.',
         counter: value => value.length <= 20 || 'Max 20 characters',
         nonNegative: value => value >= 0 || 'The number can not be negative',
         email: value => {
@@ -291,6 +293,7 @@
           return pattern.test(value) || 'Invalid e-mail'
         },
       },
+      boxErrorMessages: [],
       isCheckinFormValid: false,
       booleanItems: [
         {
@@ -312,6 +315,30 @@
       selectedGuest () {
         return this.$store.state.guestModule.selectedGuest
       },
+      boxNumber () {
+        return this.stayDto.stayDetails.boxNumber
+      },
+    },
+    watch: {
+      boxNumber (newBoxnumber, oldBoxnumber) {
+        StayService.isBoxEmpty(newBoxnumber)
+          .then((response) => {
+            if (response.data) {
+              this.boxErrorMessages = []
+            } else {
+              this.boxErrorMessages.push('This box is not free')
+            }
+          })
+      },
+    },
+    mounted () {
+      var self = this
+      window.addEventListener('keyup', function (event) {
+        // If  ESC key was pressed...
+        if (event.keyCode === 27) {
+          self.cancel()
+        }
+      })
     },
     methods: {
       open () {
@@ -342,13 +369,6 @@
       },
       updateStayPersonalDetailsField (property, value) {
         this.stayDto.stayDetails[property] = value
-      },
-      keydown (event) {
-        event.stopPropagation()
-        if (event.keyCode === 27) {
-          // If  ESC key was pressed ...
-          this.cancel()
-        }
       },
     },
   }
