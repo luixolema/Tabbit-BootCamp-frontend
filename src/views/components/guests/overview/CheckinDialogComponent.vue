@@ -372,11 +372,9 @@
       },
       nextStep () {
         this.step = parseInt(this.step) + 1
-        console.log(this.step)
       },
       backStep () {
         this.step = parseInt(this.step) - 1
-        console.log(this.step)
       },
       updateStayPersonalDetailsField (property, value) {
         this.stayDto.stayDetails[property] = value
