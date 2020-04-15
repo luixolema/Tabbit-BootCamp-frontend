@@ -321,21 +321,23 @@
     },
     watch: {
       boxNumber (newBoxnumber, oldBoxnumber) {
-        StayService.isBoxEmpty(newBoxnumber)
-          .then((response) => {
-            if (response.data) {
-              this.boxErrorMessages = []
-            } else {
-              this.boxErrorMessages.push('This box is not free')
-            }
-          })
+        if (newBoxnumber && newBoxnumber.trim().length) {
+          StayService.isBoxEmpty(newBoxnumber.trim())
+            .then((response) => {
+              if (response.data) {
+                this.boxErrorMessages = []
+              } else {
+                this.boxErrorMessages.push('This box is not free')
+              }
+            })
+        }
       },
     },
     mounted () {
       var self = this
       window.addEventListener('keyup', function (event) {
-        // If  ESC key was pressed...
-        if (event.keyCode === 27) {
+        // If dialog is open and ESC key was pressed...
+        if (self.openDialog && event.keyCode === 27) {
           self.cancel()
         }
       })
@@ -347,6 +349,7 @@
       cancel () {
         this.openDialog = false
         this.step = 1
+        this.boxErrorMessages = []
         this.$refs.form.reset()
         this.$refs.form.resetValidation()
         this.$emit('onCancel')

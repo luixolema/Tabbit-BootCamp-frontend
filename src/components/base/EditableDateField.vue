@@ -59,6 +59,13 @@
         },
       },
     },
+    watch: {
+      date: function (newDate, oldDate) {
+        if (this.date) {
+          this.inputDate = newDate
+        }
+      },
+    },
     mounted () {
       this.inputDate = this.date
     },
