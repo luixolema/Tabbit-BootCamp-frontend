@@ -6,7 +6,7 @@
       :rules="[rules.required,rules.validDate]"
       append-icon="mdi-calendar"
       @click:append="dateDialog=true"
-      @change="self.$emit('date-updated', self.property, self.inputDate)"
+      @change="$emit('date-updated', property, inputDate)"
     />
     <v-dialog
       v-model="dateDialog"
@@ -54,22 +54,32 @@
             return germanDatePattern.test(value) || 'Invalid Date'
           },
         },
+        tempDate: '',
       }
+    },
+    watch: {
+      inputDate (newInputDate, oldInputDate) {
+        this.tempDate = newInputDate
+      },
     },
     mounted () {
       this.inputDate = this.date
+      this.tempDate = this.date
       var self = this
       window.addEventListener('keyup', function (event) {
         // If enter key was pressed...
         if (event.keyCode === 13) {
-          self.dateDialog = false
-          self.$emit('date-updated', self.property, self.inputDate)
+          if (self.dateDialog) {
+            self.dateDialog = false
+            self.inputDate = self.tempDate
+            self.$emit('date-updated', self.property, self.inputDate)
+          }
         }
       })
     },
     methods: {
       signalDateUpdated (property, value) {
-        this.inputDate = value
+        this.tempDate = value
       },
     },
   }
