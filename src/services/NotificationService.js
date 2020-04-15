@@ -13,7 +13,7 @@ export default {
     Vue.notify({
       title: 'Success',
       text: msg,
-      type: 'success ',
+      type: 'success',
     })
   },
   info (msg) {
@@ -26,6 +26,7 @@ export default {
     Vue.notify({
       title: 'Warning',
       text: msg,
+      type: 'warn',
     })
   },
 }

@@ -6,7 +6,7 @@
       :rules="[rules.required,rules.validDate]"
       append-icon="mdi-calendar"
       @click:append="dateDialog=true"
-      @change="self.$emit('date-updated', self.property, self.inputDate)"
+      @change="$emit('date-updated', self.property, self.inputDate)"
     />
     <v-dialog
       v-model="dateDialog"
