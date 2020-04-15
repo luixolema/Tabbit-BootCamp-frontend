@@ -3,8 +3,10 @@
     <v-text-field
       v-model="inputDate"
       :label="label"
-      :readonly="true"
-      @click="dateDialog=true"
+      :rules="[rules.required,rules.validDate]"
+      append-icon="mdi-calendar"
+      @click:append="dateDialog=true"
+      @change="self.$emit('date-updated', self.property, self.inputDate)"
     />
     <v-dialog
       v-model="dateDialog"
@@ -25,6 +27,7 @@
 </template>
 
 <script>
+  const germanDatePattern = /^([0-2]\d|3[01])\.([0]\d|1[0-2])\.\d{4}$/
   export default {
     name: 'Datepicker',
     props: {
@@ -45,6 +48,12 @@
       return {
         dateDialog: false,
         inputDate: '',
+        rules: {
+          required: value => !!value || 'Required.',
+          validDate: value => {
+            return germanDatePattern.test(value) || 'Invalid Date'
+          },
+        },
       }
     },
     mounted () {

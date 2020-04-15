@@ -106,7 +106,7 @@
     data: () => {
       return {
         rules: {
-          required: value => !!value.trim() || 'Required.',
+          required: value => (!!value && value.match(/^ *$/) === null) || 'Required.',
           counter: value => value.length <= 20 || 'Max 20 characters',
           nonNegative: value => value >= 0 || 'The number can not be negative',
           email: value => {
