@@ -20,7 +20,7 @@ export default {
         }
         return message
     },
-    emil: (message = 'Invalid Email') => (value) => {
+    email: (message = 'Invalid Email') => (value) => {
         return emailPattern.test(value) || message
     },
     number: (min, max) => (value) => {
