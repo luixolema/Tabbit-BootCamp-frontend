@@ -217,14 +217,14 @@
       <v-card-actions class="d-flex flex-row justify-space-between">
         <v-btn
           :disabled="step==1"
-          @click="step -= 1"
+          @click="backStep"
         >
           Back
         </v-btn>
 
         <v-btn
           v-if="step < 3"
-          @click="step += 1"
+          @click="nextStep"
         >
           Next
         </v-btn>
@@ -369,6 +369,14 @@
       },
       updateGuestPersonalDetailsField (property, value) {
         this.stayDto.guestPersonalDetails[property] = value
+      },
+      nextStep () {
+        this.step = parseInt(this.step) + 1
+        console.log(this.step)
+      },
+      backStep () {
+        this.step = parseInt(this.step) - 1
+        console.log(this.step)
       },
       updateStayPersonalDetailsField (property, value) {
         this.stayDto.stayDetails[property] = value
