@@ -117,6 +117,7 @@
                     v-model="stayDto.guestPersonalDetails.country"
                     :items="countries"
                     label="Country"
+                    :rules="[rules.required]"
                   />
                   <v-divider />
                   <v-text-field
