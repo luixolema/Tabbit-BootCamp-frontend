@@ -70,9 +70,8 @@
               </v-icon>
             </v-btn>
             <checkin-dialog-component
-              :is-check-in-dialog-open="isOpenCheckinDialog"
+              ref="checkinDialog"
               @onSave="checkInSelectedGuest"
-              @onCancel="closeCheckinDialog"
             />
           </v-col>
         </v-row>
@@ -198,14 +197,14 @@
         }
       },
       openCheckinDialog () {
-        this.isOpenCheckinDialog = true
+        this.$refs.checkinDialog.open()
       },
       closeCheckinDialog () {
-        this.isOpenCheckinDialog = false
+        this.$refs.checkinDialog.cancel()
       },
       checkInSelectedGuest (stayDto) {
-        console.log('data to save: ', stayDto)
         this.closeCheckinDialog()
+        console.log('data to save: ', stayDto)
         alert('Saved!!')
       },
       selectGuest (guest) {
