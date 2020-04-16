@@ -4,7 +4,7 @@
       v-model="inputDate"
       :label="label"
       class="mt-3"
-      :rules="[validations.required(),validations.date(),validations.validateStayDates(stayDataInStore, property)]"
+      :rules="[validations.required(),validations.date()]"
     />
     <v-date-picker
       v-model="isoDate"
