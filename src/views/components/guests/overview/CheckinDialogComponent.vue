@@ -360,6 +360,7 @@
       save () {
         if (this.validForm) {
           this.stayDto.guestPersonalDetails.id = this.selectedGuest.id
+          this.stayDto.stayDetails.active = true
           StayService.createStay(this.stayDto)
             .then((response) => {
               this.$emit('onSave', this.stayDto)
