@@ -332,6 +332,9 @@
             })
         }
       },
+      'stayDto.stayDetails.arriveDate': function (newArriveDate, oldArriveDate) {
+        this.stayDto.stayDetails.checkOutDate = newArriveDate
+      },
     },
     mounted () {
       var self = this
