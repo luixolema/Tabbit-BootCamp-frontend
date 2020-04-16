@@ -312,9 +312,6 @@
       boxNumber () {
         return this.stayDto.stayDetails.boxNumber
       },
-      stayData () {
-        return this.stayDto
-      },
     },
     watch: {
       boxNumber (newBoxnumber, oldBoxnumber) {
