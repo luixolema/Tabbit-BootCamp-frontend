@@ -102,11 +102,13 @@
         stayData.stayDetails[property] = value
         StayService.updateStay(this.$store.state.stayModule.stayData).then((response) => {
           this.$store.commit('stayModule/setStayData', stayData)
+          if (property === 'boxNumber') {
+            this.$store.commit('guestModule/updateSelectedGuest', { boxNumber: stayData.stayDetails.boxNumber })
+          }
         })
           .catch((error) => {
             NotificationService.error(error.message)
           })
-        this.$store.commit('guestModule/updateSelectedGuest', stayData)
       },
     },
   }

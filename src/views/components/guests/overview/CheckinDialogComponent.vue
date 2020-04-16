@@ -357,11 +357,14 @@
       save () {
         if (this.validForm) {
           this.stayDto.guestPersonalDetails.id = this.selectedGuest.id
-          StayService.createStay(this.stayDto)
+          const dataToSend = { ...this.stayDto }
+
+          StayService.createStay(dataToSend)
             .then((response) => {
-              this.$emit('onSave', this.stayDto)
-              this.$refs.form.reset()
-              this.$refs.form.resetValidation()
+              this.$emit('onSave', dataToSend)
+              this.openDialog = false
+              // this.$refs.form.reset()
+              // this.$refs.form.resetValidation()
             }).catch(error => NotificationService.error(null, error))
         } else {
           NotificationService.warning('The form is invalid, please check it')
