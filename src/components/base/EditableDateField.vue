@@ -4,7 +4,7 @@
       v-model="inputDate"
       :label="label"
       class="mt-3"
-      :rules="[rules.required,rules.validDate]"
+      :rules="[validations.required(),validations.date(),validations.validateStayDates(stayDataInStore, property)]"
     />
     <v-date-picker
       v-model="isoDate"
@@ -14,6 +14,7 @@
 </template>
 
 <script>
+  import validations from '../../components/formUtils/Validations'
   const germanDatePattern = /^([0-2]\d|3[01])\.([0]\d|1[0-2])\.\d{4}$/
 
   export default {
@@ -35,12 +36,7 @@
     },
     data: () => {
       return {
-        rules: {
-          required: value => !!value || 'Required.',
-          validDate: value => {
-            return germanDatePattern.test(value) || 'Invalid Date'
-          },
-        },
+        validations,
         inputDate: '',
       }
     },
@@ -57,6 +53,9 @@
           this.inputDate = this.IsoStringtoGermanTimeString(newValue)
           this.signalDateUpdated()
         },
+      },
+      stayDataInStore () {
+        return this.$store.state.stayModule.stayData
       },
     },
     watch: {
