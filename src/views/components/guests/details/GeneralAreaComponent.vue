@@ -37,6 +37,7 @@
       >
         <equipment-component
           :disable-for-hystorical-data="disableForHystoricalData"
+          :loans="selectedStayData.loans || []"
         />
       </v-col>
     </v-row>
@@ -91,6 +92,9 @@
         return {
           title: this.$t('guestOverview'),
         }
+      },
+      selectedStayData () {
+        return this.$store.state.stayModule.stayData || {}
       },
     },
     mounted () {
