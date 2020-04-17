@@ -104,6 +104,7 @@
               const guestInfo = response.data
               const stayData = guestInfo.stayDto
               stayData.stayDetails = guestInfo.stayDto.stayDetails || {}
+              stayData.loanDetails = guestInfo.stayDto.loanDetails || {}
               this.$store.commit('stayModule/setStayData', stayData)
               this.buildStaysOptions(guestInfo.staySummaries)
             })
