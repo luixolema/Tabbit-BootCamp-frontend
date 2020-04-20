@@ -23,7 +23,7 @@
               dark
               icon
               v-on="on"
-              @click="cancel"
+              @click="close"
             >
               <v-icon>mdi-close</v-icon>
             </v-btn>
@@ -332,13 +332,16 @@
             })
         }
       },
+      'stayDto.stayDetails.arriveDate': function (newArriveDate, oldArriveDate) {
+        this.stayDto.stayDetails.checkOutDate = newArriveDate
+      },
     },
     mounted () {
       var self = this
       window.addEventListener('keyup', function (event) {
         // If dialog is open and ESC key was pressed...
         if (self.openDialog && event.keyCode === 27) {
-          self.cancel()
+          self.close()
         }
       })
     },
@@ -346,13 +349,12 @@
       open () {
         this.openDialog = true
       },
-      cancel () {
+      close () {
         this.openDialog = false
         this.step = 1
         this.boxErrorMessages = []
         this.$refs.form.reset()
         this.$refs.form.resetValidation()
-        this.$emit('onCancel')
       },
       save () {
         if (this.validForm) {
@@ -362,9 +364,7 @@
           StayService.createStay(dataToSend)
             .then((response) => {
               this.$emit('onSave', dataToSend)
-              this.openDialog = false
-              // this.$refs.form.reset()
-              // this.$refs.form.resetValidation()
+              this.close()
             }).catch(error => NotificationService.error(null, error))
         } else {
           NotificationService.warning('The form is invalid, please check it')

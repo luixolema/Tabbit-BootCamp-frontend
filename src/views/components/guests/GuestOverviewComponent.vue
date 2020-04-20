@@ -58,6 +58,7 @@
             <v-btn
               block
               small
+              :disabled="!noCheckedinGuestIsSelected"
               @click="openCheckinDialog"
             >
               Check In
