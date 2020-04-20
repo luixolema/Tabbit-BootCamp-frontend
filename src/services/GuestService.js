@@ -11,8 +11,8 @@ const GuestService = {
     url.searchParams.append('checkedIn', checkin)
     return axios.get(url.href)
   },
-  checkInGuests (guestId) {
-    return axios.put(apiUrl + '/checkIn', guestId)
+  checkInGuest (CheckInDto) {
+    return axios.post(apiUrl, CheckInDto)
   },
   getGuestInfo (guestId) {
     return axios.get(apiUrl + '/' + guestId)
