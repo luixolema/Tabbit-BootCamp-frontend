@@ -204,7 +204,6 @@
       },
       checkInSelectedGuest (stayDto) {
         this.closeCheckinDialog()
-        console.log('data to save: ', stayDto)
         alert('Saved!!')
       },
       selectGuest (guest) {
