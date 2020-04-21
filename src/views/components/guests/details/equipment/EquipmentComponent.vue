@@ -66,24 +66,9 @@
     },
     computed: {
       loanDetails () {
-        var loans
-        if (this.$store.state.stayModule.stayData) {
-          loans = this.$store.state.stayModule.stayData.loanDetails
-        }
-        if (!loans) { return [] }
+        if (!this.$store.state.stayModule.stayData) { return [] }
 
-        const items = []
-
-        Array.prototype.forEach.call(loans, loan =>
-          items.push({
-            type: loan.type,
-            serial: loan.serialNumber,
-            dateOut: loan.dateOut,
-            dateReturn: loan.dateReturn,
-          }),
-        )
-
-        return items
+        return this.$store.state.stayModule.stayData.loanDetails || []
       },
     },
   }
