@@ -13,10 +13,11 @@ const guestModule = {
     removeSelectedGuest (state) {
         state.selectedGuest = undefined
     },
-    updateSelectedGuest (state, payload) {
-        state.selectedGuest.firstName = payload.guestPersonalDetails.firstName
-        state.selectedGuest.lastName = payload.guestPersonalDetails.lastName
-        state.selectedGuest.boxNumber = payload.stayDetails.boxNumber
+    updateSelectedGuest (state, guest) {
+        state.selectedGuest.firstName = guest.firstName || state.selectedGuest.firstName
+        state.selectedGuest.lastName = guest.lastName || state.selectedGuest.lastName
+        state.selectedGuest.boxNumber = guest.boxNumber || state.selectedGuest.boxNumber
+        state.selectedGuest.checkedin = guest.checkedin || state.selectedGuest.checkedin
     },
  },
  actions: {},

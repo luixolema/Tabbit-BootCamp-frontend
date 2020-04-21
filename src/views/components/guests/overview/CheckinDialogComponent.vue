@@ -23,7 +23,7 @@
               dark
               icon
               v-on="on"
-              @click="cancel"
+              @click="close"
             >
               <v-icon>mdi-close</v-icon>
             </v-btn>
@@ -331,7 +331,7 @@
       window.addEventListener('keyup', function (event) {
         // If dialog is open and ESC key was pressed...
         if (self.openDialog && event.keyCode === 27) {
-          self.cancel()
+          self.close()
         }
       })
     },
@@ -339,13 +339,12 @@
       open () {
         this.openDialog = true
       },
-      cancel () {
+      close () {
         this.openDialog = false
         this.step = 1
         this.boxErrorMessages = []
         this.$refs.form.reset()
         this.$refs.form.resetValidation()
-        this.$emit('onCancel')
       },
       save () {
         if (this.validForm) {
@@ -355,6 +354,7 @@
               this.$emit('onSave', this.checkInDto)
               this.$refs.form.reset()
               this.$refs.form.resetValidation()
+              this.close()
             }).catch(error => NotificationService.error(null, error))
         } else {
           NotificationService.warning('The form is invalid, please check it')

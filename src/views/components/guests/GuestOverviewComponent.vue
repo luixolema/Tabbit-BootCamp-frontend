@@ -77,47 +77,49 @@
         </v-row>
       </v-card-text>
       <!-- Guest Table -->
-      <v-data-table
-        dense
-        :headers="headers"
-        :items="guests"
-        hide-default-footer
-        disable-pagination
-        height="73vh"
-        item-key="id"
-        fixed-header
-      >
-        <template v-slot:item="{ item }">
-          <tr
-            class="cursor-pointer"
-            :class="{active: selectedGuest && selectedGuest.id === item.id}"
-            @click="selectGuest(item)"
-          >
-            <td>
-              {{ item.id }}
-            </td>
-            <td>
-              {{ item.firstName }}
-            </td>
-            <td>
-              {{ item.lastName }}
-            </td>
-            <td>
-              {{ item.boxNumber }}
-            </td>
-            <td
-              class="text-center"
+      <div ref="tableContent">
+        <v-data-table
+          dense
+          :headers="headers"
+          :items="guests"
+          hide-default-footer
+          disable-pagination
+          height="73vh"
+          item-key="id"
+          fixed-header
+        >
+          <template v-slot:item="{ item }">
+            <tr
+              class="cursor-pointer"
+              :class="{active: selectedGuest && selectedGuest.id === item.id}"
+              @click="selectGuest(item)"
             >
-              <div v-if="item.checkedin">
-                <v-icon>mdi-check-bold</v-icon>
-              </div>
-              <div v-else>
-                <v-icon>mdi-close-thick </v-icon>
-              </div>
-            </td>
-          </tr>
-        </template>
-      </v-data-table>
+              <td>
+                {{ item.id }}
+              </td>
+              <td>
+                {{ item.firstName }}
+              </td>
+              <td>
+                {{ item.lastName }}
+              </td>
+              <td>
+                {{ item.boxNumber }}
+              </td>
+              <td
+                class="text-center"
+              >
+                <div v-if="item.checkedin">
+                  <v-icon>mdi-check-bold</v-icon>
+                </div>
+                <div v-else>
+                  <v-icon>mdi-close-thick </v-icon>
+                </div>
+              </td>
+            </tr>
+          </template>
+        </v-data-table>
+      </div>
     </base-material-card>
   </div>
 </template>
@@ -174,7 +176,7 @@
     },
     methods: {
       loadAllGuests () {
-        GuestService.findAll()
+        return GuestService.findAll()
           .then(response => {
             this.guests = response.data.guests
             this.$store.commit('guestModule/removeSelectedGuest')
@@ -184,10 +186,10 @@
       },
       filterByCheckin () {
         if (this.filterBYCheckedIn === 'all') {
-          this.loadAllGuests()
+          return this.loadAllGuests()
         } else {
           const checkedIn = this.filterBYCheckedIn === 'checkedIn' ? 1 : 0
-          GuestService.findByCheckin(checkedIn)
+          return GuestService.findByCheckin(checkedIn)
             .then(response => {
               this.guests = response.data.guests
               this.$store.commit('guestModule/removeSelectedGuest')
@@ -203,8 +205,17 @@
         this.$refs.checkinDialog.cancel()
       },
       checkInSelectedGuest (stayDto) {
-        this.closeCheckinDialog()
-        alert('Saved!!')
+        const selectedGuestId = this.$store.state.guestModule.selectedGuest.id
+        this.filterBYCheckedIn = 'all'
+
+        this.filterByCheckin().then(() => {
+          const selectedGuest = this.guests.find(guest => guest.id === selectedGuestId)
+          this.selectGuest(selectedGuest)
+
+          setTimeout(() => {
+            this.$refs.tableContent.querySelector('tr.active').scrollIntoView()
+          }, 200)
+        })
       },
       selectGuest (guest) {
         this.$store.commit('guestModule/setSelectedGuest', guest)

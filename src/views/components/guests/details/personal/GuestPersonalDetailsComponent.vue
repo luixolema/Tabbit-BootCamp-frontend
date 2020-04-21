@@ -132,7 +132,7 @@
       updateField (property, value) {
         const stayData = { ...this.$store.state.stayModule.stayData }
         stayData.guestPersonalDetails[property] = value
-        const guest = this.$store.state.guestModule.selectedGuest
+        const guest = { ...this.$store.state.guestModule.selectedGuest }
         if (guest.checkedin) {
           StayService.updateStay(this.$store.state.stayModule.stayData).then((response) => {
             this.$store.commit('stayModule/setStayData', stayData)
@@ -148,7 +148,10 @@
               NotificationService.error(error.message)
             })
         }
-        this.$store.commit('guestModule/updateSelectedGuest', stayData)
+        guest.firstName = stayData.guestPersonalDetails.firstName
+        guest.lastName = stayData.guestPersonalDetails.lastName
+        guest.boxNumber = stayData.stayDetails.boxNumber
+        this.$store.commit('guestModule/updateSelectedGuest', guest)
       },
     },
   }
