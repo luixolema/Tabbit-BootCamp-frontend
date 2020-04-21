@@ -74,12 +74,12 @@
                     v-model="checkInDto.guestPersonalDetails.lastName"
                     label="Lastname"
                     autofocus
-                    :rules="[rules.required]"
+                    :rules="[validations.required()]"
                   />
                   <v-text-field
                     v-model="checkInDto.guestPersonalDetails.firstName"
                     label="Firstname"
-                    :rules="[rules.required]"
+                    :rules="[validations.required()]"
                   />
                   <base-datepicker
                     :date="checkInDto.guestPersonalDetails.birthDate"
@@ -91,45 +91,45 @@
                     v-model="checkInDto.guestPersonalDetails.nationality"
                     :items="nationalities"
                     label="Nationality"
-                    :rules="[rules.required]"
+                    :rules="[validations.required()]"
                   />
                   <v-text-field
                     v-model="checkInDto.guestPersonalDetails.passportId"
                     label="Passport ID"
-                    :rules="[rules.required]"
+                    :rules="[validations.required()]"
                   />
                   <v-divider />
                   <v-text-field
                     v-model="checkInDto.guestPersonalDetails.street"
                     label="Street"
-                    :rules="[rules.required]"
+                    :rules="[validations.required()]"
                   />
                   <v-text-field
                     v-model="checkInDto.guestPersonalDetails.city"
                     label="City"
-                    :rules="[rules.required]"
+                    :rules="[validations.required()]"
                   />
                   <v-text-field
                     v-model="checkInDto.guestPersonalDetails.postcode"
                     label="postcode"
-                    :rules="[rules.required]"
+                    :rules="[validations.required()]"
                   />
                   <v-autocomplete
                     v-model="checkInDto.guestPersonalDetails.country"
                     :items="countries"
                     label="Country"
-                    :rules="[rules.required]"
+                    :rules="[validations.required()]"
                   />
                   <v-divider />
                   <v-text-field
                     v-model="checkInDto.guestPersonalDetails.email"
                     label="email"
-                    :rules="[rules.required,rules.email]"
+                    :rules="[validations.required(), validations.email()]"
                   />
                   <v-text-field
                     v-model="checkInDto.guestPersonalDetails.phone"
                     label="Phone"
-                    :rules="[rules.required]"
+                    :rules="[validations.required()]"
                   />
                 </div>
               </v-stepper-content>
@@ -140,40 +140,42 @@
                     v-model="checkInDto.stayDetails.boxNumber"
                     label="Box Number"
                     :error-messages="boxErrorMessages"
-                    :rules="[rules.required]"
+                    :rules="[validations.required()]"
                   />
                   <base-datepicker
                     :date="checkInDto.stayDetails.checkInDate"
                     label="Check In"
                     property="checkInDate"
-                    @date-updated="updateStayPersonalDetailsField"
+                    :staydto="stayDto"
+                    @date-updated="updateStayDetailsField"
                   />
                   <base-datepicker
                     :date="checkInDto.stayDetails.arriveDate"
                     label="Arrive"
                     property="arriveDate"
-                    @date-updated="updateStayPersonalDetailsField"
+                    :staydto="stayDto"
+                    @date-updated="updateStayDetailsField"
                   />
                   <base-datepicker
                     :date="checkInDto.stayDetails.leaveDate"
                     label="Leave"
                     property="leaveDate"
-                    @date-updated="updateStayPersonalDetailsField"
+                    :staydto="stayDto"
+                    @date-updated="updateStayDetailsField"
                   />
                   <v-text-field
                     v-model="checkInDto.stayDetails.hotel"
                     label="Hotel"
-                    :rules="[rules.required]"
+                    :rules="[validations.required()]"
                   />
                   <v-text-field
                     v-model="checkInDto.stayDetails.room"
                     label="Room"
-                    :rules="[rules.required]"
+                    :rules="[validations.required()]"
                   />
                   <v-text-field
                     v-model="checkInDto.stayDetails.preBooking"
                     label="Pre Booking"
-                    :rules="[rules.required]"
                   />
                 </div>
               </v-stepper-content>
@@ -184,18 +186,19 @@
                     :date="checkInDto.stayDetails.lastDiveDate"
                     label="last Dive"
                     property="lastDiveDate"
-                    @date-updated="updateStayPersonalDetailsField"
+                    :staydto="stayDto"
+                    @date-updated="updateStayDetailsField"
                   />
                   <v-text-field
                     v-model="checkInDto.stayDetails.divesAmount"
                     label="Number of Dives"
                     type="number"
-                    :rules="[rules.required, rules.nonNegative]"
+                    :rules="[validations.required(), validations.checkPositiveNumber()]"
                   />
                   <v-text-field
                     v-model="checkInDto.stayDetails.brevet"
                     label="brevet"
-                    :rules="[rules.required]"
+                    :rules="[validations.required()]"
                   />
                   <v-autocomplete
                     v-model="checkInDto.stayDetails.nitrox"
@@ -283,15 +286,6 @@
       },
       step: 1,
       validations,
-      rules: {
-        required: value => (!!value && value.match(/^ *$/) === null) || 'Required.',
-        counter: value => value.length <= 20 || 'Max 20 characters',
-        nonNegative: value => value >= 0 || 'The number can not be negative',
-        email: value => {
-          const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-          return pattern.test(value) || 'Invalid e-mail'
-        },
-      },
       boxErrorMessages: [],
       isCheckinFormValid: false,
       booleanItems: [

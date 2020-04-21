@@ -43,7 +43,7 @@
             v-if="props.item.type==='text'"
             v-model="props.item.value"
             :label="props.item.key"
-            :rules="[rules.required]"
+            :rules="[validations.required()]"
             maxlength="400"
             counter
           />
@@ -52,13 +52,13 @@
             v-model="props.item.value"
             :label="props.item.key"
             type="number"
-            :rules="[rules.required, rules.nonNegative]"
+            :rules="[validations.required(), validations.checkPositiveNumber()]"
           />
           <v-text-field
             v-if="props.item.type==='email'"
             v-model="props.item.value"
             :label="props.item.key"
-            :rules="[rules.required, rules.email]"
+            :rules="[validations.required(), validations.email()]"
           />
           <v-text-field
             v-if="props.item.type==='fixed'"
@@ -87,6 +87,7 @@
 </template>
 
 <script>
+  import validations from '../../components/formUtils/Validations'
   export default {
     name: 'EditableDataTable',
     props: {
@@ -105,6 +106,7 @@
     },
     data: () => {
       return {
+        validations,
         rules: {
           required: value => (!!value && value.match(/^ *$/) === null) || 'Required.',
           counter: value => value.length <= 20 || 'Max 20 characters',
@@ -115,6 +117,11 @@
           },
         },
       }
+    },
+    computed: {
+      stayDataInStore () {
+        return this.$store.state.stayModule.stayData
+      },
     },
     methods: {
       updateDateField (property, value) {

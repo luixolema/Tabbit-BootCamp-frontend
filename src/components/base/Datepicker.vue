@@ -3,7 +3,7 @@
     <v-text-field
       v-model="inputDate"
       :label="label"
-      :rules="[rules.required,rules.validDate]"
+      :rules="[validations.required(),validations.validateStayDates(staydto, property)]"
       append-icon="mdi-calendar"
       @click:append="dateDialog=true"
       @change="$emit('date-updated', property, inputDate)"
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-  const germanDatePattern = /^([0-2]\d|3[01])\.([0]\d|1[0-2])\.\d{4}$/
+  import validations from '../../components/formUtils/Validations'
   export default {
     name: 'Datepicker',
     props: {
@@ -43,17 +43,16 @@
         type: String,
         default: '',
       },
+      staydto: {
+        type: Object,
+        default: () => ({}),
+      },
     },
     data: () => {
       return {
         dateDialog: false,
         inputDate: '',
-        rules: {
-          required: value => !!value || 'Required.',
-          validDate: value => {
-            return germanDatePattern.test(value) || 'Invalid Date'
-          },
-        },
+        validations,
         tempDate: '',
       }
     },
