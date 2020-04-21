@@ -205,7 +205,6 @@
       },
       checkInSelectedGuest (stayDto) {
         this.closeCheckinDialog()
-        alert('Saved!!')
         const selectedGuestId = this.$store.state.guestModule.selectedGuest.id
         this.filterBYCheckedIn = 'all'
 
