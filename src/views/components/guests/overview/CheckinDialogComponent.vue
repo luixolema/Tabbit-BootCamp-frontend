@@ -71,63 +71,63 @@
               <v-stepper-content step="1">
                 <div class="mb-3">
                   <v-text-field
-                    v-model="stayDto.guestPersonalDetails.lastName"
+                    v-model="checkInDto.guestPersonalDetails.lastName"
                     label="Lastname"
                     autofocus
                     :rules="[validations.required()]"
                   />
                   <v-text-field
-                    v-model="stayDto.guestPersonalDetails.firstName"
+                    v-model="checkInDto.guestPersonalDetails.firstName"
                     label="Firstname"
                     :rules="[validations.required()]"
                   />
                   <base-datepicker
-                    :date="stayDto.guestPersonalDetails.birthDate"
+                    :date="checkInDto.guestPersonalDetails.birthDate"
                     label="Birthdate"
                     property="birthDate"
                     @date-updated="updateGuestPersonalDetailsField"
                   />
                   <v-autocomplete
-                    v-model="stayDto.guestPersonalDetails.nationality"
+                    v-model="checkInDto.guestPersonalDetails.nationality"
                     :items="nationalities"
                     label="Nationality"
                     :rules="[validations.required()]"
                   />
                   <v-text-field
-                    v-model="stayDto.guestPersonalDetails.passportId"
+                    v-model="checkInDto.guestPersonalDetails.passportId"
                     label="Passport ID"
                     :rules="[validations.required()]"
                   />
                   <v-divider />
                   <v-text-field
-                    v-model="stayDto.guestPersonalDetails.street"
+                    v-model="checkInDto.guestPersonalDetails.street"
                     label="Street"
                     :rules="[validations.required()]"
                   />
                   <v-text-field
-                    v-model="stayDto.guestPersonalDetails.city"
+                    v-model="checkInDto.guestPersonalDetails.city"
                     label="City"
                     :rules="[validations.required()]"
                   />
                   <v-text-field
-                    v-model="stayDto.guestPersonalDetails.postcode"
+                    v-model="checkInDto.guestPersonalDetails.postcode"
                     label="postcode"
                     :rules="[validations.required()]"
                   />
                   <v-autocomplete
-                    v-model="stayDto.guestPersonalDetails.country"
+                    v-model="checkInDto.guestPersonalDetails.country"
                     :items="countries"
                     label="Country"
                     :rules="[validations.required()]"
                   />
                   <v-divider />
                   <v-text-field
-                    v-model="stayDto.guestPersonalDetails.email"
+                    v-model="checkInDto.guestPersonalDetails.email"
                     label="email"
                     :rules="[validations.required(), validations.email()]"
                   />
                   <v-text-field
-                    v-model="stayDto.guestPersonalDetails.phone"
+                    v-model="checkInDto.guestPersonalDetails.phone"
                     label="Phone"
                     :rules="[validations.required()]"
                   />
@@ -137,44 +137,44 @@
               <v-stepper-content step="2">
                 <div class="mb-3">
                   <v-text-field
-                    v-model="stayDto.stayDetails.boxNumber"
+                    v-model="checkInDto.stayDetails.boxNumber"
                     label="Box Number"
                     :error-messages="boxErrorMessages"
                     :rules="[validations.required()]"
                   />
                   <base-datepicker
-                    :date="stayDto.stayDetails.checkInDate"
+                    :date="checkInDto.stayDetails.checkInDate"
                     label="Check In"
                     property="checkInDate"
                     :staydto="stayDto"
                     @date-updated="updateStayDetailsField"
                   />
                   <base-datepicker
-                    :date="stayDto.stayDetails.arriveDate"
+                    :date="checkInDto.stayDetails.arriveDate"
                     label="Arrive"
                     property="arriveDate"
                     :staydto="stayDto"
                     @date-updated="updateStayDetailsField"
                   />
                   <base-datepicker
-                    :date="stayDto.stayDetails.leaveDate"
+                    :date="checkInDto.stayDetails.leaveDate"
                     label="Leave"
                     property="leaveDate"
                     :staydto="stayDto"
                     @date-updated="updateStayDetailsField"
                   />
                   <v-text-field
-                    v-model="stayDto.stayDetails.hotel"
+                    v-model="checkInDto.stayDetails.hotel"
                     label="Hotel"
                     :rules="[validations.required()]"
                   />
                   <v-text-field
-                    v-model="stayDto.stayDetails.room"
+                    v-model="checkInDto.stayDetails.room"
                     label="Room"
                     :rules="[validations.required()]"
                   />
                   <v-text-field
-                    v-model="stayDto.stayDetails.preBooking"
+                    v-model="checkInDto.stayDetails.preBooking"
                     label="Pre Booking"
                   />
                 </div>
@@ -183,30 +183,30 @@
               <v-stepper-content step="3">
                 <div class="mb-3">
                   <base-datepicker
-                    :date="stayDto.stayDetails.lastDiveDate"
+                    :date="checkInDto.stayDetails.lastDiveDate"
                     label="last Dive"
                     property="lastDiveDate"
                     :staydto="stayDto"
                     @date-updated="updateStayDetailsField"
                   />
                   <v-text-field
-                    v-model="stayDto.stayDetails.divesAmount"
+                    v-model="checkInDto.stayDetails.divesAmount"
                     label="Number of Dives"
                     type="number"
                     :rules="[validations.required(), validations.checkPositiveNumber()]"
                   />
                   <v-text-field
-                    v-model="stayDto.stayDetails.brevet"
+                    v-model="checkInDto.stayDetails.brevet"
                     label="brevet"
                     :rules="[validations.required()]"
                   />
                   <v-autocomplete
-                    v-model="stayDto.stayDetails.nitrox"
+                    v-model="checkInDto.stayDetails.nitrox"
                     :items="booleanItems"
                     label="Nitrox"
                   />
                   <v-autocomplete
-                    v-model="stayDto.stayDetails.medicalStatement"
+                    v-model="checkInDto.stayDetails.medicalStatement"
                     :items="booleanItems"
                     label="Medical Statement"
                   />
@@ -245,6 +245,7 @@
 <script>
   import validations from '../../../../components/formUtils/Validations'
   import StayService from '@/services/StayService'
+  import GuestService from '@/services/GuestService'
   import NotificationService from '@/services/NotificationService'
   import countries from '@/constants/countries'
   import nationalities from '@/constants/nationalities'
@@ -252,7 +253,7 @@
   export default {
     data: () => ({
       openDialog: false,
-      stayDto: {
+      checkInDto: {
         guestPersonalDetails: {
           id: undefined,
           firstName: '',
@@ -271,7 +272,6 @@
           id: undefined,
           boxNumber: '',
           checkInDate: '',
-          checkOutDate: '',
           arriveDate: '',
           leaveDate: '',
           hotel: '',
@@ -281,7 +281,6 @@
           divesAmount: null,
           nitrox: true,
           medicalStatement: true,
-          active: false,
           preBooking: '',
         },
       },
@@ -310,7 +309,7 @@
         return this.$store.state.guestModule.selectedGuest
       },
       boxNumber () {
-        return this.stayDto.stayDetails.boxNumber
+        return this.checkInDto.stayDetails.boxNumber
       },
     },
     watch: {
@@ -350,10 +349,10 @@
       },
       save () {
         if (this.validForm) {
-          this.stayDto.guestPersonalDetails.id = this.selectedGuest.id
-          StayService.createStay(this.stayDto)
+          this.checkInDto.guestPersonalDetails.id = this.selectedGuest.id
+          GuestService.checkInGuest(this.checkInDto)
             .then((response) => {
-              this.$emit('onSave', this.stayDto)
+              this.$emit('onSave', this.checkInDto)
               this.$refs.form.reset()
               this.$refs.form.resetValidation()
             }).catch(error => NotificationService.error(null, error))
@@ -362,7 +361,7 @@
         }
       },
       updateGuestPersonalDetailsField (property, value) {
-        this.stayDto.guestPersonalDetails[property] = value
+        this.checkInDto.guestPersonalDetails[property] = value
       },
       nextStep () {
         this.step = parseInt(this.step) + 1
@@ -370,8 +369,8 @@
       backStep () {
         this.step = parseInt(this.step) - 1
       },
-      updateStayDetailsField (property, value) {
-        this.stayDto.stayDetails[property] = value
+      updateStayPersonalDetailsField (property, value) {
+        this.checkInDto.stayDetails[property] = value
       },
     },
   }
