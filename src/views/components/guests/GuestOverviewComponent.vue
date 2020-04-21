@@ -213,7 +213,6 @@
           this.selectGuest(selectedGuest)
 
           setTimeout(() => {
-            // put the scrooll focus on the new checked in guest
             this.$refs.tableContent.querySelector('tr.active').scrollIntoView()
           }, 200)
         })
