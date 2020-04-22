@@ -210,11 +210,13 @@
                     v-model="checkInDto.stayDetails.nitrox"
                     :items="booleanItems"
                     label="Nitrox"
+                    :rules="[validations.required()]"
                   />
                   <v-autocomplete
                     v-model="checkInDto.stayDetails.medicalStatement"
                     :items="booleanItems"
                     label="Medical Statement"
+                    :rules="[validations.required()]"
                   />
                 </div>
               </v-stepper-content>
