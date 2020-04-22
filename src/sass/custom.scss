@@ -104,3 +104,21 @@ thead th {
 button.v-btn.v-btn--contained.v-size--default {
     margin: 1% !important; 
 }
+
+.v-application .error--text .v-input__slot {
+    background: rgb(248, 248, 107);
+}
+
+
+
+.v-application .error--text .v-text-field__slot::after {
+    content: "\F0026";
+    display: inline-block;
+    font: normal normal normal 26px/1 "Material Design Icons";
+    font-size: 1.1em;
+    text-rendering: auto;
+    line-height: inherit;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0.4% 1%;
+ }

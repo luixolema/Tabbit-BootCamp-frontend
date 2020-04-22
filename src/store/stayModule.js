@@ -14,6 +14,7 @@ const stayModule = {
         if (state.stayData) {
         state.stayData.guestPersonalDetails = {}
         state.stayData.stayDetails = {}
+        state.stayData.loanDetails = []
         }
     },
  },

@@ -20,6 +20,9 @@ const GuestService = {
   updateGuest (guestInfo) {
     return axios.put(apiUrl, guestInfo)
   },
+  getGuestPersonalDetails (guestId) {
+    return axios.get(apiUrl + '/' + guestId + '/personal-details')
+  },
 }
 
 export default GuestService

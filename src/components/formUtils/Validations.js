@@ -4,7 +4,7 @@ const germanDatePattern = /^([0-2]\d|3[01])\.([0]\d|1[0-2])\.\d{4}$/
 export default {
 
     required: (message = 'This field is required') => (value) => {
-        if (!value || value.match(/^ *$/) !== null) {
+        if (!value || String(value).match(/^ *$/) !== null) {
             return message
         }
         return true
@@ -61,6 +61,10 @@ export default {
             var parts = germanTimeString.match(/(\d+)/g)
             return new Date(parts[2], parts[1] - 1, parts[0] - (-1)).toISOString().substr(0, 10)
           }
+
+        if (!germanDatePattern.test(value)) {
+            return true
+        }
 
         if (!value) {
             return true
