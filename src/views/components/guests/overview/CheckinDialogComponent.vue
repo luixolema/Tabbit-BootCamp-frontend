@@ -5,7 +5,9 @@
     scrollable
     persistent
   >
-    <v-card>
+    <v-card
+      v-if="openDialog"
+    >
       <v-toolbar
         flat
         dark
@@ -85,6 +87,7 @@
                     :date="checkInDto.guestPersonalDetails.birthDate"
                     label="Birthdate"
                     property="birthDate"
+                    :required="true"
                     @date-updated="updateGuestPersonalDetailsField"
                   />
                   <v-autocomplete
@@ -146,21 +149,24 @@
                     :date="checkInDto.stayDetails.checkInDate"
                     label="Check In"
                     property="checkInDate"
-                    :staydto="stayDto"
+                    :required="true"
+                    :rules="[validations.validateStayDates(checkInDto, 'checkInDate')]"
                     @date-updated="updateStayDetailsField"
                   />
                   <base-datepicker
                     :date="checkInDto.stayDetails.arriveDate"
                     label="Arrive"
                     property="arriveDate"
-                    :staydto="stayDto"
+                    :required="true"
+                    :rules="[validations.validateStayDates(checkInDto, 'arriveDate')]"
                     @date-updated="updateStayDetailsField"
                   />
                   <base-datepicker
                     :date="checkInDto.stayDetails.leaveDate"
                     label="Leave"
                     property="leaveDate"
-                    :staydto="stayDto"
+                    :required="true"
+                    :rules="[validations.validateStayDates(checkInDto, 'leaveDate')]"
                     @date-updated="updateStayDetailsField"
                   />
                   <v-text-field
@@ -186,7 +192,7 @@
                     :date="checkInDto.stayDetails.lastDiveDate"
                     label="last Dive"
                     property="lastDiveDate"
-                    :staydto="stayDto"
+                    :staydto="checkInDto"
                     @date-updated="updateStayDetailsField"
                   />
                   <v-text-field
@@ -204,11 +210,13 @@
                     v-model="checkInDto.stayDetails.nitrox"
                     :items="booleanItems"
                     label="Nitrox"
+                    :rules="[validations.required()]"
                   />
                   <v-autocomplete
                     v-model="checkInDto.stayDetails.medicalStatement"
                     :items="booleanItems"
                     label="Medical Statement"
+                    :rules="[validations.required()]"
                   />
                 </div>
               </v-stepper-content>
@@ -337,14 +345,20 @@
     },
     methods: {
       open () {
+        GuestService.getGuestPersonalDetails(this.selectedGuest.id).then((response) => {
+          this.checkInDto.guestPersonalDetails = response.data
+        })
+          .catch((error) => {
+            NotificationService.error(error.message)
+          })
         this.openDialog = true
       },
       close () {
-        this.openDialog = false
         this.step = 1
         this.boxErrorMessages = []
         this.$refs.form.reset()
         this.$refs.form.resetValidation()
+        this.openDialog = false
       },
       save () {
         if (this.validForm) {
@@ -369,7 +383,7 @@
       backStep () {
         this.step = parseInt(this.step) - 1
       },
-      updateStayPersonalDetailsField (property, value) {
+      updateStayDetailsField (property, value) {
         this.checkInDto.stayDetails[property] = value
       },
     },
