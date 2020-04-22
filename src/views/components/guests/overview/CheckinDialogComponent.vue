@@ -253,7 +253,7 @@
 
 <script>
   import validations from '../../../../components/formUtils/Validations'
-  import StayService from '@/services/StayService'
+  import BoxManagementService from '@/services/BoxManagementService'
   import GuestService from '@/services/GuestService'
   import NotificationService from '@/services/NotificationService'
   import countries from '@/constants/countries'
@@ -324,7 +324,7 @@
     watch: {
       boxNumber (newBoxnumber, oldBoxnumber) {
         if (newBoxnumber && newBoxnumber.trim().length) {
-          StayService.isBoxEmpty(newBoxnumber.trim())
+          BoxManagementService.isBoxEmpty(newBoxnumber.trim())
             .then((response) => {
               if (response.data) {
                 this.boxErrorMessages = []
