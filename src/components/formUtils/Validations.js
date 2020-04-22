@@ -62,6 +62,10 @@ export default {
             return new Date(parts[2], parts[1] - 1, parts[0] - (-1)).toISOString().substr(0, 10)
           }
 
+        if (!germanDatePattern.test(value)) {
+            return true
+        }
+
         if (!value) {
             return true
         }

@@ -87,7 +87,7 @@
                     :date="checkInDto.guestPersonalDetails.birthDate"
                     label="Birthdate"
                     property="birthDate"
-                    :rules="[validations.required()]"
+                    :required="true"
                     @date-updated="updateGuestPersonalDetailsField"
                   />
                   <v-autocomplete
@@ -149,21 +149,24 @@
                     :date="checkInDto.stayDetails.checkInDate"
                     label="Check In"
                     property="checkInDate"
-                    :rules="[validations.required(),validations.validateStayDates(checkInDto, 'checkInDate')]"
+                    :required="true"
+                    :rules="[validations.validateStayDates(checkInDto, 'checkInDate')]"
                     @date-updated="updateStayDetailsField"
                   />
                   <base-datepicker
                     :date="checkInDto.stayDetails.arriveDate"
                     label="Arrive"
                     property="arriveDate"
-                    :rules="[validations.required(),validations.validateStayDates(checkInDto, 'arriveDate')]"
+                    :required="true"
+                    :rules="[validations.validateStayDates(checkInDto, 'arriveDate')]"
                     @date-updated="updateStayDetailsField"
                   />
                   <base-datepicker
                     :date="checkInDto.stayDetails.leaveDate"
                     label="Leave"
                     property="leaveDate"
-                    :rules="[validations.required(),validations.validateStayDates(checkInDto, 'leaveDate')]"
+                    :required="true"
+                    :rules="[validations.validateStayDates(checkInDto, 'leaveDate')]"
                     @date-updated="updateStayDetailsField"
                   />
                   <v-text-field
