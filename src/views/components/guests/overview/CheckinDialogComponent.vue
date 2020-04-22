@@ -241,6 +241,7 @@
         </v-btn>
         <v-btn
           v-else
+          :disabled="!isCheckinFormValid"
           @click="save"
         >
           CHECK IN!
@@ -295,7 +296,7 @@
       step: 1,
       validations,
       boxErrorMessages: [],
-      isCheckinFormValid: false,
+      isCheckinFormValid: true,
       booleanItems: [
         {
           value: 'true',
