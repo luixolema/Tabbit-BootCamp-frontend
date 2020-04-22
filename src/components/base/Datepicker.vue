@@ -3,7 +3,7 @@
     <v-text-field
       v-model="inputDate"
       :label="label"
-      :rules="[validations.required(),validations.validateStayDates(staydto, property)]"
+      :rules="rules"
       append-icon="mdi-calendar"
       @click:append="dateDialog=true"
       @change="$emit('date-updated', property, inputDate)"
@@ -27,7 +27,6 @@
 </template>
 
 <script>
-  import validations from '../../components/formUtils/Validations'
   export default {
     name: 'Datepicker',
     props: {
@@ -43,22 +42,24 @@
         type: String,
         default: '',
       },
-      staydto: {
-        type: Object,
-        default: () => ({}),
+      rules: {
+        type: Array,
+        default: () => ([]),
       },
     },
     data: () => {
       return {
         dateDialog: false,
         inputDate: '',
-        validations,
         tempDate: '',
       }
     },
     watch: {
       inputDate (newInputDate, oldInputDate) {
         this.tempDate = newInputDate
+      },
+      date (newDate, oldDate) {
+        this.inputDate = newDate
       },
     },
     mounted () {
