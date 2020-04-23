@@ -12,7 +12,6 @@
 <script>
   import NotificationService from '@/services/NotificationService'
   import StayService from '@/services/StayService'
-  import validations from '@/components/formUtils/Validations'
 
   export default {
     name: 'StayDetailsComponent',
@@ -28,7 +27,6 @@
     },
     data: function () {
       return {
-        validations,
         propertiesSpecification: {
           boxNumber: { name: 'Box', type: 'text' },
           checkInDate: { name: 'Check In', type: 'date' },
