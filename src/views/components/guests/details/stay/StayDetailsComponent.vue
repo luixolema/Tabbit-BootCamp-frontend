@@ -12,6 +12,7 @@
 <script>
   import NotificationService from '@/services/NotificationService'
   import StayService from '@/services/StayService'
+  import validations from '@/components/formUtils/Validations'
 
   export default {
     name: 'StayDetailsComponent',
@@ -27,6 +28,7 @@
     },
     data: function () {
       return {
+        validations,
         propertiesSpecification: {
           boxNumber: { name: 'Box', type: 'text' },
           checkInDate: { name: 'Check In', type: 'date' },
@@ -90,6 +92,7 @@
             type: this.propertiesSpecification[property].type,
             value: stayDetails[property] + '',
             options: this.propertiesSpecification[property].options,
+            errors: this.propertiesSpecification[property].errors,
           })
         })
 
@@ -107,7 +110,8 @@
           }
         })
           .catch((error) => {
-            NotificationService.error(error.message)
+            this.$emit('update-error')
+            NotificationService.error(error.response.data.message)
           })
       },
     },
