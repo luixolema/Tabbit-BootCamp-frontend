@@ -121,7 +121,6 @@
     },
     methods: {
       selectStay (selectedStay) {
-        console.log('selecting')
         if (selectedStay.id !== null) {
           StayService.findById(selectedStay.id)
             .then((response) => {
