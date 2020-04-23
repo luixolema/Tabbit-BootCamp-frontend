@@ -76,63 +76,74 @@
                     v-model="checkInDto.guestPersonalDetails.lastName"
                     label="Lastname"
                     autofocus
-                    :rules="[validations.required()]"
+                    class="required"
+                    :rules="[validations.required('The Last Name cannot be empty')]"
                   />
                   <v-text-field
                     v-model="checkInDto.guestPersonalDetails.firstName"
                     label="Firstname"
-                    :rules="[validations.required()]"
+                    class="required"
+                    :rules="[validations.required('The First Name cannot be empty')]"
                   />
                   <base-datepicker
                     :date="checkInDto.guestPersonalDetails.birthDate"
                     label="Birthdate"
                     property="birthDate"
-                    :required="true"
+                    :requiered="true"
+                    :rules="[validations.required('The Birthdate cannot be empty')]"
                     @date-updated="updateGuestPersonalDetailsField"
                   />
                   <v-autocomplete
                     v-model="checkInDto.guestPersonalDetails.nationality"
                     :items="nationalities"
                     label="Nationality"
-                    :rules="[validations.required()]"
+                    class="required"
+                    :rules="[validations.required('The Nationality cannot be empty')]"
                   />
                   <v-text-field
                     v-model="checkInDto.guestPersonalDetails.passportId"
                     label="Passport ID"
-                    :rules="[validations.required()]"
+                    class="required"
+                    :rules="[validations.required('The Passport ID cannot be empty')]"
                   />
                   <v-divider />
                   <v-text-field
                     v-model="checkInDto.guestPersonalDetails.street"
                     label="Street"
-                    :rules="[validations.required()]"
+                    class="required"
+                    :rules="[validations.required('The Street cannot be empty')]"
                   />
                   <v-text-field
                     v-model="checkInDto.guestPersonalDetails.city"
                     label="City"
-                    :rules="[validations.required()]"
+                    class="required"
+                    :rules="[validations.required('The City cannot be empty')]"
                   />
                   <v-text-field
                     v-model="checkInDto.guestPersonalDetails.postcode"
-                    label="postcode"
-                    :rules="[validations.required()]"
+                    label="Postcode"
+                    class="required"
+                    :rules="[validations.required('The Postcode cannot be empty')]"
                   />
                   <v-autocomplete
                     v-model="checkInDto.guestPersonalDetails.country"
                     :items="countries"
                     label="Country"
-                    :rules="[validations.required()]"
+                    class="required"
+                    :rules="[validations.required('The Country cannot be empty')]"
                   />
                   <v-divider />
                   <v-text-field
                     v-model="checkInDto.guestPersonalDetails.email"
-                    label="email"
-                    :rules="[validations.required(), validations.email()]"
+                    label="Email"
+                    class="required"
+                    :rules="[validations.required('The Email cannot be empty'), validations.email()]"
                   />
                   <v-text-field
                     v-model="checkInDto.guestPersonalDetails.phone"
                     label="Phone"
-                    :rules="[validations.required()]"
+                    class="required"
+                    :rules="[validations.required('The Phone cannot be empty')]"
                   />
                 </div>
               </v-stepper-content>
@@ -143,41 +154,44 @@
                     v-model="checkInDto.stayDetails.boxNumber"
                     label="Box Number"
                     :error-messages="boxErrorMessages"
-                    :rules="[validations.required()]"
+                    class="required"
+                    :rules="[validations.required('The Box Number cannot be empty')]"
                   />
                   <base-datepicker
                     :date="checkInDto.stayDetails.checkInDate"
                     label="Check In"
                     property="checkInDate"
-                    :required="true"
-                    :rules="[validations.validateStayDates(checkInDto, 'checkInDate')]"
+                    :requiered="true"
+                    :rules="[validations.required('The Check In cannot be empty'), validations.validateStayDates(checkInDto, 'checkInDate')]"
                     @date-updated="updateStayDetailsField"
                   />
                   <base-datepicker
                     :date="checkInDto.stayDetails.arriveDate"
                     label="Arrive"
                     property="arriveDate"
-                    :required="true"
-                    :rules="[validations.validateStayDates(checkInDto, 'arriveDate')]"
+                    :requiered="true"
+                    :rules="[validations.required('The Arrive cannot be empty'), validations.validateStayDates(checkInDto, 'arriveDate')]"
                     @date-updated="updateStayDetailsField"
                   />
                   <base-datepicker
                     :date="checkInDto.stayDetails.leaveDate"
                     label="Leave"
                     property="leaveDate"
-                    :required="true"
-                    :rules="[validations.validateStayDates(checkInDto, 'leaveDate')]"
+                    :requiered="true"
+                    :rules="[validations.required('The Leave cannot be empty'), validations.validateStayDates(checkInDto, 'leaveDate')]"
                     @date-updated="updateStayDetailsField"
                   />
                   <v-text-field
                     v-model="checkInDto.stayDetails.hotel"
                     label="Hotel"
-                    :rules="[validations.required()]"
+                    class="required"
+                    :rules="[validations.required('The Hotel cannot be empty')]"
                   />
                   <v-text-field
                     v-model="checkInDto.stayDetails.room"
                     label="Room"
-                    :rules="[validations.required()]"
+                    class="required"
+                    :rules="[validations.required('The Room cannot be empty')]"
                   />
                   <v-text-field
                     v-model="checkInDto.stayDetails.preBooking"
@@ -190,33 +204,39 @@
                 <div class="mb-3">
                   <base-datepicker
                     :date="checkInDto.stayDetails.lastDiveDate"
-                    label="last Dive"
+                    label="Last Dive"
                     property="lastDiveDate"
                     :staydto="checkInDto"
-                    @date-updated="updateStayDetailsField"
+                    :requiered="true"
+                    :rules="[validations.required('The Last Dive cannot be empty')]"
                   />
                   <v-text-field
                     v-model="checkInDto.stayDetails.divesAmount"
                     label="Number of Dives"
                     type="number"
-                    :rules="[validations.required(), validations.checkPositiveNumber()]"
+                    class="required"
+                    :rules="[validations.required('The Number of Dives cannot be empty'), validations.checkPositiveNumber()]"
+                    @date-updated="updateStayDetailsField"
                   />
                   <v-text-field
                     v-model="checkInDto.stayDetails.brevet"
-                    label="brevet"
-                    :rules="[validations.required()]"
+                    label="Brevet"
+                    class="required"
+                    :rules="[validations.required('The Brevet cannot be empty')]"
                   />
                   <v-autocomplete
                     v-model="checkInDto.stayDetails.nitrox"
                     :items="booleanItems"
                     label="Nitrox"
-                    :rules="[validations.required()]"
+                    class="required"
+                    :rules="[validations.required('The Nitrox cannot be empty')]"
                   />
                   <v-autocomplete
                     v-model="checkInDto.stayDetails.medicalStatement"
                     :items="booleanItems"
                     label="Medical Statement"
-                    :rules="[validations.required()]"
+                    class="required"
+                    :rules="[validations.required('The Medical Statement cannot be empty')]"
                   />
                 </div>
               </v-stepper-content>

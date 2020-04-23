@@ -5,6 +5,7 @@
       :label="label"
       :rules="computedRules"
       append-icon="mdi-calendar"
+      :class="{required: 'required'}"
       @click:append="dateDialog=true"
       @change="$emit('date-updated', property, inputDate)"
     />
@@ -66,7 +67,7 @@
         if (this.required) {
           ruleArray = [validations.required()]
         }
-        return ruleArray.concat([validations.date()]).concat(this.rules)
+        return [...this.rules, ...ruleArray, validations.date()]
       },
     },
     watch: {
