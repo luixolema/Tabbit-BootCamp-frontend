@@ -355,15 +355,6 @@
         }
       },
     },
-    mounted () {
-      var self = this
-      window.addEventListener('keyup', function (event) {
-        // If dialog is open and ESC key was pressed...
-        if (self.openDialog && event.keyCode === 27) {
-          self.close()
-        }
-      })
-    },
     methods: {
       open () {
         GuestService.getGuestPersonalDetails(this.selectedGuest.id).then((response) => {
