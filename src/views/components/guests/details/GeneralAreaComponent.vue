@@ -25,6 +25,7 @@
             <stay-details-component
               :headers="headers"
               :disable-for-hystorical-data="disableForHystoricalData"
+              @update-error="$emit('update-error')"
             />
           </v-col>
         </v-row>

@@ -90,6 +90,7 @@
             type: this.propertiesSpecification[property].type,
             value: stayDetails[property] !== null ? stayDetails[property] + '' : '',
             options: this.propertiesSpecification[property].options,
+            errors: this.propertiesSpecification[property].errors,
           })
         })
 
@@ -107,7 +108,8 @@
           }
         })
           .catch((error) => {
-            NotificationService.error(error.message)
+            this.$emit('update-error')
+            NotificationService.error(error.response.data.message)
           })
       },
     },

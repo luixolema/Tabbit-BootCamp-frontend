@@ -41,6 +41,7 @@
         <general-area-component
           :disable-for-hystorical-data="disableForHystoricalData"
           :selected-stay="selectedStay"
+          @update-error="selectStay(selectedStay)"
         />
         <!-- Example to pass info to another component -->
         <!-- <activities-ifo :guest="selectedStay.activities"> -->

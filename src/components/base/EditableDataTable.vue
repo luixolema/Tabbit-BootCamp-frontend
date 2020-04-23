@@ -44,6 +44,7 @@
             v-model="props.item.value"
             :label="props.item.key"
             :rules="[validations.required()]"
+            :error-messages="props.item.errors"
             maxlength="400"
             counter
           />
@@ -53,12 +54,14 @@
             :label="props.item.key"
             type="number"
             :rules="[validations.required(), validations.checkPositiveNumber()]"
+            :error-messages="props.item.errors"
           />
           <v-text-field
             v-if="props.item.type==='email'"
             v-model="props.item.value"
             :label="props.item.key"
             :rules="[validations.required(), validations.email()]"
+            :error-messages="props.item.errors"
           />
           <v-text-field
             v-if="props.item.type==='fixed'"
@@ -78,6 +81,7 @@
             item-value="value"
             :items="props.item.options"
             :label="props.item.key"
+            :error-messages="props.item.errors"
           />
         </template>
       </base-edit-dialog>

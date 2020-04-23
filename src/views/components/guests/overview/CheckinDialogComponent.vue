@@ -350,7 +350,7 @@
           this.checkInDto.guestPersonalDetails = response.data
         })
           .catch((error) => {
-            NotificationService.error(error.message)
+            NotificationService.error(error.response.data.message)
           })
         this.openDialog = true
       },
@@ -370,7 +370,13 @@
               this.$refs.form.reset()
               this.$refs.form.resetValidation()
               this.close()
-            }).catch(error => NotificationService.error(null, error))
+            }).catch(error => {
+              if (error.response.status === 409 && error.response.data.message === 'The box number is already used.') {
+                this.boxErrorMessages.push('This box is not free')
+                this.step = 2
+              }
+              NotificationService.error(error.response.data.message)
+            })
         } else {
           NotificationService.warning('The form is invalid, please check it')
         }
