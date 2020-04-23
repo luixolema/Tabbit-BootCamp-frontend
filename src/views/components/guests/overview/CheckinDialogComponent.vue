@@ -371,6 +371,7 @@
         this.$refs.form.reset()
         this.$refs.form.resetValidation()
         this.openDialog = false
+        this.clearCheckInDtoFields()
       },
       save () {
         if (this.validForm) {
@@ -403,6 +404,17 @@
       },
       updateStayDetailsField (property, value) {
         this.checkInDto.stayDetails[property] = value
+      },
+      clearCheckInDtoFields () {
+        Object.keys(this.checkInDto).forEach(property => {
+          Object.keys(this.checkInDto.stayDetails).forEach(property => {
+            delete this.checkInDto.stayDetails[property]
+          })
+
+          Object.keys(this.checkInDto.guestPersonalDetails).forEach(property => {
+            delete this.checkInDto.stayDetails[property]
+          })
+        })
       },
     },
   }
