@@ -88,7 +88,7 @@
             property: property,
             key: this.propertiesSpecification[property].name,
             type: this.propertiesSpecification[property].type,
-            value: stayDetails[property] + '',
+            value: stayDetails[property] !== null ? stayDetails[property] + '' : '',
             options: this.propertiesSpecification[property].options,
           })
         })
