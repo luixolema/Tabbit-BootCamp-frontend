@@ -6,11 +6,12 @@
       :rules="computedRules"
       append-icon="mdi-calendar"
       :class="{required: 'required'}"
-      @click:append="dateDialog=true"
+      @click:append="isDateDialogOpen=true"
       @change="$emit('date-updated', property, inputDate)"
     />
     <v-dialog
-      v-model="dateDialog"
+      ref="datePickerDialog"
+      v-model="isDateDialogOpen"
       max-width="340"
     >
       <v-card>
@@ -55,7 +56,7 @@
     },
     data: () => {
       return {
-        dateDialog: false,
+        isDateDialogOpen: false,
         inputDate: '',
         tempDate: '',
         validations,
@@ -84,11 +85,15 @@
       var self = this
       window.addEventListener('keyup', function (event) {
         // If enter key was pressed...
-        if (event.keyCode === 13) {
-          if (self.dateDialog) {
-            self.dateDialog = false
+
+        if (self.isDateDialogOpen) {
+          if (event.keyCode === 13) {
+            self.isDateDialogOpen = false
             self.inputDate = self.tempDate
             self.$emit('date-updated', self.property, self.inputDate)
+          }
+          if (event.keyCode === 27) {
+            self.isDateDialogOpen = false
           }
         }
       })

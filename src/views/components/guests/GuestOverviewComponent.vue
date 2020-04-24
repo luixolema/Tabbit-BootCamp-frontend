@@ -46,6 +46,7 @@
             <v-btn
               block
               small
+              @click="openAddGuestDialog"
             >
               Add
               <v-icon
@@ -72,6 +73,9 @@
             <checkin-dialog-component
               ref="checkinDialog"
               @onSave="checkInSelectedGuest"
+            />
+            <add-guest-dialog-component
+              ref="addGuestDialog"
             />
           </v-col>
         </v-row>
@@ -128,6 +132,7 @@
   import GuestService from '@/services/GuestService'
   import NotificationService from '@/services/NotificationService'
   import CheckinDialogComponent from '@/views/components/guests/overview/CheckinDialogComponent'
+  import AddGuestDialogComponent from '@/views/components/guests/overview/AddGuestDialogComponent'
 
   const headers = [
     { text: 'Id', value: 'id' },
@@ -141,6 +146,7 @@
     name: 'GuestOverviewComponent',
     components: {
       CheckinDialogComponent,
+      AddGuestDialogComponent,
     },
     data: () => {
       return {
@@ -203,6 +209,9 @@
       },
       closeCheckinDialog () {
         this.$refs.checkinDialog.cancel()
+      },
+      openAddGuestDialog () {
+        this.$refs.addGuestDialog.open()
       },
       checkInSelectedGuest (stayDto) {
         const selectedGuestId = this.$store.state.guestModule.selectedGuest.id
