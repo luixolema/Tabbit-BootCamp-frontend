@@ -23,6 +23,9 @@ const GuestService = {
   getGuestPersonalDetails (guestId) {
     return axios.get(apiUrl + '/' + guestId + '/personal-details')
   },
+  AddGuest (createGuestDto) {
+    return axios.post(apiUrl, createGuestDto)
+  },
 }
 
 export default GuestService
