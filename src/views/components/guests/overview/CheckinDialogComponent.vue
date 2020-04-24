@@ -89,7 +89,7 @@
                     :date="checkInDto.guestPersonalDetails.birthDate"
                     label="Birthdate"
                     property="birthDate"
-                    :requiered="true"
+                    :required="true"
                     :rules="[validations.required('The Birthdate cannot be empty')]"
                     @date-updated="updateGuestPersonalDetailsField"
                   />
@@ -161,7 +161,7 @@
                     :date="checkInDto.stayDetails.checkInDate"
                     label="Check In"
                     property="checkInDate"
-                    :requiered="true"
+                    :required="true"
                     :rules="[validations.required('The Check In cannot be empty'), validations.validateStayDates(checkInDto, 'checkInDate')]"
                     @date-updated="updateStayDetailsField"
                   />
@@ -169,7 +169,7 @@
                     :date="checkInDto.stayDetails.arriveDate"
                     label="Arrive"
                     property="arriveDate"
-                    :requiered="true"
+                    :required="true"
                     :rules="[validations.required('The Arrive cannot be empty'), validations.validateStayDates(checkInDto, 'arriveDate')]"
                     @date-updated="updateStayDetailsField"
                   />
@@ -177,7 +177,7 @@
                     :date="checkInDto.stayDetails.leaveDate"
                     label="Leave"
                     property="leaveDate"
-                    :requiered="true"
+                    :required="true"
                     :rules="[validations.required('The Leave cannot be empty'), validations.validateStayDates(checkInDto, 'leaveDate')]"
                     @date-updated="updateStayDetailsField"
                   />
@@ -196,6 +196,8 @@
                   <v-text-field
                     v-model="checkInDto.stayDetails.preBooking"
                     label="Pre Booking"
+                    class="required"
+                    :rules="[validations.required('The Prebooking cannot be empty')]"
                   />
                 </div>
               </v-stepper-content>
@@ -207,8 +209,9 @@
                     label="Last Dive"
                     property="lastDiveDate"
                     :staydto="checkInDto"
-                    :requiered="true"
+                    :required="true"
                     :rules="[validations.required('The Last Dive cannot be empty')]"
+                    @date-updated="updateStayDetailsField"
                   />
                   <v-text-field
                     v-model="checkInDto.stayDetails.divesAmount"
@@ -379,8 +382,6 @@
           GuestService.checkInGuest(this.checkInDto)
             .then((response) => {
               this.$emit('onSave', this.checkInDto)
-              this.$refs.form.reset()
-              this.$refs.form.resetValidation()
               this.close()
             }).catch(error => {
               if (error.response.status === 409 && error.response.data.message === 'The box number is already used.') {
