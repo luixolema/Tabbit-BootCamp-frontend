@@ -12,7 +12,7 @@ const GuestService = {
     return axios.get(url.href)
   },
   checkInGuest (CheckInDto) {
-    return axios.post(apiUrl, CheckInDto)
+    return axios.post(apiUrl + '/check-in', CheckInDto)
   },
   getGuestInfo (guestId) {
     return axios.get(apiUrl + '/' + guestId)
