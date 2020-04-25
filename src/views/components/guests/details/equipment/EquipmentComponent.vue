@@ -57,7 +57,7 @@
     data: function () {
       return {
         headers: [{ text: 'Type', value: 'type' },
-                  { text: 'Serial', value: 'serial' },
+                  { text: 'Serial', value: 'serialNumber' },
                   { text: 'Date Out', value: 'dateOut' },
                   { text: 'Date Return', value: 'dateReturn' },
         ],
