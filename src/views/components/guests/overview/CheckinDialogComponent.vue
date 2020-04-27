@@ -379,9 +379,10 @@
       save () {
         if (this.validForm) {
           this.checkInDto.guestPersonalDetails.id = this.selectedGuest.id
+          var self = this
           GuestService.checkInGuest(this.checkInDto)
             .then((response) => {
-              this.$emit('onSave', this.checkInDto)
+              this.$emit('onCheckIn', self.$store.state.guestModule.selectedGuest.id)
               this.close()
             }).catch(error => {
               if (error.response.status === 409 && error.response.data.message === 'The box number is already used.') {
