@@ -210,7 +210,7 @@
                     property="lastDiveDate"
                     :staydto="checkInDto"
                     :required="true"
-                    :rules="[validations.required('The Last Dive cannot be empty')]"
+                    :rules="[validations.required('The Last Dive cannot be empty'), validations.validateStayDates(checkInDto, 'lastDiveDate')]"
                     @date-updated="updateStayDetailsField"
                   />
                   <v-text-field
