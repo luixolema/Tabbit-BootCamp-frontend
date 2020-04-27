@@ -210,7 +210,7 @@
                     property="lastDiveDate"
                     :staydto="checkInDto"
                     :required="true"
-                    :rules="[validations.required('The Last Dive cannot be empty')]"
+                    :rules="[validations.required('The Last Dive cannot be empty'), validations.validateStayDates(checkInDto, 'lastDiveDate')]"
                     @date-updated="updateStayDetailsField"
                   />
                   <v-text-field
@@ -404,7 +404,22 @@
         this.step = parseInt(this.step) - 1
       },
       updateStayDetailsField (property, value) {
+        this.validateDate(property)
         this.checkInDto.stayDetails[property] = value
+      },
+      validateDate (property) {
+        const array = ['checkInDate', 'leaveDate', 'arriveDate']
+        if (array.indexOf(property) !== -1) {
+          array.forEach(element => {
+            if (element !== property && this.checkInDto.stayDetails[element]) {
+              var self = this
+              this.checkInDto.stayDetails[element] = this.checkInDto.stayDetails[element] + ' '
+              setTimeout(function () {
+                self.checkInDto.stayDetails[element] = self.checkInDto.stayDetails[element].substring(0, self.checkInDto.stayDetails[element].length - 1)
+              }, 0)
+            }
+          })
+        }
       },
       clearCheckInDtoFields () {
         Object.keys(this.checkInDto).forEach(property => {

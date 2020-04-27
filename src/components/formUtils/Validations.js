@@ -62,11 +62,11 @@ export default {
             return new Date(parts[2], parts[1] - 1, parts[0] - (-1)).toISOString().substr(0, 10)
           }
 
-        if (!germanDatePattern.test(value)) {
+        if (!value || String(value).match(/^ *$/) !== null) {
             return true
         }
 
-        if (!value) {
+        if (!germanDatePattern.test(value)) {
             return true
         }
 
@@ -75,6 +75,7 @@ export default {
         var checkInDate = getStayDateFromString(stayData, 'checkInDate')
         var checkOutDate = getStayDateFromString(stayData, 'checkOutDate')
         var valueDate = new Date(germanTimeStringtoIsoString(value))
+        var today = (new Date()).setHours(0, 0, 0, 0)
 
         if (nameOfDateField === 'checkInDate') {
             if (arriveDate !== null) {
@@ -142,11 +143,11 @@ export default {
                     return 'Leave Date has to be equal or more then Check Out Date'
                 }
             }
-            if (new Date() > valueDate) {
+            if (today > valueDate) {
                 return 'Leave Date cannot be in the past'
             }
         } else if (nameOfDateField === 'lastDiveDate') {
-            if (new Date(germanTimeStringtoIsoString(value) > new Date())) {
+            if (new Date(germanTimeStringtoIsoString(value)) > today) {
                 return 'Last Dive Date cannot be in the future'
             }
         }
