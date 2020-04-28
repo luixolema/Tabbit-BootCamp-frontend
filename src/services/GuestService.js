@@ -23,8 +23,8 @@ const GuestService = {
   getGuestPersonalDetails (guestId) {
     return axios.get(apiUrl + '/' + guestId + '/personal-details')
   },
-  AddGuest (createGuestDto) {
-    return axios.post(apiUrl, createGuestDto)
+  AddGuest (guestCreationDto) {
+    return axios.post(apiUrl, guestCreationDto)
   },
 }
 

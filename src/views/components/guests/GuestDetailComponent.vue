@@ -65,6 +65,25 @@
       return {
         selectedStay: null,
         staysOptions: [],
+        defaultStayDto: {
+          guestPersonalDetails: {
+            id: undefined,
+            firstName: '',
+            lastName: '',
+            birthDate: '',
+            nationality: '',
+            country: '',
+            city: '',
+            postcode: '',
+            street: '',
+            email: '',
+            phone: '',
+            passportId: '',
+          },
+          stayDetails: {
+          },
+          loanDetails: [],
+        },
       }
     },
     computed: {
@@ -103,9 +122,8 @@
           GuestService.getGuestInfo(selectedGuest.id)
             .then((response) => {
               const guestInfo = response.data
-              const stayData = guestInfo.stayDto
-              stayData.stayDetails = guestInfo.stayDto.stayDetails || {}
-              stayData.loanDetails = guestInfo.stayDto.loanDetails || []
+              const stayData = guestInfo.stayDto || this.defaultStayDto
+              stayData.guestPersonalDetails = guestInfo.guestPersonalDetails || {}
               this.$store.commit('stayModule/setStayData', stayData)
               this.buildStaysOptions(guestInfo.staySummaries)
             })
