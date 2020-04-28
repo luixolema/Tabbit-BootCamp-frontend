@@ -72,10 +72,11 @@
             </v-btn>
             <checkin-dialog-component
               ref="checkinDialog"
-              @onSave="checkInSelectedGuest"
+              @onCheckIn="refilterAndFocusSelectedGuest"
             />
             <add-guest-dialog-component
               ref="addGuestDialog"
+              @onAddGuest="refilterAndFocusSelectedGuest"
             />
           </v-col>
         </v-row>
@@ -213,14 +214,11 @@
       openAddGuestDialog () {
         this.$refs.addGuestDialog.open()
       },
-      checkInSelectedGuest (stayDto) {
-        const selectedGuestId = this.$store.state.guestModule.selectedGuest.id
+      refilterAndFocusSelectedGuest (selectedGuestId) {
         this.filterBYCheckedIn = 'all'
-
         this.filterByCheckin().then(() => {
           const selectedGuest = this.guests.find(guest => guest.id === selectedGuestId)
           this.selectGuest(selectedGuest)
-
           setTimeout(() => {
             this.$refs.tableContent.querySelector('tr.active').scrollIntoView()
           }, 200)

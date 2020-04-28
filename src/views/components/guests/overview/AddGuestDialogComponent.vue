@@ -167,16 +167,16 @@
         this.openDialog = true
       },
       close () {
+        this.openDialog = false
         this.boxErrorMessages = []
         this.$refs.form.reset()
         this.$refs.form.resetValidation()
-        this.openDialog = false
+        this.clearCreateGuestDtoFields()
       },
       addGuest () {
         GuestService.AddGuest(this.createGuestDto)
           .then((response) => {
-            this.$refs.form.reset()
-            this.$refs.form.resetValidation()
+            this.$emit('onAddGuest', response.data) //  response.data should hold the new guest id
             this.close()
           }).catch(error => {
             NotificationService.error(error.response.data.message)
@@ -184,6 +184,11 @@
       },
       updateCreateGuestDtoField (property, value) {
         this.createGuestDto[property] = value
+      },
+      clearCreateGuestDtoFields () {
+        Object.keys(this.createGuestDto).forEach(property => {
+          delete this.createGuestDto[property]
+        })
       },
     },
   }
