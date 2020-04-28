@@ -43,58 +43,58 @@
               Personal Data
             </v-subheader>
             <v-text-field
-              v-model="createGuestDto.lastName"
+              v-model="guestCreationDto.lastName"
               label="Lastname"
               autofocus
               class="required"
               :rules="[validations.required('The Last Name cannot be empty')]"
             />
             <v-text-field
-              v-model="createGuestDto.firstName"
+              v-model="guestCreationDto.firstName"
               label="Firstname"
               class="required"
               :rules="[validations.required('The First Name cannot be empty')]"
             />
             <base-datepicker
-              :date="createGuestDto.birthDate"
+              :date="guestCreationDto.birthDate"
               label="Birthdate"
               property="birthDate"
               :requiered="true"
               :rules="[validations.required('The Birthdate cannot be empty')]"
-              @date-updated="updateCreateGuestDtoField"
+              @date-updated="updateguestCreationDtoField"
             />
             <v-autocomplete
-              v-model="createGuestDto.nationality"
+              v-model="guestCreationDto.nationality"
               :items="nationalities"
               label="Nationality"
               class="required"
               :rules="[validations.required('The Nationality cannot be empty')]"
             />
             <v-text-field
-              v-model="createGuestDto.passportId"
+              v-model="guestCreationDto.passportId"
               label="Passport ID"
             />
             <v-divider class="my-3" />
             <v-text-field
-              v-model="createGuestDto.street"
+              v-model="guestCreationDto.street"
               label="Street"
               class="required"
               :rules="[validations.required('The Street cannot be empty')]"
             />
             <v-text-field
-              v-model="createGuestDto.city"
+              v-model="guestCreationDto.city"
               label="City"
               class="required"
               :rules="[validations.required('The City cannot be empty')]"
             />
             <v-text-field
-              v-model="createGuestDto.postcode"
+              v-model="guestCreationDto.postcode"
               label="Postcode"
               class="required"
               :rules="[validations.required('The Postcode cannot be empty')]"
             />
             <v-autocomplete
-              v-model="createGuestDto.country"
+              v-model="guestCreationDto.country"
               :items="countries"
               label="Country"
               class="required"
@@ -102,13 +102,13 @@
             />
             <v-divider class="my-3" />
             <v-text-field
-              v-model="createGuestDto.email"
+              v-model="guestCreationDto.email"
               label="Email"
               class="required"
               :rules="[validations.required('The Email cannot be empty'), validations.email()]"
             />
             <v-text-field
-              v-model="createGuestDto.phone"
+              v-model="guestCreationDto.phone"
               label="Phone"
             />
           </div>
@@ -143,7 +143,7 @@
   export default {
     data: () => ({
       openDialog: false,
-      createGuestDto: {
+      guestCreationDto: {
         firstName: '',
         lastName: '',
         birthDate: '',
@@ -171,10 +171,10 @@
         this.boxErrorMessages = []
         this.$refs.form.reset()
         this.$refs.form.resetValidation()
-        this.clearCreateGuestDtoFields()
+        this.clearguestCreationDtoFields()
       },
       addGuest () {
-        GuestService.AddGuest(this.createGuestDto)
+        GuestService.AddGuest(this.guestCreationDto)
           .then((response) => {
             this.$emit('onAddGuest', response.data) //  response.data should hold the new guest id
             this.close()
@@ -182,12 +182,12 @@
             NotificationService.error(error.response.data.message)
           })
       },
-      updateCreateGuestDtoField (property, value) {
-        this.createGuestDto[property] = value
+      updateguestCreationDtoField (property, value) {
+        this.guestCreationDto[property] = value
       },
-      clearCreateGuestDtoFields () {
-        Object.keys(this.createGuestDto).forEach(property => {
-          delete this.createGuestDto[property]
+      clearguestCreationDtoFields () {
+        Object.keys(this.guestCreationDto).forEach(property => {
+          delete this.guestCreationDto[property]
         })
       },
     },
