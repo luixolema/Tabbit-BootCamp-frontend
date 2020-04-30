@@ -1,4 +1,5 @@
-const emailPattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+const emailPattern = /^.{2,}@.{2,}\..{2,10}$/
+// /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 const germanDatePattern = /^([0-2]\d|3[01])\.([0]\d|1[0-2])\.\d{4}$/
 
 export default {
@@ -47,6 +48,32 @@ export default {
             return true
         }
         return message
+    },
+    checkDateNotInFuture: (nameOfDateField) => (value) => {
+        if (!value || String(value).match(/^ *$/) !== null) {
+            return true
+        }
+
+        if (!germanDatePattern.test(value)) {
+            return true
+        }
+
+        var today = (new Date()).setHours(0, 0, 0, 0)
+        function germanTimeStringtoIsoString (germanTimeString) {
+            var parts = germanTimeString.match(/(\d+)/g)
+            return new Date(parts[2], parts[1] - 1, parts[0] - (-1)).toISOString().substr(0, 10)
+          }
+
+        if (nameOfDateField === 'lastDiveDate') {
+            if (new Date(germanTimeStringtoIsoString(value)) > today) {
+                return 'Last Dive Date cannot be in the future'
+            }
+        } else if (nameOfDateField === 'birthDate') {
+            if (new Date(germanTimeStringtoIsoString(value)) >= today) {
+                return 'Birth Date should be in the past'
+            }
+        }
+        return true
     },
     validateStayDates: (stayData, nameOfDateField) => (value) => {
         function getStayDateFromString (stayData, nameOfDateField) {
@@ -145,10 +172,6 @@ export default {
             }
             if (today > valueDate) {
                 return 'Leave Date cannot be in the past'
-            }
-        } else if (nameOfDateField === 'lastDiveDate') {
-            if (new Date(germanTimeStringtoIsoString(value)) > today) {
-                return 'Last Dive Date cannot be in the future'
             }
         }
         return true

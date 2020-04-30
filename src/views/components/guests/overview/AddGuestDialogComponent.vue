@@ -60,7 +60,7 @@
               label="Birthdate"
               property="birthDate"
               :requiered="true"
-              :rules="[validations.required('The Birthdate cannot be empty')]"
+              :rules="[validations.required('The Birthdate cannot be empty'), validations.checkDateNotInFuture('birthDate')]"
               @date-updated="updateguestCreationDtoField"
             />
             <v-autocomplete
