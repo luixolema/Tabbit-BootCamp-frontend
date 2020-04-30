@@ -90,7 +90,7 @@
                     label="Birthdate"
                     property="birthDate"
                     :required="true"
-                    :rules="[validations.required('The Birthdate cannot be empty')]"
+                    :rules="[validations.required('The Birthdate cannot be empty'), validations.checkDateNotInFuture('birthDate')]"
                     @date-updated="updateGuestPersonalDetailsField"
                   />
                   <v-autocomplete
@@ -210,7 +210,7 @@
                     property="lastDiveDate"
                     :staydto="checkInDto"
                     :required="true"
-                    :rules="[validations.required('The Last Dive cannot be empty'), validations.validateStayDates(checkInDto, 'lastDiveDate')]"
+                    :rules="[validations.required('The Last Dive cannot be empty'), validations.checkDateNotInFuture('lastDiveDate')]"
                     @date-updated="updateStayDetailsField"
                   />
                   <v-text-field
