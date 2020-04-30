@@ -70,7 +70,7 @@ export default {
             }
         } else if (nameOfDateField === 'birthDate') {
             if (new Date(germanTimeStringtoIsoString(value)) >= today) {
-                return 'Birth Date should be in the past'
+                return 'Birth Date cannot be in the future'
             }
         }
         return true
