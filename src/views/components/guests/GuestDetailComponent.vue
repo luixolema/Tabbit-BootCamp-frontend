@@ -103,10 +103,7 @@
           GuestService.getGuestInfo(selectedGuest.id)
             .then((response) => {
               const guestInfo = response.data
-              var stayData = guestInfo.stayDto
-              if (!stayData) {
-                stayData = { guestPersonalDetails: guestInfo.guestPersonalDetails, stayDetails: {}, loanDetails: [] }
-              }
+              const stayData = guestInfo.stayDto || { guestPersonalDetails: guestInfo.guestPersonalDetails, stayDetails: {}, loanDetails: [] }
               this.$store.commit('stayModule/setStayData', stayData)
               this.buildStaysOptions(guestInfo.staySummaries)
             })
@@ -132,8 +129,14 @@
             })
         } else {
           const stayData = { ...this.$store.state.stayModule.stayData }
-          stayData.stayDetails = {}
-          this.$store.commit('stayModule/setStayData', stayData)
+          GuestService.getGuestPersonalDetails(stayData.guestPersonalDetails.id)
+            .then((response) => {
+              const stayData = { guestPersonalDetails: response.data, stayDetails: {}, loanDetails: [] }
+              this.$store.commit('stayModule/setStayData', stayData)
+            })
+            .catch((error) => {
+              NotificationService.error(error.message)
+            })
         }
       },
       buildStaysOptions (staySummaries) {
