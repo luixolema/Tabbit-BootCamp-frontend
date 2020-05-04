@@ -1,5 +1,4 @@
-const emailPattern = /^.{2,}@.{2,}\..{2,10}$/
-// /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+const emailPattern = /^[a-zA-Z0-9_+&*-]+(?:\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,7}$/
 const germanDatePattern = /^([0-2]\d|3[01])\.([0]\d|1[0-2])\.\d{4}$/
 
 export default {
@@ -70,7 +69,7 @@ export default {
             }
         } else if (nameOfDateField === 'birthDate') {
             if (new Date(germanTimeStringtoIsoString(value)) >= today) {
-                return 'Birth Date cannot be in the future'
+                return 'Birth Date has to be before today'
             }
         }
         return true
