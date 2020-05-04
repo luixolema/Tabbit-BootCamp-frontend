@@ -362,6 +362,10 @@
       open () {
         GuestService.getGuestPersonalDetails(this.selectedGuest.id).then((response) => {
           this.checkInDto.guestPersonalDetails = response.data
+          var dateFormat = require('dateformat')
+          var now = new Date()
+          this.checkInDto.stayDetails.checkInDate = dateFormat(now, 'dd.mm.yyyy')
+          this.checkInDto.stayDetails.arriveDate = dateFormat(now, 'dd.mm.yyyy')
         })
           .catch((error) => {
             NotificationService.error(error.response.data.message)
