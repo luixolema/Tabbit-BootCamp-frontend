@@ -113,11 +113,6 @@
         validations,
       }
     },
-    computed: {
-      stayDataInStore () {
-        return this.$store.state.stayModule.stayData
-      },
-    },
     methods: {
       updateDateField (property, value) {
         var foundItemIndex = this.tableItems.findIndex((tableItem) => { return tableItem.property === property })
