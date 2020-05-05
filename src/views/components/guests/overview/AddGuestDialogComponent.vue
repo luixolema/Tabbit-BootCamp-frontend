@@ -165,6 +165,7 @@
     methods: {
       open () {
         this.openDialog = true
+        setTimeout(() => this.$refs.form.resetValidation(), 50)
       },
       close () {
         this.openDialog = false
@@ -187,7 +188,7 @@
       },
       clearguestCreationDtoFields () {
         Object.keys(this.guestCreationDto).forEach(property => {
-          delete this.guestCreationDto[property]
+          this.guestCreationDto[property] = ''
         })
       },
     },
