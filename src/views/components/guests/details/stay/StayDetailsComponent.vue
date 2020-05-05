@@ -30,7 +30,7 @@
         propertiesSpecification: {
           boxNumber: { name: 'Box', type: 'text' },
           checkInDate: { name: 'Check In', type: 'date' },
-          checkOutDate: { name: 'Check Out', type: 'date' },
+          checkOutDate: { name: 'Check Out', type: 'fixed' },
           arriveDate: { name: 'Arrival', type: 'date' },
           leaveDate: { name: 'Leave', type: 'date' },
           hotel: { name: 'Hotel', type: 'text' },

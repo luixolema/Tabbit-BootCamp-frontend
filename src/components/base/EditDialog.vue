@@ -24,6 +24,17 @@
                 }
               }
             },
+            focusin: function focusin (e) {
+              var input = _this2.$refs.content.querySelector('input')
+              setTimeout(
+                function () {
+                  var event = new Event('blur', {
+                    bubbles: true,
+                    cancelable: true,
+                  })
+                  input.dispatchEvent(event)
+                }, 0)
+            },
           },
         }, [this.$slots.input])
       },
@@ -57,7 +68,7 @@
             on.dblclick = on.click
             delete on.click
             return h('div', {
-              staticClass: 'v-small-dialog__activator koko',
+              staticClass: 'v-small-dialog__activator',
               on: on,
             }, [h('span', {
               staticClass: 'v-small-dialog__activator__content',

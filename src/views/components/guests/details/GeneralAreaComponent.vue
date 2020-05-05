@@ -94,13 +94,6 @@
         }
       },
     },
-    mounted () {
-      this.test()
-    },
-    methods: {
-      test () {
-      },
-    },
   }
 </script>
 

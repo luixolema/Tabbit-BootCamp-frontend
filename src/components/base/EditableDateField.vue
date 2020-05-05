@@ -1,6 +1,7 @@
 <template>
   <div>
     <v-text-field
+      ref="dateTextField"
       v-model="inputDate"
       :label="label"
       class="mt-3"
@@ -66,6 +67,11 @@
       },
     },
     mounted () {
+      var inputDateTextField = this.$refs.dateTextField.$el.querySelector('input')
+      setTimeout(() => {
+        inputDateTextField.focus()
+      }, 100) // this code is to be sure that once the dialog with the date picker opens, the text input will be on focus
+
       this.inputDate = this.date
     },
     methods: {
