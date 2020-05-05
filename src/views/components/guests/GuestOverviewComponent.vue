@@ -208,9 +208,6 @@
       openCheckinDialog () {
         this.$refs.checkinDialog.open()
       },
-      closeCheckinDialog () {
-        this.$refs.checkinDialog.cancel()
-      },
       openAddGuestDialog () {
         this.$refs.addGuestDialog.open()
       },
