@@ -86,21 +86,25 @@
     },
     methods: {
       onLogin (index) {
-        AuthenticationService.loginUser({
+        const loginDto = {
           login: this.login,
           password: this.password,
-        }, this.afterSuccessfulLogin, this.afterFailedLogin)
-      },
-      afterSuccessfulLogin (response) {
-        sessionStorage.token = response.data.token
-        this.router.push('/')
-      },
-      afterFailedLogin (error) {
-        if (error.response) {
-          NotificationService.error(error.response.data.message)
-        } else {
-          NotificationService.error(error.message)
         }
+
+        AuthenticationService.loginUser(loginDto)
+          .then(response => {
+            sessionStorage.token = response.data.token
+            this.router.push('/')
+          })
+          .catch(error => {
+            if (error.response.status === 404) {
+              NotificationService.error(error.response.data.message)
+            } else {
+              NotificationService.error(error.message)
+            }
+          })
+        this.$refs.form.resetValidation()
+        this.clearInputfields()
       },
       clearInputfields () {
         this.password = ''

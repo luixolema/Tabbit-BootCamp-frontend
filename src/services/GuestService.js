@@ -1,30 +1,30 @@
-import axios from 'axios'
+import { http, serverUrl } from './httpService'
 
-const apiUrl = 'http://localhost:8080/api/guests'
+const apiUrl = serverUrl + '/api/guests'
 
 const GuestService = {
   findAll () {
-      return axios.get(apiUrl)
+      return http.get(apiUrl)
   },
   findByCheckin (checkin) {
     const url = new URL(apiUrl)
     url.searchParams.append('checkedIn', checkin)
-    return axios.get(url.href)
+    return http.get(url.href)
   },
   checkInGuest (CheckInDto) {
-    return axios.post(apiUrl + '/check-in', CheckInDto)
+    return http.post(apiUrl + '/check-in', CheckInDto)
   },
   getGuestInfo (guestId) {
-    return axios.get(apiUrl + '/' + guestId)
+    return http.get(apiUrl + '/' + guestId)
   },
   updateGuest (guestInfo) {
-    return axios.put(apiUrl, guestInfo)
+    return http.put(apiUrl, guestInfo)
   },
   getGuestPersonalDetails (guestId) {
-    return axios.get(apiUrl + '/' + guestId + '/personal-details')
+    return http.get(apiUrl + '/' + guestId + '/personal-details')
   },
   AddGuest (guestCreationDto) {
-    return axios.post(apiUrl, guestCreationDto)
+    return http.post(apiUrl, guestCreationDto)
   },
 }
 

@@ -1,16 +1,16 @@
-import axios from 'axios'
+import { http, serverUrl } from './httpService'
 
-const apiUrl = 'http://localhost:8080/api/stay'
+const apiUrl = serverUrl + '/api/stay'
 
 const StayService = {
   findAll () {
-      return axios.get(apiUrl)
+      return http.get(apiUrl)
   },
   findById (stayId) {
-    return axios.get(apiUrl + '/' + stayId)
+    return http.get(apiUrl + '/' + stayId)
   },
   updateStay (StayDto) {
-    return axios.put(apiUrl, StayDto)
+    return http.put(apiUrl, StayDto)
   },
 }
 
