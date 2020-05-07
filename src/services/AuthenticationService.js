@@ -1,19 +1,11 @@
 import axios from 'axios'
+import { serverUrl } from './httpService'
 
-const apiUrl = 'http://localhost:8080/login'
+const loginUrl = serverUrl + '/login'
 
 const AuthenticationService = {
-    loginUser (loginDto, successCallback, failCallback) {
-        axios.post(apiUrl, loginDto).then((response) => {
-            if (successCallback) {
-                successCallback(response)
-            }
-        })
-        .catch((error) => {
-            if (failCallback) {
-                failCallback(error)
-            }
-        })
+    loginUser (loginDto) {
+        return axios.post(loginUrl, loginDto)
     },
 }
 

@@ -1,10 +1,10 @@
-import axios from 'axios'
+import { http, serverUrl } from './httpService'
 
-const apiUrl = 'http://localhost:8080/api/box'
+const apiUrl = serverUrl + '/api/box'
 
 const BoxManagementService = {
   isBoxEmpty (boxNumber) {
-    return axios.get(apiUrl + '/' + boxNumber + '/isFree')
+    return http.get(apiUrl + '/' + boxNumber + '/isFree')
   },
 }
 
