@@ -77,7 +77,6 @@
     name: 'Login',
     data () {
       return {
-        showPassword: false,
         isLoginFormValid: false,
         login: '',
         password: '',
