@@ -15,7 +15,7 @@ export default {
         }
         return message
     },
-    minLength: (min, message = 'The value is too long') => (value) => {
+    minLength: (min, message = 'The value is too short') => (value) => {
         if (value.length >= min) {
             return true
         }
