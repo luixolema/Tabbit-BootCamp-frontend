@@ -32,15 +32,6 @@
 
     <div class="mx-3" />
 
-    <v-btn
-      class="ml-2"
-      min-width="0"
-      text
-      to="/"
-    >
-      <v-icon>mdi-view-dashboard</v-icon>
-    </v-btn>
-
     <v-menu
       bottom
       left
@@ -66,9 +57,13 @@
     <v-btn
       class="ml-2"
       min-width="0"
+      outlined
       text
     >
-      <v-icon>mdi-account</v-icon>
+      Logout {{ userName }}
+      <v-icon right>
+        mdi-logout-variant
+      </v-icon>
     </v-btn>
   </v-app-bar>
 </template>
@@ -128,6 +123,9 @@
 
     computed: {
       ...mapState(['drawer']),
+      userName () {
+        return this.$store.state.contextModule.contextData.userName
+      },
     },
 
     methods: {
