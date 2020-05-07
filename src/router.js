@@ -34,9 +34,17 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.name === 'Login' && localStorage.token) next({ name: 'Dashboard' })
-  else if (to.name !== 'Login' && !localStorage.token) next({ name: 'Login' })
-  else next()
+  const logged = localStorage.token
+
+  if (to.name !== 'Login' && !logged) {
+    return next({ name: 'Login' })
+  }
+
+  if (to.name === 'Login' && logged) {
+    return next({ name: 'Dashboard' })
+  }
+
+  next()
 })
 
 export default router

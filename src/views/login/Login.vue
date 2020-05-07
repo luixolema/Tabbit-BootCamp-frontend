@@ -90,15 +90,13 @@
           login: this.login,
           password: this.password,
         }, this.afterSuccessfulLogin, this.afterFailedLogin)
-        this.clearInputfields()
-        this.$refs.form.resetValidation()
       },
       afterSuccessfulLogin (response) {
         localStorage.token = response.data.token
         this.router.push('/')
       },
       afterFailedLogin (error) {
-        if (error.response.status === 404) {
+        if (error.response) {
           NotificationService.error(error.response.data.message)
         } else {
           NotificationService.error(error.message)
