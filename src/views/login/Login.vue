@@ -103,6 +103,12 @@
               NotificationService.error(error.message)
             }
           })
+        this.$refs.form.resetValidation()
+        this.clearInputfields()
+      },
+      clearInputfields () {
+        this.password = ''
+        this.login = ''
       },
     },
   }
