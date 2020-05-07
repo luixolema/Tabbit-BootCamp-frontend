@@ -92,7 +92,7 @@
         }, this.afterSuccessfulLogin, this.afterFailedLogin)
       },
       afterSuccessfulLogin (response) {
-        localStorage.token = response.data.token
+        sessionStorage.token = response.data.token
         this.router.push('/')
       },
       afterFailedLogin (error) {
