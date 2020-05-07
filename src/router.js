@@ -34,7 +34,7 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  const logged = localStorage.token
+  const logged = sessionStorage.token
 
   if (to.name !== 'Login' && !logged) {
     return next({ name: 'Login' })
