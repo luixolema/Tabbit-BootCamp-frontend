@@ -93,7 +93,7 @@
 
         AuthenticationService.loginUser(loginDto)
           .then(response => {
-            sessionStorage.token = response.data.token
+            localStorage.token = response.data.token
             this.router.push('/')
           })
           .catch(error => {

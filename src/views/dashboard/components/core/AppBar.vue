@@ -67,8 +67,9 @@
       class="ml-2"
       min-width="0"
       text
+      @click="onLogout"
     >
-      <v-icon>mdi-account</v-icon>
+      <v-icon>mdi-account-arrow-right</v-icon>
     </v-btn>
   </v-app-bar>
 </template>
@@ -134,6 +135,10 @@
       ...mapMutations({
         setDrawer: 'SET_DRAWER',
       }),
+      onLogout () {
+        localStorage.removeItem('token')
+        window.location.reload()
+      },
     },
   }
 </script>
