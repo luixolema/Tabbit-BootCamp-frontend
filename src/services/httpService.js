@@ -10,7 +10,7 @@ http.interceptors.request.use(
   config => {
     // Do something before request is sent
     config.headers = {
-      Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
     }
 
     return config
@@ -33,7 +33,7 @@ http.interceptors.response.use(
       const responseCode = error.response.status
       // the token is not valid, redirect to login
       if (responseCode === 401) {
-        sessionStorage.removeItem('token')
+        localStorage.removeItem('token')
         window.location.reload()
         return
       }
