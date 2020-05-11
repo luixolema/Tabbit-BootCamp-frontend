@@ -32,6 +32,15 @@
 
     <div class="mx-3" />
 
+    <v-btn
+      class="ml-2"
+      min-width="0"
+      text
+      to="/"
+    >
+      <v-icon>mdi-view-dashboard</v-icon>
+    </v-btn>
+
     <v-menu
       bottom
       left
@@ -59,10 +68,11 @@
       min-width="0"
       outlined
       text
+      @click="onLogout"
     >
       Logout {{ userName }}
       <v-icon right>
-        mdi-logout-variant
+        mdi-account-arrow-right
       </v-icon>
     </v-btn>
   </v-app-bar>
@@ -132,6 +142,10 @@
       ...mapMutations({
         setDrawer: 'SET_DRAWER',
       }),
+      onLogout () {
+        localStorage.removeItem('token')
+        window.location.reload()
+      },
     },
   }
 </script>

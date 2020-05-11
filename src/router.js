@@ -3,7 +3,7 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   mode: 'hash',
   base: process.env.BASE_URL,
   routes: [
@@ -25,5 +25,26 @@ export default new Router({
         },
       ],
     },
+    {
+      name: 'Login',
+      path: '/login',
+      component: () => import('@/views/login/Login'),
+    },
   ],
 })
+
+router.beforeEach((to, from, next) => {
+  const logged = localStorage.token
+
+  if (to.name !== 'Login' && !logged) {
+    return next({ name: 'Login' })
+  }
+
+  if (to.name === 'Login' && logged) {
+    return next({ name: 'Dashboard' })
+  }
+
+  next()
+})
+
+export default router
