@@ -41,10 +41,7 @@
             class="display-1"
           >
             <div class="logo-title">
-              {{ profile.title }}
-            </div>
-            <div class="logo-subtitle">
-              {{ profile.subtitle }}
+              {{ diveCenterName }}
             </div>
           </v-list-item-title>
         </v-list-item-content>
@@ -142,12 +139,8 @@
       computedItems () {
         return this.items.map(this.mapItem)
       },
-      profile () {
-        return {
-          avatar: true,
-          title: this.$t('title'),
-          subtitle: this.$t('subtitle'),
-        }
+      diveCenterName () {
+        return this.$store.state.contextModule.contextData.diveCenterName
       },
     },
     created () {

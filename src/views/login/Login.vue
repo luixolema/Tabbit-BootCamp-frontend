@@ -98,7 +98,7 @@
           })
           .catch(error => {
             if (error.response.status === 404) {
-              NotificationService.error(error.response.data.message)
+              NotificationService.error('Unknown user or wrong password')
             } else {
               NotificationService.error(error.message)
             }

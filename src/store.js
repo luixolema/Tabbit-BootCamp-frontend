@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import guestModule from './store/guestModule'
 import stayModule from './store/stayModule'
+import contextModule from './store/contextModule'
 
 Vue.use(Vuex)
 
@@ -9,6 +10,7 @@ export default new Vuex.Store({
   modules: {
     guestModule,
     stayModule,
+    contextModule,
   },
   state: {
     barColor: 'rgba(0, 0, 0, .8), rgba(0, 0, 0, .8)',

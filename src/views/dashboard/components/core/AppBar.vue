@@ -66,10 +66,14 @@
     <v-btn
       class="ml-2"
       min-width="0"
+      outlined
       text
       @click="onLogout"
     >
-      <v-icon>mdi-account-arrow-right</v-icon>
+      Logout {{ userName }}
+      <v-icon right>
+        mdi-account-arrow-right
+      </v-icon>
     </v-btn>
   </v-app-bar>
 </template>
@@ -129,6 +133,9 @@
 
     computed: {
       ...mapState(['drawer']),
+      userName () {
+        return this.$store.state.contextModule.contextData.userName
+      },
     },
 
     methods: {
